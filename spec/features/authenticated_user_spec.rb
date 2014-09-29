@@ -2,8 +2,6 @@ require 'spec_helper'
 require 'capybara/rails'
 require 'capybara/rspec'
 
-
-
 describe 'authenticated user', type: :feature do
 	#before do:
 		#@user = User.create authenticated user
