@@ -34,8 +34,10 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara', '~> 2.4.3' 
+  gem 'capybara', '~> 2.4.3'
 end
+
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
