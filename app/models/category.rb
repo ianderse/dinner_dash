@@ -1,7 +1,7 @@
 class Category < ActiveRecord::Base
   validates :title, :description, presence: true
-  has_many :categories
-  has_many :items, through: :categories
+  has_many :item_categories
+  has_many :items, through: :item_categories
 
   def to_s
     name
