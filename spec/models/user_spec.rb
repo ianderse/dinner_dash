@@ -14,13 +14,21 @@ RSpec.describe User, :type => :model do
     expect(user).to be_valid
   end
 
-  it "is invalid without a first_name" do
-    user.first_name = nil
-    expect(user).to_not be_valid
-  end
+  it "is invalid without a full name" do
+    expect(user).to be_valid
+    expect(user.full_name).to eq 'Jane Doughey'
 
-  it "is invalid without a last_name" do
-    user.last_name = nil
+    user.first_name = ""
+    expect(user.full_name).to eq 'Doughey'
+    expect(user).to be_valid
+
+    user.first_name = "Jane"
+    user.last_name = ""
+    expect(user.full_name).to eq 'Jane'
+    expect(user).to be_valid
+
+    user.first_name = ""
+    user.last_name = ""
     expect(user).to_not be_valid
   end
 

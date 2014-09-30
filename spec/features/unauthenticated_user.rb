@@ -6,7 +6,7 @@ describe 'unauthenticated user', type: :feature do
     visit '/'
     click_link 'Menu'
     expect(current_path).to eq(items_path)
-    expect(page).to have_content 'Menu'
+    # expect(page).to have_content 'Menu'
     # expect(page).to have ____________
   end
 

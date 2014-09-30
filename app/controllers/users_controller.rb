@@ -4,6 +4,11 @@ class UsersController < ApplicationController
   end
 
   def create
+    # @user = User.new(params[:])
+    # if @user
+    #   @user.save
+    # else
+    #   render :new # error message
   end
 
   def new
