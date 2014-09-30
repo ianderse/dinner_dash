@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   resources :users
 
   get '/about' => 'welcome#about'
-  get 'sessions/new'
-  post 'sessions/create'
-  delete 'sessions/destroy'
+  # get 'sessions/new'
+  # post 'sessions/create'
+  # delete 'sessions/destroy'
 
   get    '/login',  to: 'sessions#new'
   post   '/login',  to: 'sessions#create'
