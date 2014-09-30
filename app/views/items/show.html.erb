@@ -5,12 +5,16 @@
 			<th>Title</th>
 			<th>Description</th>
 			<th>Price</th>
+      <th>Category</th>
     </tr>
     <tr>
 			<td><%= @item.title %></td>
 			<td><%= @item.description %></td>
 			<td><%= @item.price %></td>
-		</tr>
+      <td><% @categories.each do |category| %>
+        <%= category.title %>
+      <% end %></td>
+  	</tr>
   </table>
 <nav>
   <%= link_to "All Items", items_path %> |

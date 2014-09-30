@@ -11,6 +11,12 @@
   	<%= f.label :price %><br/>
     <%= f.text_field :price %>
   </p>
+  <p>
+    <% @categories.each do |category| %>
+      <%= f.label category.title %>
+      <%= check_box_tag "categories[]", category.id, @item.categories.include?(category) ? true : false %>
+    <% end %>
+  </p>
 
   <p>
     <%= f.submit %>
