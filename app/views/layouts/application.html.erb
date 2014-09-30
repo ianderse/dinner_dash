@@ -6,10 +6,14 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+
+
 <body>
+<style>background-image: url(<%= asset_path '/assets/images/brick_background.png' %>)</style>
 <%= render 'layouts/header' %>
 
 <%= yield %>
+
 
 </body>
 </html>

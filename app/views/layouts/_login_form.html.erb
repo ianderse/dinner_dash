@@ -1,9 +1,15 @@
-<%= form_tag(login_path) do %>
-  <p><%= flash[:errors] if flash[:errors] %></p>
+<form class="navbar-form navbar-right" role="form">
+    <%= form_tag(login_path) do %>
+    <p><%= flash[:errors] if flash[:errors] %></p>
 
-  <%= text_field_tag "email", nil, placeholder: "email" %>
-  <%= password_field_tag "password", nil, placeholder: "password" %>
+    <%= text_field_tag "email", nil, placeholder: "email" %>
 
-  <%= submit_tag :login  %>
-  <%= link_to "Create Account", new_user_path %>
-<% end %>
+
+    <%= password_field_tag "password", nil, placeholder: "password" %>
+
+
+    <%= submit_tag :login  %>
+    <%= link_to "Create Account", new_user_path %>
+  <% end %>
+
+</form>
