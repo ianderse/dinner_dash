@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe Category, :type => :model do
   let(:category) { Category.new(title:"vegan", description:"It's gross")}
 
