@@ -10,32 +10,42 @@ describe 'unauthenticated user', type: :feature do
     # expect(page).to have ____________
   end
 
-  it "can browse items by category" do
-  # When I visit the homepage
-    visit '/'
-  # And I click on the Menu button
-    click_link 'Menu'
-  # And I click on Appetizers link
-  #  click_link 'Appetizers'
-  # Then I see a page with only appetizer items
-    # expect(current_path).to have_content 'Appetizers'
-  end
-
-  it "can create an account" do
-    # When I visit the homepage
-    # And I click the 'Create Account' link
-    # And I fill out the form with valid info
-    # I see a message showing that my account has been created successfully
-    # I see that that I am logged in as my username or fullname
-  end
-
-  it "cannot create an account with invalid data" do
-    # When I visit the homepage
-    # And I click the 'Create Account' link
-    # And I fill out the form with an invalid format for an email address
-    # I see that all the data I entered is still in the form
-    # I see a notice asking me to enter an email in a valid format
-  end
+  # it "can browse items by category" do
+  # # When I visit the homepage
+  #   visit '/'
+  # # And I click on the Menu button
+  #   click_link 'Menu'
+  # # And I click on Appetizers link
+  # #  click_link 'Appetizers'
+  # # Then I see a page with only appetizer items
+  #   # expect(current_path).to have_content 'Appetizers'
+  # end
+  #
+  # it "can create an account" do
+  #   # When I visit the homepage
+  #   visit '/'
+  #   # And I click the 'Create Account' link
+  #   click_link 'Create Account'
+  #   expect(current_path).to eq new_user_path
+  #   fill_in 'First Name', with: => 'Joe'
+  #   fill_in 'Last Name', with: => 'Smithers'
+  #   fill_in 'Email', with: => 'jsmithers@example.com'
+  #   fill_in 'Confirm Email', with: => 'jsmithers@example.com'
+  #   fill_in 'Nickname', with: => 'jsmithers1000'
+  #   click_button 'Create Account'
+  #   expect(page)
+  #   # And I fill out the form with valid info
+  #   # I see a message showing that my account has been created successfully
+  #   # I see that that I am logged in as my username or fullname
+  # end
+  #
+  # it "cannot create an account with invalid data" do
+  #   # When I visit the homepage
+  #   # And I click the 'Create Account' link
+  #   # And I fill out the form with an invalid format for an email address
+  #   # I see that all the data I entered is still in the form
+  #   # I see a notice asking me to enter an email in a valid format
+  # end
   #
   # it "can view a single item"
   # When I visit the homepage
