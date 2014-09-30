@@ -33,3 +33,4 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'sass-rails', '~> 4.0.3'
 gem 'autoprefixer-rails'
 gem 'paperclip'
+gem 'rails_12factor', group: :production
