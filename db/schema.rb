@@ -16,22 +16,61 @@ ActiveRecord::Schema.define(version: 20140930184648) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "items", force: true do |t|
-    t.string   "title"
-    t.text     "description"
-    t.float    "price"
+  create_table "categories", force: true do |t|
+    t.string   "title",       null: false
+    t.string   "description", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  create_table "item_categories", force: true do |t|
+    t.integer  "item_id",     null: false
+    t.integer  "category_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "items", force: true do |t|
+    t.string   "title",       null: false
+    t.text     "description", null: false
+    t.decimal  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "line_items", force: true do |t|
+    t.integer  "order_id"
+    t.integer  "item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "line_items", ["item_id"], name: "index_line_items_on_item_id", using: :btree
+  add_index "line_items", ["order_id"], name: "index_line_items_on_order_id", using: :btree
+
+  create_table "orders", force: true do |t|
+    t.integer  "user_id"
+    t.string   "status"
+    t.string   "exchange"
+    t.string   "street_number"
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
+
   create_table "users", force: true do |t|
     t.string   "first_name",      default: ""
     t.string   "last_name",       default: ""
-    t.string   "email"
+    t.string   "email",           null: false
     t.string   "nickname"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "password_digest"
+    t.string   "password_digest", null: false
   end
 
 end
