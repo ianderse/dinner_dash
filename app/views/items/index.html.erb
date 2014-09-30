@@ -1,4 +1,11 @@
 <h2>Menu</h2>
+<table>
+	<tr>
+<% @categories.each do |category| %>
+	<td><%= link_to category.title, category_path(category) %></td>
+<% end %>
+	</tr>
+</table>
 <% @items.each do |item| %>
   <div>
     <h3><%= link_to item.title, item_path(item)  %></h3>
