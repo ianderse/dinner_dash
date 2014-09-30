@@ -31,9 +31,9 @@ ActiveRecord::Schema.define(version: 20140930184648) do
   end
 
   create_table "items", force: true do |t|
-    t.string   "title",       null: false
-    t.text     "description", null: false
-    t.decimal  "price"
+    t.string   "title"
+    t.text     "description"
+    t.float    "price"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -66,11 +66,11 @@ ActiveRecord::Schema.define(version: 20140930184648) do
   create_table "users", force: true do |t|
     t.string   "first_name",      default: ""
     t.string   "last_name",       default: ""
-    t.string   "email",           null: false
+    t.string   "email"
     t.string   "nickname"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "password_digest", null: false
+    t.string   "password_digest"
   end
 
 end

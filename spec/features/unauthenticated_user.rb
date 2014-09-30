@@ -1,13 +1,16 @@
-require 'spec_helper'
+require 'rails_helper'
+require 'capybara/rails'
+require 'capybara/rspec'
 
 describe 'unauthenticated user', type: :feature do
+  include Capybara::DSL
 
   it "can browse all items" do
     visit '/'
     click_link 'Menu'
     expect(current_path).to eq(items_path)
-    # expect(page).to have_content 'Menu'
-    # expect(page).to have ____________
+    expect(page).to have_content 'Menu'
+    # expect(page).to have_css
   end
 
   # it "can browse items by category" do
@@ -21,23 +24,25 @@ describe 'unauthenticated user', type: :feature do
   #   # expect(current_path).to have_content 'Appetizers'
   # end
   #
-  # it "can create an account" do
-  #   # When I visit the homepage
-  #   visit '/'
-  #   # And I click the 'Create Account' link
-  #   click_link 'Create Account'
-  #   expect(current_path).to eq new_user_path
-  #   fill_in 'First Name', with: => 'Joe'
-  #   fill_in 'Last Name', with: => 'Smithers'
-  #   fill_in 'Email', with: => 'jsmithers@example.com'
-  #   fill_in 'Confirm Email', with: => 'jsmithers@example.com'
-  #   fill_in 'Nickname', with: => 'jsmithers1000'
-  #   click_button 'Create Account'
-  #   expect(page)
-  #   # And I fill out the form with valid info
-  #   # I see a message showing that my account has been created successfully
-  #   # I see that that I am logged in as my username or fullname
-  # end
+  it "can create an account" do
+    # When I visit the homepage
+    visit '/'
+    # And I click the 'Create Account' link
+    click_link 'Create Account'
+    expect(current_path).to eq new_user_path
+    fill_in 'First name', with: 'Joe'
+    fill_in 'Last name', with: 'Smithers'
+    fill_in 'Nickname', with: 'jsmithers1000'
+    fill_in 'Email', with: 'jsmithers@example.com'
+    fill_in 'Password', with: 'jsmithers@example.com'
+    fill_in 'Password confirmation', with: 'jsmithers@example.com'
+    click_button 'Create Account'
+    expect(page).to have_content "Your account was successfully created!"
+    expect(page).to have_content 'Menu'
+    # And I fill out the form with valid info
+    # I see a message showing that my account has been created successfully
+    # I see that that I am logged in as my username or fullname
+  end
   #
   # it "cannot create an account with invalid data" do
   #   # When I visit the homepage
