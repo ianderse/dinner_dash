@@ -32,20 +32,10 @@ ActiveRecord::Schema.define(version: 20140930013811) do
 
   create_table "items", force: true do |t|
     t.string   "title"
-    t.string   "description"
-    t.decimal  "price"
+    t.text     "description"
+    t.float    "price"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "users", force: true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
-    t.string   "nickname"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "password_digest"
   end
 
   create_table "line_items", force: true do |t|
@@ -72,5 +62,15 @@ ActiveRecord::Schema.define(version: 20140930013811) do
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
+
+  create_table "users", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "nickname"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "password_digest"
+  end
 
 end
