@@ -1,17 +1,29 @@
 require 'rails_helper'
 
 RSpec.describe Order, :type => :model do
-  let(:order) { Order.new() }
-  let(:valid_item_attributes) { { title: 'carrots', description: 'orange', price: '10.00' } }
+  # let(:category)              { Category.new(id: 1) }
+  # let(:valid_item_attributes) { { title: 'carrots', description: 'orange', price: '10.00', categories: [category] } }
+  # let(:item)                  { Item.create(valid_attributes) }
+  #
+  # attr_reader :order
+  #
+  # before do
+  #   @order = Order.new
+  #   @order.exchange = 'pickup'
+  #   @order.user = User.new(id: 1)
+  #   @order.items.build(valid_item_attributes)
+  # end
 
-  before do
-    order.exchange = 'pickup'
-    order.user = User.new(id: 1) 
-    order.items.build(valid_item_attributes)
-  end
+  let(:category)              { Category.create!(title: "Vegan", description: "Green shit.") }
+  let(:valid_item_attributes) { { title: 'carrots', description: 'orange', price: '10.00', categories: [category] } }
+  let(:valid_user_attributes) { { first_name: "John", last_name: "Snow", email: "jon@example.com", nickname: "wolfie"} }
+  let(:user)                  { User.create(valid_user_attributes) }
+  let(:item)                  { Item.create(valid_item_attributes) }
+  let(:order)                 { Order.create(items: [item], exchange: "pickup", user: user) }
 
   it "is valid when it has items" do
-    expect(order).to be_valid 
+    order.save!
+    expect(order).to be_valid
   end
 
   it "is invalid while it does not have items" do
@@ -20,7 +32,7 @@ RSpec.describe Order, :type => :model do
   end
 
   it "is invalid without a user" do
-    order.user_id = nil
+    order.user = nil
     expect(order).to_not be_valid
   end
 

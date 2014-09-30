@@ -9,11 +9,8 @@ RSpec.describe Category, :type => :model do
     category.title = nil
     expect(category).to_not be_valid
   end
+  
 
-  it 'is invalid without a description' do
-      category.description = nil
-    expect(category).to_not be_valid
-  end
 
 
 end
