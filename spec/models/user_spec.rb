@@ -4,7 +4,9 @@ RSpec.describe User, :type => :model do
       first_name: "Jane",
       last_name: "Doughey",
       email: "abc1234@example.com",
-      nickname: "janedoughburger5"
+      nickname: "janedoughburger5",
+      password: "abcdefg",
+      password_confirmation: "abcdefg"
     )
   end
 
@@ -44,10 +46,19 @@ RSpec.describe User, :type => :model do
     expect(second_user).to_not be_valid
   end
 
-  # it "has an optional nickname between 2 - 32 characters" do
-  #
-  # end
-  #
-  # it "has a fullname" do
-  # end
+  it "does not allow a nickname less than 2 or more than 32 characters" do
+    expect(user).to be_valid
+
+    user.nickname = "a"
+    expect(user).to_not be_valid
+
+    user.nickname = "aa"
+    expect(user).to be_valid
+
+    user.nickname = "#{'a'*32}"
+    expect(user).to be_valid
+
+    user.nickname = "#{'a'*33}"
+    expect(user).to_not be_valid
+  end
 end
