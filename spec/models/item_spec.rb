@@ -27,7 +27,7 @@ RSpec.describe Item, :type => :model do
   	expect(item).to_not be_valid
   end
 
-  it 'is invalid if price is not a decimal' do
+  it 'is invalid if price is not numeric' do
   	item.price = "asdf"
   	expect(item).to_not be_valid
   end
