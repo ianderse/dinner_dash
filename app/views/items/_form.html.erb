@@ -1,0 +1,19 @@
+<%= form_for(@item) do |f| %>
+  <p>
+    <%= f.label :title %><br/>
+    <%= f.text_field :title, autofocus: true %>
+  </p>
+  <p>
+  	<%= f.label :description %><br/>
+    <%= f.text_field :description %>
+  </p>
+  <p>
+  	<%= f.label :price %><br/>
+    <%= f.text_field :price %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+    <%= link_to "Cancel", items_path %>
+  </p>
+<% end %>

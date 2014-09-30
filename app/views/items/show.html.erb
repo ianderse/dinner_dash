@@ -1,0 +1,20 @@
+<div class="container">
+  <h1><%= @item.title.capitalize %>
+  <table>
+  	<tr>
+			<th>Title</th>
+			<th>Description</th>
+			<th>Price</th>
+    </tr>
+    <tr>
+			<td><%= @item.title %></td>
+			<td><%= @item.description %></td>
+			<td><%= @item.price %></td>
+		</tr>
+  </table>
+<nav>
+  <%= link_to "All Items", items_path %> |
+  <%= link_to "Edit", edit_item_path(@item) %> |
+  <%= link_to "Delete", item_path(@item), method: :delete, data: { confirm: 'Are you sure?' } %>
+</nav>
+</div>
