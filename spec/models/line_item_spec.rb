@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe LineItem, :type => :model do
-  let(:line_item) { LineItem.create(order_id: 1, item_id: 1) }
+  let(:line_item) { LineItem.new() }
+
+  before do
+    line_item.order = Order.new(id: 1)
+    line_item.item = Item.new(id: 1)
+  end
 
   it "is valid" do
     expect(line_item).to be_valid

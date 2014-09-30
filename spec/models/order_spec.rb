@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Order, :type => :model do
-  let(:order) { Order.new(user_id: 1, exchange: 'pickup') }
+  let(:order) { Order.new() }
   let(:valid_item_attributes) { { title: 'carrots', description: 'orange', price: '10.00' } }
 
   before do
+    order.exchange = 'pickup'
+    order.user = User.new(id: 1) 
     order.items.build(valid_item_attributes)
   end
 
