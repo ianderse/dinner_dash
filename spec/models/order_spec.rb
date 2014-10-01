@@ -12,7 +12,7 @@ RSpec.describe Order, :type => :model do
   #   @order.items.build(valid_item_attributes)
   # end
 
-  let(:category)              { Category.create!(title: "Vegan", description: "Green shit.") }
+  let(:category)              { Category.create!(title: "Vegan") }
   let(:valid_item_attributes) { { title: 'carrots', description: 'orange', price: '10.00', categories: [category] } }
   let(:valid_user_attributes) { { first_name: "John", last_name: "Snow", email: "jon@example.com", nickname: "wolfie"} }
   let(:user)                  { User.create(valid_user_attributes) }
