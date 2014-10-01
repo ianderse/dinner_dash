@@ -5,6 +5,8 @@ group :development, :test do
 end
 group :test do
   gem 'capybara', '~> 2.4.3'
+  gem 'pry-rails'
+  gem 'factory_girl_rails'
 end
 
 gem 'rails', '4.1.6'

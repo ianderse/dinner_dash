@@ -12,7 +12,12 @@
       <td><%= link_to item.title, item_path(item) %></td>
       <td><%= item.description %></td>
       <td><%= item.price %></td>
-      <td></td>
+      <td>
+        <%= form_for(CartItem.new) do |form|%>
+            <span class="glyphicon glyphicon-plus"></span>
+            <%= form.submit 'Add to cart', class: "btn btn-default btn-sm" %>
+        <% end %>
+      </td>
       <td>
         <label for="quantity">Quantity</label>
         <select>
@@ -21,8 +26,8 @@
           <option value="3">3</option>
           <option value="4">4</option>
         </select>
-      <a href="/items" class="btn btn-default btn-sm">
-      <span class="glyphicon glyphicon-plus"></span> Add to Cart</a>
+      <!-- <a href="/items" class="btn btn-default btn-sm">
+      <span class="glyphicon glyphicon-plus"></span> Add to Cart</a> -->
 
       </td>
     </tr>
