@@ -38,6 +38,60 @@ describe 'unauthenticated user', type: :feature do
     expect(page).to have_content 'Menu'
   end
 
+  it "cannot create an account with invalid data" do
+    visit '/'
+    click_on 'Create Account'
+    fill_in 'Email', with: 'awef'
+    click_button 'Create Account'
+    expect(current_path).to eq users_path
+    expect(page).to have_content "Please be sure to include a name and a valid email."
+  end
+  #
+  it "can view a single item" do
+    small_plates_category = create(:category, title: 'Small Plates')
+    item = create(:item, title: 'Second Food', categories: [small_plates_category])
+    visit '/'
+    click_on 'Menu'
+    within("table") do
+      click_on 'Second Food'
+    end
+    expect(current_path).to eq item_path(item)
+    expect(page).to have_content "#{item.title}"
+  end
+
+  it "can login" do
+    user = create(:user, first_name: 'joe', email: 'abc@example.com', password: 'asdf', password_confirmation: 'asdf')
+    visit '/'
+    fill_in 'email', with: "#{user.email}"
+    fill_in 'password', with: "#{user.password}"
+    click_on 'login'
+    expect(page).to have_content 'Login successful'
+    expect(current_path).to eq items_path
+    expect(page).to_not have_css '#email'
+  end
+
+  it "cannot login with invalid credentials" do
+    user = create(:user, first_name: 'joe', email: 'abc@example.com', password: 'asdf', password_confirmation: 'asdf')
+    visit '/'
+    fill_in 'email', with: "imdrunk"
+    fill_in 'password', with: "toodrunktologin"
+    click_on 'login'
+    expect(page).to have_content 'Invalid Login'
+    expect(current_path).to eq root_path
+  end
+
+  it "can logout" do
+    user = create(:user, first_name: 'joe', email: 'abc@example.com', password: 'asdf', password_confirmation: 'asdf')
+    visit '/'
+    fill_in 'email', with: "#{user.email}"
+    fill_in 'password', with: "#{user.password}"
+    click_on 'login'
+    expect(page).to have_content 'Logout'
+    click_on 'Logout'
+    expect(page).to have_css '#email'
+    expect(page).to have_css '#password'
+  end
+
   # it "can add item to cart" do
   #   # Given I am on the Menu Page
   #   create(:item, title: 'red t-shirt')
@@ -56,38 +110,24 @@ describe 'unauthenticated user', type: :feature do
   #   # asset cart has the item
   # end
 
-  it "cannot create an account with invalid data" do
-    # When I visit the homepage
-    # And I click the 'Create Account' link
-    # And I fill out the form with an invalid format for an email address
-    # I see that all the data I entered is still in the form
-    # I see a notice asking me to enter an email in a valid format
-  end
-  #
-  # it "can view a single item"
-  # When I visit the homepage
-  # And I click on Menu button
-  # And I click on first menu item
-  # Then I see a page displaying only that menu item
-  #
-  # it "can add an item to my cart"
-  # When I visit the homepage
-  # And I click on Menu button
-  # And I click on the 'Buy' button next to first menu item
-  # Then I see a message notifying me that my item has been added
-  # And I see a cart icon displaying the number one
-  #
+
   # it "can view the cart"
   # When I visit the homepage
   # And I click on the cart icon
   # Then I see a page with that lists my cart items
   #
   # it "can remove an item from the cart"
-  #
-  #
+  # Given my cart has one item
+  # When I visit my cart
+  # And I click on 'Remove Item'
+  # I expect my cart to have a quantity of 0
+
   # it "can increase the quantity of a item in my cart"
-  #
-  #
+  # Given I visit the Menu and my cart has no items
+  # And I click the up arrow next to the item
+  # And I click 'Add item to cart'
+  # I expect my cart to have a quantity of 2
+
   # it "can log in, which does not clear the cart"
   #
   #
