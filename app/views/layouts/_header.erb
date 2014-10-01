@@ -22,7 +22,12 @@
           </ul>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-              <%= render 'layouts/login_form'  %>
+              <% if current_user %>
+                <%= "Welcome #{current_user.full_name}!" %>
+              <%= link_to "Logout", logout_path, method: :delete %>
+              <% else %>
+                <%= render 'layouts/login_form'  %>
+              <% end %>
             </ul>
           </div>
         </div>
@@ -30,3 +35,8 @@
     </div>
   </div>
 </nav>
+<% flash.each do |k, v| %>
+  <div class="flash" id="<%= k %>">
+    <%= v %>
+  </div>
+  <% end %>

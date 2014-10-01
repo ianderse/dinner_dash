@@ -10,6 +10,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Your account was successfully created!"
       redirect_to items_path
     else
+      flash[:error] = "Please be sure to include a name and a valid email."
       render :new
     end
   end
