@@ -14,5 +14,7 @@ class CreateOrders < ActiveRecord::Migration
     end
 
     execute "ALTER TABLE orders ADD CONSTRAINT exchange_options CHECK (exchange IN ('pickup', 'delivery'))"
+
+    execute "ALTER TABLE orders ADD CONSTRAINT status_options CHECK (status IN ('ordered', 'paid', 'cancelled', 'completed'))"
   end
 end

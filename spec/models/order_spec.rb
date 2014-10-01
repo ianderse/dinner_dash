@@ -1,19 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Order, :type => :model do
-  # let(:category)              { Category.new(id: 1) }
-  # let(:valid_item_attributes) { { title: 'carrots', description: 'orange', price: '10.00', categories: [category] } }
-  # let(:item)                  { Item.create(valid_attributes) }
-  #
-  # attr_reader :order
-  #
-  # before do
-  #   @order = Order.new
-  #   @order.exchange = 'pickup'
-  #   @order.user = User.new(id: 1)
-  #   @order.items.build(valid_item_attributes)
-  # end
-
   let(:category)              { Category.create!(title: "Vegan") }
   let(:valid_item_attributes) { { title: 'carrots', description: 'orange', price: '10.00', categories: [category] } }
   let(:valid_user_attributes) { { first_name: "John", last_name: "Snow", email: "jon@example.com", nickname: "wolfie"} }
