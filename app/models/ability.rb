@@ -9,6 +9,7 @@ class Ability
       can :manage, :all
     else
       can :read, Item
+      can :read, Category
       can :create, User
     end
   end
