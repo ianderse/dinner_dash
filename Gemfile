@@ -19,17 +19,6 @@ gem 'spring',        group: :development
 gem 'bcrypt', '~> 3.1.7'
 gem 'launchy', '~> 2.4.2'
 gem 'sprig', '~> 0.1'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistsort_by { rand }o-rails', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
-
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'sass-rails', '~> 4.0.3'
 gem 'autoprefixer-rails'
