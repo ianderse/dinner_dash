@@ -17,9 +17,11 @@
   	</tr>
   </table>
 <nav>
-  <%= link_to "Add New Item", new_item_path %>
-  <%= link_to "All Items", items_path %> |
-  <%= link_to "Edit", edit_item_path(@item) %> |
-  <%= link_to "Delete", item_path(@item), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= link_to "All Items", items_path %>
+  <% if can? :update, @item %>
+    | <%= link_to "Add New Item", new_item_path %>
+    <%= link_to "Edit", edit_item_path(@item) %> |
+    <%= link_to "Delete", item_path(@item), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
 </nav>
 </div>

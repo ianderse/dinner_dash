@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  belongs_to :membership
 
   has_many :orders
   has_secure_password
@@ -19,4 +18,11 @@ class User < ActiveRecord::Base
   def full_name
     "#{first_name + " " + last_name}".strip
   end
+
+  Roles = [ :admin , :default ]
+
+  def is?( requested_role )
+    self.role.to_s == requested_role.to_s
+  end
+
 end
