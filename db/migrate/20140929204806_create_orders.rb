@@ -13,6 +13,6 @@ class CreateOrders < ActiveRecord::Migration
       t.timestamps
     end
 
-    execute "ALTER TABLE orders ADD CONSTRAINT exchange_options CHECK (exchange IN ('pickup', 'deliver'))"
+    execute "ALTER TABLE orders ADD CONSTRAINT exchange_options CHECK (exchange IN ('pickup', 'delivery'))"
   end
 end
