@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe Order, :type => :model do
   # let(:category)              { Category.new(id: 1) }
   # let(:valid_item_attributes) { { title: 'carrots', description: 'orange', price: '10.00', categories: [category] } }
@@ -19,7 +17,7 @@ RSpec.describe Order, :type => :model do
   let(:valid_user_attributes) { { first_name: "John", last_name: "Snow", email: "jon@example.com", nickname: "wolfie"} }
   let(:user)                  { User.create(valid_user_attributes) }
   let(:item)                  { Item.create(valid_item_attributes) }
-  let(:order)                 { Order.create(items: [item], exchange: "pickup", user: user) }
+  let(:order)                 { Order.create(items: [item], exchange: "pickup", user: user, status: "completed") }
 
   it "is valid when it has items" do
     order.save!

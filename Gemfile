@@ -18,6 +18,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'bcrypt', '~> 3.1.7'
 gem 'launchy', '~> 2.4.2'
+gem 'sprig', '~> 0.1'
 
 # Use unicorn as the app server
 # gem 'unicorn'
