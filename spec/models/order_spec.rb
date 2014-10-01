@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe Order, :type => :model do
   # let(:category)              { Category.new(id: 1) }
   # let(:valid_item_attributes) { { title: 'carrots', description: 'orange', price: '10.00', categories: [category] } }
@@ -20,8 +22,7 @@ RSpec.describe Order, :type => :model do
   let(:order)                 { Order.create(items: [item], exchange: "pickup", user: user, status: "completed") }
 
   it "is valid when it has items" do
-    order.save!
-    expect(order).to be_valid
+    expect(order).to be_valid 
   end
 
   it "is invalid while it does not have items" do
@@ -37,6 +38,19 @@ RSpec.describe Order, :type => :model do
   it "has an exchange of either pickup or delivery" do
     order.exchange = "neither"
     expect(order).to be_invalid
+  end
+
+  it 'is invalid without a correct status' do
+    order.status = nil
+    expect(order).to_not be_valid
+    order.status = 'neither'
+    expect(order).to_not be_valid
+    order.status = 'cancelled'
+    expect(order).to be_valid
+    order.status = 'completed'
+    expect(order).to be_valid
+    order.status = 'paid'
+    expect(order).to be_valid
   end
 
   context "when the exchange is a delivery" do
