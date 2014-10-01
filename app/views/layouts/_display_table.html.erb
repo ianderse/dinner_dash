@@ -1,0 +1,31 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Item Name</th>
+      <th>Description</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% @items.each do |item| %>
+      <td><%= link_to item.title, item_path(item) %></td>
+      <td><%= item.description %></td>
+      <td><%= item.price %></td>
+      <td></td>
+      <td>
+        <label for="quantity">Quantity</label>
+        <select>
+          <option value="1" selected="">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      <a href="/items" class="btn btn-default btn-sm">
+      <span class="glyphicon glyphicon-plus"></span> Add to Cart</a>
+
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

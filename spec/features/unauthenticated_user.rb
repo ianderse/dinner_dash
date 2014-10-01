@@ -13,17 +13,18 @@ describe 'unauthenticated user', type: :feature do
     # expect(page).to have_css
   end
 
-  # it "can browse items by category" do
-  # # When I visit the homepage
-  #   visit '/'
-  # # And I click on the Menu button
-  #   click_link 'Menu'
-  # # And I click on Appetizers link
-  # #  click_link 'Appetizers'
-  # # Then I see a page with only appetizer items
-  #   # expect(current_path).to have_content 'Appetizers'
-  # end
-  #
+  it "can browse items by category" do
+  # When I visit the homepage
+    visit '/'
+  # And I click on the Menu button
+    click_link 'Menu'
+  # And I click on Appetizers link
+    click_link 'Small Plates'
+  # Then I see a page with only appetizer items
+    expect(current_path).to have_content 'Small Plates'
+    # expect(page).to have_content 'Croissant'
+  end
+
   it "can create an account" do
     # When I visit the homepage
     visit '/'
@@ -39,9 +40,6 @@ describe 'unauthenticated user', type: :feature do
     click_button 'Create Account'
     expect(page).to have_content "Your account was successfully created!"
     expect(page).to have_content 'Menu'
-    # And I fill out the form with valid info
-    # I see a message showing that my account has been created successfully
-    # I see that that I am logged in as my username or fullname
   end
   #
   # it "cannot create an account with invalid data" do
