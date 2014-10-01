@@ -18,11 +18,7 @@ ActiveRecord::Schema.define(version: 20140930184648) do
 
   create_table "categories", force: true do |t|
     t.string   "title",       null: false
-<<<<<<< HEAD
     t.string   "description"
-=======
-    t.string   "description", null: false
->>>>>>> master
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -35,15 +31,9 @@ ActiveRecord::Schema.define(version: 20140930184648) do
   end
 
   create_table "items", force: true do |t|
-<<<<<<< HEAD
     t.string   "title",       null: false
     t.text     "description", null: false
     t.decimal  "price"
-=======
-    t.string   "title"
-    t.text     "description"
-    t.float    "price"
->>>>>>> master
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -74,23 +64,13 @@ ActiveRecord::Schema.define(version: 20140930184648) do
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-<<<<<<< HEAD
-    t.string   "first_name",      null: false
-    t.string   "last_name",       null: false
-    t.string   "email",           null: false
-    t.string   "nickname"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "password_digest", null: false
-=======
     t.string   "first_name",      default: ""
     t.string   "last_name",       default: ""
-    t.string   "email"
+    t.string   "email",                        null: false
     t.string   "nickname"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "password_digest"
->>>>>>> master
+    t.string   "password_digest",              null: false
   end
 
 end
