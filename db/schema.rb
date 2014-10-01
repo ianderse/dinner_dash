@@ -17,35 +17,25 @@ ActiveRecord::Schema.define(version: 20140930013811) do
   enable_extension "plpgsql"
 
   create_table "categories", force: true do |t|
-    t.string   "title"
+    t.string   "title",       null: false
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "item_categories", force: true do |t|
-    t.integer  "item_id"
-    t.integer  "category_id"
+    t.integer  "item_id",     null: false
+    t.integer  "category_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "items", force: true do |t|
-    t.string   "title"
-    t.string   "description"
+    t.string   "title",       null: false
+    t.text     "description", null: false
     t.decimal  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "users", force: true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
-    t.string   "nickname"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "password_digest"
   end
 
   create_table "line_items", force: true do |t|
@@ -72,5 +62,15 @@ ActiveRecord::Schema.define(version: 20140930013811) do
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
+
+  create_table "users", force: true do |t|
+    t.string   "first_name",      null: false
+    t.string   "last_name",       null: false
+    t.string   "email",           null: false
+    t.string   "nickname"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "password_digest", null: false
+  end
 
 end
