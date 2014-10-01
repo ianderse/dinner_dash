@@ -19,7 +19,14 @@ RSpec.describe Order, :type => :model do
   let(:valid_user_attributes) { { first_name: "John", last_name: "Snow", email: "jon@example.com", nickname: "wolfie"} }
   let(:user)                  { User.create(valid_user_attributes) }
   let(:item)                  { Item.create(valid_item_attributes) }
-  let(:order)                 { Order.create(items: [item], exchange: "pickup", user: user) }
+  let(:order)                 { Order.create(items: item, exchange: "pickup", user: user) }
+  let(:order) { Order.new(exchange: 'pickup', status: 'ordered') }
+  let(:valid_item_attributes) { { title: 'carrots', description: 'orange', price: '10.00' } }
+
+  before do
+    order.user = User.new(id: 1)
+    order.items.build(valid_item_attributes)
+  end
 
   it "is valid when it has items" do
     order.save!
@@ -39,6 +46,17 @@ RSpec.describe Order, :type => :model do
   it "has an exchange of either pickup or delivery" do
     order.exchange = "neither"
     expect(order).to be_invalid
+  end
+
+  it 'is invalid without a correct status' do
+    order.status = nil
+    expect(order).to_not be_valid
+    order.status = 'neither'
+    expect(order).to_not be_valid
+    order.status = 'cancelled'
+    expect(order).to be_valid
+    order.status = 'completed'
+    expect(order).to be_valid
   end
 
   context "when the exchange is a delivery" do
