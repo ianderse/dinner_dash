@@ -5,7 +5,8 @@ class CategoriesController < ApplicationController
 	end
 
 	def show
-		item_category_id = Category.where(:title => 'Small Plates').first.id
+		@category = Category.find(params[:id])
+		item_category_id = Category.where(:title => @category.title).first.id
 		items_list = ItemCategory.where(:category_id => item_category_id).flatten
 		items_ids = items_list.map do |item|
 			item.item_id
@@ -13,7 +14,7 @@ class CategoriesController < ApplicationController
 		@items = items_ids.map do |id|
 			Item.where(:id => id)
 		end.flatten
-		@category = Category.find(params[:id])
+
 	end
 
 	def new
