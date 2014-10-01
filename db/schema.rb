@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20140930184648) do
 
   create_table "categories", force: true do |t|
     t.string   "title",       null: false
-    t.string   "description"
+    t.string   "description", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 20140930184648) do
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "first_name",      default: ""
-    t.string   "last_name",       default: ""
+    t.string   "first_name",      default: "", null: false
+    t.string   "last_name",       default: "", null: false
     t.string   "email",                        null: false
     t.string   "nickname"
     t.datetime "created_at"
