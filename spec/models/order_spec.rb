@@ -6,10 +6,11 @@ RSpec.describe Order, :type => :model do
   let(:valid_user_attributes) { { first_name: "John", last_name: "Snow", email: "jon@example.com", nickname: "wolfie"} }
   let(:user)                  { User.create(valid_user_attributes) }
   let(:item)                  { Item.create(valid_item_attributes) }
+  # let(:order)                 { create.:order }
   let(:order)                 { Order.create(items: [item], exchange: "pickup", user: user, status: "completed") }
 
   it "is valid when it has items" do
-    expect(order).to be_valid 
+    expect(order).to be_valid
   end
 
   it "is invalid while it does not have items" do
