@@ -80,18 +80,6 @@ describe 'unauthenticated user', type: :feature do
     expect(current_path).to eq root_path
   end
 
-  it "can logout" do
-    user = create(:user, first_name: 'joe', email: 'abc@example.com', password: 'asdf', password_confirmation: 'asdf')
-    visit '/'
-    fill_in 'email', with: "#{user.email}"
-    fill_in 'password', with: "#{user.password}"
-    click_on 'login'
-    expect(page).to have_content 'Logout'
-    click_on 'Logout'
-    expect(page).to have_css '#email'
-    expect(page).to have_css '#password'
-  end
-
   # it "can add item to cart" do
   #   # Given I am on the Menu Page
   #   create(:item, title: 'red t-shirt')

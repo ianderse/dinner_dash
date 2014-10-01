@@ -3,21 +3,49 @@ require 'capybara/rails'
 require 'capybara/rspec'
 
 describe 'authenticated user', type: :feature do
-	#before do:
-		#@user = User.create authenticated user
-	#end
-	it 'can browse all items'
-	it 'can browse items by category'
+	before do
+		user = create(:user, first_name: 'joe', email: 'abc@example.com', password: 'asdf', password_confirmation: 'asdf')
+    visit '/'
+    fill_in 'email', with: "#{user.email}"
+    fill_in 'password', with: "#{user.password}"
+    click_on 'login'
+	end
+	it 'can browse all items' do
+		visit '/'
+    click_link 'Menu'
+    expect(current_path).to eq(items_path)
+    expect(page).to have_content 'Menu'
+	end
+	it 'can browse items by category' do
+    small_plates_category = create(:category, title: 'Small Plates')
+    create(:item, title: 'Second Food', categories: [small_plates_category])
+    visit '/'
+    click_link 'Menu'
+    expect(page).to have_content 'Menu'
+    click_link 'Small Plates'
+    expect(page).to have_content 'Small Plates'
+    expect(page).to have_content 'Second Food'
+	end
+
 	it 'can add item to cart'
 	it 'can view my cart'
 	it 'can remove an item from my cart'
 	it 'can increase quantity of an item in my cart'
-	it 'can logout'
-	it 'can view past orders with links to display each order'
+
+  it "can logout" do
+  	visit '/'
+    expect(page).to have_content 'Logout'
+    click_on 'Logout'
+    expect(page).to have_css '#email'
+    expect(page).to have_css '#password'
+  end
+
+  it 'can view past orders with links to display each order'
 	it 'cannot view another users order'
 	it 'cannot view the admin screens'
 	it 'cannot access admin edit pages'
 	it 'cannot make itself an admit'
+
 	describe 'order display page' do
 		it 'displays item with quantity ordered'
 		it 'shows line-item subtotals'
