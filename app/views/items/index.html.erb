@@ -1,8 +1,5 @@
 <h2>Menu</h2>
-<%= @items.each do |item| %>
-  <div>
-    <h3><%= item.title  %></h3>
-    <p><%= item.description  %></p>
-    <p><%= item.price  %></p>
-  </div>
+<% @categories.each do |category| %>
+<%= link_to category.title, category_path(category) %></td>
 <% end %>
+<%= render 'layouts/display_table'  %>
