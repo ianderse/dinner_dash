@@ -37,6 +37,8 @@ RSpec.describe Order, :type => :model do
     expect(order).to be_valid
     order.status = 'completed'
     expect(order).to be_valid
+    order.status = 'paid'
+    expect(order).to be_valid
   end
 
   context "when the exchange is a delivery" do
