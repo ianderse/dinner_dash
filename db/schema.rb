@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20141001172930) do
   add_index "line_items", ["order_id"], name: "index_line_items_on_order_id", using: :btree
 
   create_table "memberships", force: true do |t|
-    t.string   "role"
+    t.string   "role",       default: "user"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

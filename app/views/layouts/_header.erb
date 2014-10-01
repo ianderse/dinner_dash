@@ -24,6 +24,9 @@
             <ul class="nav navbar-nav navbar-right">
               <% if current_user %>
                 <%= "Welcome #{current_user.full_name}!" %>
+                <% if Membership.find_by user_id: (current_user.id) == "admin" %>
+                  administrator
+                <% end %>
               <%= link_to "Logout", logout_path, method: :delete %>
               <% else %>
                 <%= render 'layouts/login_form'  %>

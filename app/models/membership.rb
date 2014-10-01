@@ -1,4 +1,4 @@
 class Membership < ActiveRecord::Base
-	validates :role, default: "user", presence: true
+	validates :role, presence: true
 	has_many :users
 end

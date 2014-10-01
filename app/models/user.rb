@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  belongs_to :memberships
+  belongs_to :membership
+
   has_many :orders
   has_secure_password
 
