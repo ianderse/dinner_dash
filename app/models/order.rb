@@ -7,5 +7,11 @@ class Order < ActiveRecord::Base
   validates :user, presence: true
   validates :status, inclusion: %w(ordered completed cancelled paid)
   validates :exchange, inclusion: %w(pickup delivery)
-  validates :street_number, :street, :city, :state, :zip, presence: true, if: Proc.new { |o| o.exchange == 'delivery' }
+  validates :street_number, 
+            :street, 
+            :city, 
+            :state, 
+            :zip, 
+            presence: true, 
+            if: ->(order) { order.exchange == 'delivery' }
 end
