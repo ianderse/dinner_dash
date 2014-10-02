@@ -1,13 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Order, :type => :model do
-  let(:category)              { Category.create!(title: "Vegan") }
-  let(:valid_item_attributes) { { title: 'carrots', description: 'orange', price: '10.00', categories: [category] } }
-  let(:valid_user_attributes) { { first_name: "John", last_name: "Snow", email: "jon@example.com", nickname: "wolfie"} }
-  let(:user)                  { User.create(valid_user_attributes) }
-  let(:item)                  { Item.create(valid_item_attributes) }
-  # let(:order)                 { create.:order }
-  let(:order)                 { Order.create(items: [item], exchange: "pickup", user: user, status: "completed") }
+  let(:order) { create(:order) }
 
   it "is valid when it has items" do
     expect(order).to be_valid
@@ -41,20 +35,73 @@ RSpec.describe Order, :type => :model do
     expect(order).to be_valid
   end
 
-  context "when the exchange is a delivery" do
-    it 'is invalid unless all address fields are present' do
-      order.exchange = 'delivery'
-      expect(order).to_not be_valid
-      order.street_number = '123'
-      expect(order).to_not be_valid
-      order.street = 'abc'
-      expect(order).to_not be_valid
-      order.city = 'city'
-      expect(order).to_not be_valid
-      order.state = 'OK'
-      expect(order).to_not be_valid
-      order.zip = '4567'
+  context "when the exchange is a pickup" do
+    it 'is valid without a street number' do
+      order.street_number = ''
       expect(order).to be_valid
+    end
+
+    it 'is valid without a street' do
+      order.street = ''
+      expect(order).to be_valid
+    end
+
+    it 'is valid without a city' do
+      order.city = ''
+      expect(order).to be_valid
+    end
+
+    it 'is valid without a state' do
+      order.state = ''
+      expect(order).to be_valid
+    end
+
+    it 'is valid without a zip' do
+      order.zip = ''
+      expect(order).to be_valid
+    end
+  end
+
+  context "when the exchange is a delivery" do
+    before do
+      order.exchange = 'delivery'
+    end
+
+    it 'is invalid without a street number' do
+      order.street_number = ''
+      expect(order).to_not be_valid
+    end
+
+    it 'is invalid without a street' do
+      order.street = ''
+      expect(order).to_not be_valid
+    end
+
+    it 'is invalid without a city' do
+      order.city = ''
+      expect(order).to_not be_valid
+    end
+
+    it 'is invalid without a state' do
+      order.state = ''
+      expect(order).to_not be_valid
+    end
+
+    it 'is invalid without a zip' do
+      order.zip = ''
+      expect(order).to_not be_valid
+    end
+
+    it 'is invalid without a legitimate state' do
+      order.state = 'AA'
+      expect(order).to_not be_valid
+    end
+    
+    it "is invalid without a proper zip code" do
+      order.zip = 'abc'
+      expect(order).to_not be_valid
+      order.zip = '1234'
+      expect(order).to_not be_valid
     end
   end
 end

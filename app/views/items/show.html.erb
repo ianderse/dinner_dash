@@ -2,13 +2,14 @@
   <h1><%= @item.title.capitalize %>
   <table>
   	<tr>
+      <th>Picture</th>
 			<th>Title</th>
 			<th>Description</th>
 			<th>Price</th>
       <th>Category</th>
     </tr>
     <tr>
-      <%= image_tag @item.image.url(:medium) %>
+      <td><% if @item.image_file_name != nil %><%= image_tag @item.image.url(:medium) %><% end %></td>
 			<td><%= @item.title %></td>
 			<td><%= @item.description %></td>
 			<td><%= @item.price %></td>
@@ -18,9 +19,11 @@
   	</tr>
   </table>
 <nav>
-  <%= link_to "Add New Item", new_item_path %>
-  <%= link_to "All Items", items_path %> |
-  <%= link_to "Edit", edit_item_path(@item) %> |
-  <%= link_to "Delete", item_path(@item), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= link_to "All Items", items_path %>
+  <% if can? :update, @item %>
+    | <%= link_to "Add New Item", new_item_path %>
+    <%= link_to "Edit", edit_item_path(@item) %> |
+    <%= link_to "Delete", item_path(@item), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
 </nav>
 </div>

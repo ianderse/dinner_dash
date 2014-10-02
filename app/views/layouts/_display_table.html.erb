@@ -1,6 +1,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Picture</th>
       <th>Item Name</th>
       <th>Description</th>
       <th>Price</th>
@@ -9,7 +10,7 @@
   <tbody>
     <tr>
       <% @items.each do |item| %>
-      <td><%= image_tag item.image.url(:thumb) %></td>
+      <td><% if item.image_file_name != nil %><%= image_tag item.image.url(:thumb) %><% end %></td>
       <td><%= link_to item.title, item_path(item) %></td>
       <td><%= item.description %></td>
       <td><%= item.price %></td>

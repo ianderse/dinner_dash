@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-
+	load_and_authorize_resource
 	def index
 		@items = Item.all
 		@categories = Category.all
@@ -21,6 +21,7 @@ class ItemsController < ApplicationController
 	end
 
 	def create
+		#refactor this
 		@item = Item.new(item_params)
 		@categories = params[:categories] || []
 		@categories.each do |category|
@@ -38,6 +39,7 @@ class ItemsController < ApplicationController
 	end
 
 	def update
+		#refactor this
 		@item = Item.find(params[:id])
 		@categories = params[:categories] || []
 		@item.categories = []

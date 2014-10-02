@@ -1,32 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do
-  let(:user) do
-    User.create(
-      first_name: "Jane",
-      last_name: "Doughey",
-      email: "abc1234@example.com",
-      nickname: "janedoughburger5",
-      password: "abcdefg",
-      password_confirmation: "abcdefg"
-    )
-  end
+  let(:user) { create(:user) }
 
   it "is valid" do
     expect(user).to be_valid
   end
 
   it "is invalid without a full name" do
-    expect(user).to be_valid
-    expect(user.full_name).to eq 'Jane Doughey'
+    expect(user.full_name).to eq 'John Snow'
 
     user.first_name = ""
-    expect(user.full_name).to eq 'Doughey'
+    expect(user.full_name).to eq 'Snow'
     expect(user).to be_valid
 
-    user.first_name = "Jane"
+    user.first_name = "John"
     user.last_name = ""
-    expect(user.full_name).to eq 'Jane'
+    expect(user.full_name).to eq 'John'
     expect(user).to be_valid
 
     user.first_name = ""
