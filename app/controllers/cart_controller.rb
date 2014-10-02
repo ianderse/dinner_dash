@@ -1,8 +1,9 @@
 class CartController < ApplicationController
   def edit
-    @cart_items = session[:cart].dup || []
-    @cart_items.map! { |i| Item.find(i) }
+    @cart_items = session[:cart] || []
+    @cart_items = @cart_items.map { |i| Item.find(i) }
     @cart_items = @cart_items.group_by(&:id).values
+    #move some of this to model
   end
 
   def update
