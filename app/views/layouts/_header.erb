@@ -19,6 +19,9 @@
             <li class="active"><%= link_to "Events", items_path %></li>
             <li class="active"><%= link_to "Blog", items_path %></li>
             <li class="active"><%= link_to "Contact", items_path %></li>
+            <% if can? :create, @item %>
+                  <li class="active"><%= link_to "Admin Dashboard", root_path %></li>
+            <% end %>
           </ul>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
