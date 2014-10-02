@@ -36,27 +36,27 @@ RSpec.describe Order, :type => :model do
   end
 
   context "when the exchange is a pickup" do
-    it 'is invalid without a street number' do
+    it 'is valid without a street number' do
       order.street_number = ''
       expect(order).to be_valid
     end
 
-    it 'is invalid without a street' do
+    it 'is valid without a street' do
       order.street = ''
       expect(order).to be_valid
     end
 
-    it 'is invalid without a city' do
+    it 'is valid without a city' do
       order.city = ''
       expect(order).to be_valid
     end
 
-    it 'is invalid without a state' do
+    it 'is valid without a state' do
       order.state = ''
       expect(order).to be_valid
     end
 
-    it 'is invalid without a zip' do
+    it 'is valid without a zip' do
       order.zip = ''
       expect(order).to be_valid
     end
@@ -89,6 +89,18 @@ RSpec.describe Order, :type => :model do
 
     it 'is invalid without a zip' do
       order.zip = ''
+      expect(order).to_not be_valid
+    end
+
+    it 'is invalid without a legitimate state' do
+      order.state = 'AA'
+      expect(order).to_not be_valid
+    end
+    
+    it "is invalid without a proper zip code" do
+      order.zip = 'abc'
+      expect(order).to_not be_valid
+      order.zip = '1234'
       expect(order).to_not be_valid
     end
   end
