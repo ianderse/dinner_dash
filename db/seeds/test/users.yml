@@ -27,3 +27,4 @@ records:
     nickname: 'josh'
     password: 'password'
     password_confirmation: 'password'
+    role: 'admin'
