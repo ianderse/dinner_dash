@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Category, :type => :model do
-  let(:category) { Category.new(title:"vegan", description:"It's gross")}
+  let(:category) { create(:category) }
 
   it 'is valid' do
     expect(category).to be_valid
