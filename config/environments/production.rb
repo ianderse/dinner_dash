@@ -86,13 +86,4 @@ Rails.application.configure do
     :fog_directory => ENV["BUCKET_NAME"]
   }
 
-
-  #   :bucket => ENV['S3_BUCKET_NAME'],
-  #   :s3_credentials => {
-  #     :s3_host_name => 'turingproject.s3.amazonaws.com',
-  #     :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-  #     :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
-  #     :s3_hostname => ENV['S3_HOST_NAME']
-  #   }
-  # }
-end
+  end
