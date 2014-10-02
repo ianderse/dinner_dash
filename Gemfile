@@ -5,9 +5,14 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.4.1'
   gem 'quiet_assets', '~> 1.0.3'
 end
+
 group :test do
   gem 'capybara', '~> 2.4.3'
-  gem 'pry-rails'
+  gem "codeclimate-test-reporter", require: nil
+end
+
+group :development do
+  gem 'pry-rails', '~> 0.3.2'
 end
 
 gem 'rails', '4.1.6'

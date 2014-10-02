@@ -7,7 +7,7 @@ FactoryGirl.define do
     street_number "123"
     street "Sesame St"
     city "Wall"
-    state "GN"
+    state "GU"
     zip "80120"
   end
 end

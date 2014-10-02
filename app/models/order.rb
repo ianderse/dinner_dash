@@ -1,4 +1,8 @@
+require_relative 'order_validators'
+
 class Order < ActiveRecord::Base
+  extend OrderValidators
+  
   belongs_to :user
   has_many :line_items
   has_many :items, through: :line_items
@@ -10,8 +14,11 @@ class Order < ActiveRecord::Base
   validates :street_number, 
             :street, 
             :city, 
-            :state, 
-            :zip, 
-            presence: true, 
-            if: ->(order) { order.exchange == 'delivery' }
+            presence: true, if: "delivery?"
+  validates :state, inclusion: states, if: "delivery?"
+  validates :zip, format: { with: /\d{5}\d*/ }, if: "delivery?"
+
+  def delivery?
+    exchange == 'delivery'
+  end
 end
