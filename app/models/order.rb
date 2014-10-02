@@ -1,13 +1,12 @@
 class Order < ActiveRecord::Base
-
   belongs_to :user
   has_many :line_items
   has_many :items, through: :line_items
 
   validates :items, presence: true
   validates :user, presence: true
-  validates :status, inclusion: %w(ordered completed cancelled paid)
-  validates :exchange, inclusion: %w(pickup delivery)
+  validates :status, inclusion: { in: :statuses }
+  validates :exchange, inclusion: { in: :exchanges }
   validates :street_number,
             :street,
             :city,
@@ -17,5 +16,13 @@ class Order < ActiveRecord::Base
 
   def delivery?
     exchange == 'delivery'
+  end
+
+  def statuses
+    ['ordered', 'completed', 'cancelled', 'paid']
+  end
+
+  def exchanges
+    ['pickup', 'delivery']
   end
 end
