@@ -78,7 +78,7 @@ records:
       - '<%= sprig_record(Category, 3).id %>'
       - '<%= sprig_record(Category, 5).id %>'
   - sprig_id: 13
-    title: "cardoon souffle&acute;"
+    title: "cardoon souffle"
     description: "porcini balsamella, leeks, baby kale"
     price: 11.01
     category_ids:

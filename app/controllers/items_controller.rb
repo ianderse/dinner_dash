@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
 	load_and_authorize_resource
+
 	def index
 		@items = Item.all
 		@categories = Category.all
