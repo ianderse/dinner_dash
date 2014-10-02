@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       flash[:notice] = "Login successful"
       session[:user_id] = user.id
-      redirect_to items_path
+      redirect_to correct_destination(user)
     else
       flash[:errors] = "Invalid Login"
       redirect_to root_path
@@ -20,4 +20,11 @@ class SessionsController < ApplicationController
     flash[:notice] = "Logout Successful"
     redirect_to root_path
   end
+
+  private
+
+    def correct_destination(user)
+      user.is?('admin') ? admin_path : items_path
+    end
+
 end

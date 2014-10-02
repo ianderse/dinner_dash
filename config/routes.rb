@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
+  namespace :admin do
+    resources :items, except: [:index, :show]
+  end
+
   get '/code' => 'welcome#code'
   get '/about' => 'welcome#about'
 

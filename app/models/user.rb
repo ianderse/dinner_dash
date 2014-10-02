@@ -25,4 +25,5 @@ class User < ActiveRecord::Base
     self.role.to_s == requested_role.to_s
   end
 
+
 end
