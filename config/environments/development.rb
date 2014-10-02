@@ -34,14 +34,13 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-
-  # config.paperclip_defaults = {
-  #   :storage => :s3,
-  #   :bucket => ENV['S3_BUCKET_NAME'],
-  #   :s3_credentials => {
-  #     :s3_host_name => 'turingproject.s3.amazonaws.com',
-  #     :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-  #     :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
-  #   }
-  # }
+  config.paperclip_defaults = {
+    :storage => :fog,
+    :fog_credentials => {
+      :provider => "AWS",
+      :aws_access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+      :aws_secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    },
+    :fog_directory => ENV["S3_BUCKET_NAME"]
+  }
 end

@@ -46,7 +46,7 @@ describe 'unauthenticated user', type: :feature do
     expect(current_path).to eq users_path
     expect(page).to have_content "Please be sure to include a name and a valid email."
   end
-  #
+  
   it "can view a single item" do
     small_plates_category = create(:category, title: 'Small Plates')
     item = create(:item, title: 'Second Food', categories: [small_plates_category])
@@ -80,51 +80,48 @@ describe 'unauthenticated user', type: :feature do
     expect(current_path).to eq root_path
   end
 
-  # it "can add item to cart" do
-  #   # Given I am on the Menu Page
-  #   create(:item, title: 'red t-shirt')
-  #   visit items_path
-  #   # When I click on the 'Buy' button next to a menu item
-  #   click_on 'Add to cart'
-  #   # Then I see a message notifying me that my item has been added
-  #   expect(page).to have_content 'Item added to your cart!'
-  #   # And I see a cart icon displaying the number one
-  #   within('.cart-container') do
-  #     expect(page).to have_content '1'
-  #   end
-  #
-  #   click_on 'Cart'
-  #
-  #   # asset cart has the item
-  # end
 
+  context "cart" do
+    before do
+      create(:item, title: 'red t-shirt')
+      visit items_path
+      click_on 'Add to cart'
+    end
 
-  # it "can view the cart"
-  # When I visit the homepage
-  # And I click on the cart icon
-  # Then I see a page with that lists my cart items
-  #
-  # it "can remove an item from the cart"
-  # Given my cart has one item
-  # When I visit my cart
-  # And I click on 'Remove Item'
-  # I expect my cart to have a quantity of 0
+    it "can add item to cart" do
+      expect(page).to have_content 'Item added to your cart!'
+      within('.cart-container') do
+        expect(page).to have_content '1'
+        find('a').click
+      end
+      expect(current_path).to eq(cart_edit_path)
+      expect(page).to have_content('Your Cart')
+      expect(page).to have_content('red t-shirt')
+    end
 
-  # it "can increase the quantity of a item in my cart"
-  # Given I visit the Menu and my cart has no items
-  # And I click the up arrow next to the item
-  # And I click 'Add item to cart'
-  # I expect my cart to have a quantity of 2
+    xit "can remove an item from the cart" do
+      visit cart_edit_path
+      click_on 'Remove Item'
+      within('.cart-container') do
+        expect(page).to have_content '0'
+      end
+    end
+  end
 
-  # it "can log in, which does not clear the cart"
-  #
-  #
-  # Unauthenticated users are NOT allowed to:
+  #it "can increase the quantity of a item in my cart"
+  #Given I visit the Menu and my cart has no items
+  #And I click the up arrow next to the item
+  #And I click 'Add item to cart'
+  #I expect my cart to have a quantity of 2
 
-  # CANNOT:
-  # View another user’s private data (such as current order, etc.)
-  # Checkout (until they log in)
-  # View the administrator screens or use administrator functionality
-  # Make themselves an administrator
+  #it "can log in, which does not clear the cart"
+  
+  
+  #Unauthenticated users are NOT allowed to:
 
+  #CANNOT:
+  #View another user’s private data (such as current order, etc.)
+  #Checkout (until they log in)
+  #View the administrator screens or use administrator functionality
+  #Make themselves an administrator
 end
