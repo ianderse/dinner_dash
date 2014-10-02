@@ -4,7 +4,7 @@ require 'capybara/rspec'
 
 describe 'authenticated user', type: :feature do
 	before do
-		user = create(:user, first_name: 'joe', email: 'abc@example.com', password: 'asdf', password_confirmation: 'asdf')
+		user = create(:user, id: 1, first_name: 'joe', email: 'abc@example.com', password: 'asdf', password_confirmation: 'asdf')
     visit '/'
     fill_in 'email', with: "#{user.email}"
     fill_in 'password', with: "#{user.password}"
@@ -57,7 +57,12 @@ describe 'authenticated user', type: :feature do
 		expect(page).to have_content "You are not authorized to access this page."
 	end
 
-	it 'cannot make itself an admin'
+	it 'cannot make itself an admin' do
+		visit '/users/1/edit'
+		expect(page).to_not have_content "Edit User"
+		expect(current_path).to eq(root_path)
+		expect(page).to have_content "You are not authorized to access this page."
+	end
 
 	describe 'order display page' do
 		it 'displays item with quantity ordered'
