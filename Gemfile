@@ -34,3 +34,4 @@ gem 'rails_12factor', group: :production
 gem 'paperclip', '~> 4.2.0'
 gem 'aws-sdk', '~> 1.54.0'
 gem 'cancancan'
+gem 'fog'
