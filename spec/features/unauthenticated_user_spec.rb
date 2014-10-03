@@ -46,7 +46,7 @@ describe 'unauthenticated user', type: :feature do
     expect(current_path).to eq users_path
     expect(page).to have_content "Please be sure to include a name and a valid email."
   end
-  
+
   it "can view a single item" do
     small_plates_category = create(:category, title: 'Small Plates')
     item = create(:item, title: 'Second Food', categories: [small_plates_category])
@@ -80,6 +80,22 @@ describe 'unauthenticated user', type: :feature do
     expect(current_path).to eq root_path
   end
 
+  it "cannot view another user's private data" do
+    user = create(:user, id: 1, first_name: 'joe', email: 'abc@example.com', password: 'asdf', password_confirmation: 'asdf')
+    visit user_path(user)
+    expect(current_path).to eq(root_path)
+    expect(page).to have_content('You are not authorized to access this page')
+  end
+
+  xit "cannot view the administrator screens or use administrator functionality" do
+    #cannot view /admin pages
+  end
+
+  it "canot make themselves an administrator" do
+    visit new_user_path
+    expect(page).to_not have_content('Role')
+  end
+
 
   context "cart" do
     before do
@@ -106,6 +122,37 @@ describe 'unauthenticated user', type: :feature do
         expect(page).to have_content '0'
       end
     end
+
+    it "can clear the cart" do
+      visit cart_edit_path
+      click_on 'clear my cart'
+      within('.cart-container') do
+        expect(page).to have_content '0'
+      end
+    end
+
+    it 'can log in, which does not clear the cart' do
+      visit root_path
+      within('.cart-container') do
+        expect(page).to have_content '1'
+      end
+      user = create(:user, first_name: 'joe', email: 'abc@example.com', password: 'asdf', password_confirmation: 'asdf')
+      visit '/'
+      fill_in 'email', with: "#{user.email}"
+      fill_in 'password', with: "#{user.password}"
+      click_on 'login'
+      expect(page).to have_content 'Login successful'
+      expect(current_path).to eq items_path
+      within('.cart-container') do
+        expect(page).to have_content '1'
+      end
+    end
+
+    it 'cannot checkout' do
+      visit cart_edit_path
+      expect(page).to_not have_content 'Checkout'
+    end
+
   end
 
   #it "can increase the quantity of a item in my cart"
@@ -114,14 +161,4 @@ describe 'unauthenticated user', type: :feature do
   #And I click 'Add item to cart'
   #I expect my cart to have a quantity of 2
 
-  #it "can log in, which does not clear the cart"
-  
-  
-  #Unauthenticated users are NOT allowed to:
-
-  #CANNOT:
-  #View another user’s private data (such as current order, etc.)
-  #Checkout (until they log in)
-  #View the administrator screens or use administrator functionality
-  #Make themselves an administrator
 end

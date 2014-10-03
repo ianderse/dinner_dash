@@ -10,12 +10,14 @@ describe 'authenticated user', type: :feature do
     fill_in 'password', with: "#{user.password}"
     click_on 'login'
 	end
+
 	it 'can browse all items' do
 		visit '/'
     click_link 'Menu'
     expect(current_path).to eq(items_path)
     expect(page).to have_content 'Menu'
 	end
+
 	it 'can browse items by category' do
     small_plates_category = create(:category, title: 'Small Plates')
     create(:item, title: 'Second Food', categories: [small_plates_category])
