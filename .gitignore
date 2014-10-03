@@ -15,4 +15,3 @@
 /log/*.log
 /tmp
 /coverage/*
-/config/environment_variables.yml
