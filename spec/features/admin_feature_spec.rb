@@ -1,7 +1,3 @@
-require 'rails_helper'
-require 'capybara/rails'
-require 'capybara/rspec'
-
 describe 'admin user', type: :feature do
 
 	before do

@@ -1,7 +1,3 @@
-require 'rails_helper'
-require 'capybara/rails'
-require 'capybara/rspec'
-
 describe 'unauthenticated user', type: :feature do
   include Capybara::DSL
 
