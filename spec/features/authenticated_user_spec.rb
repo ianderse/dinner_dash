@@ -27,8 +27,24 @@ describe 'authenticated user', type: :feature do
     expect(page).to have_content 'Second Food'
 	end
 
-	it 'can add item to cart'
-	it 'can view my cart'
+	it 'can add item to cart' do
+		small_plates_category = create(:category, title: 'Small Plates')
+    create(:item, title: 'Second Food', categories: [small_plates_category])
+    visit items_path
+    click_on 'Add to cart'
+    expect(page).to have_content 'Item added to your cart!'
+    within('.cart-container') do
+        expect(page).to have_content '1'
+      end
+	end
+
+	it 'can view my cart' do
+		within('.cart-container') do
+        find('a').click
+      end
+		expect(current_path).to eq(cart_edit_path)
+    expect(page).to have_content('Your Cart')
+	end
 	it 'can remove an item from my cart'
 	it 'can increase quantity of an item in my cart'
 
@@ -42,6 +58,7 @@ describe 'authenticated user', type: :feature do
 
   it 'can view past orders with links to display each order'
 	it 'cannot view another users order'
+
 	it 'cannot view the admin screens' do
 		visit '/items/new'
 		expect(page).to_not have_content "Create New Item"
