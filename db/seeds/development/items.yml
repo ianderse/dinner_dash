@@ -6,10 +6,7 @@ records:
     category_ids:
       - '<%= sprig_record(Category, 1).id %>'
       - '<%= sprig_record(Category, 5).id %>'
-    image_file_name: "goat_milk"
-    image_content_type: "JPEG image"
-    image_file_size: "42kb"
-    image_updated_at: "2014-10-02T19:22:07.281481"
+    image_file_name: "goat_milk.jpg"
   - sprig_id: 2
     title: "chilled bangs island mussels"
     description: "tomato water, lemon balm, lemon cucumber"
