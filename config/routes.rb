@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
-  get 'cart/edit'
-
-  patch 'cart/update'
-
-  delete 'cart/destroy'
-
   root 'welcome#index'
+  
+  get 'cart/edit'
+  patch 'cart/update'
+  delete 'cart/destroy'
 
   get '/code' => 'welcome#code'
   get '/about' => 'welcome#about'
