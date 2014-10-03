@@ -15,6 +15,7 @@ group :development do
   gem 'pry-rails', '~> 0.3.2'
 end
 
+gem 'figaro'
 gem 'rails', '4.1.6'
 gem 'pg'
 gem 'uglifier', '>= 1.3.0'
