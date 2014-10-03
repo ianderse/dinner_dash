@@ -114,21 +114,21 @@ describe 'unauthenticated user', type: :feature do
       expect(page).to have_content('red t-shirt')
     end
 
-    it "can remove an item from the cart" do
-      visit cart_edit_path
-      click_on 'remove item'
-      within('.cart-container') do
-        expect(page).to have_content '0'
-      end
-    end
-
-    #it "can clear the cart" do
+    #it "can remove an item from the cart" do
     #  visit cart_edit_path
-    #  click_on 'clear my cart'
+    #  click_on 'remove item'
     #  within('.cart-container') do
     #    expect(page).to have_content '0'
     #  end
     #end
+
+    it "can clear the cart" do
+      visit cart_edit_path
+      click_on 'clear my cart'
+      within('.cart-container') do
+        expect(page).to have_content '0'
+      end
+    end
 
     it 'can log in, which does not clear the cart' do
       visit root_path
