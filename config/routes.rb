@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   root 'welcome#index'
   
   get 'cart/edit'
-  patch 'cart/update'
+  patch 'cart/add_item/:item_id', to: 'cart#add_item', as: 'cart_add_item'
+  patch 'cart/remove_item/:item_id', to: 'cart#remove_item', as: 'cart_remove_item'
   delete 'cart/destroy'
 
   # post "/items/:id" => "admin/items#update"

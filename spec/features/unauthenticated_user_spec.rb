@@ -1,6 +1,5 @@
-require 'rails_helper'
-require 'capybara/rails'
-require 'capybara/rspec'
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
 
 describe 'unauthenticated user', type: :feature do
   include Capybara::DSL
@@ -97,7 +96,7 @@ describe 'unauthenticated user', type: :feature do
   end
 
 
-  context "cart" do
+  context "when using the cart" do
     before do
       create(:item, title: 'red t-shirt')
       visit items_path
@@ -115,13 +114,13 @@ describe 'unauthenticated user', type: :feature do
       expect(page).to have_content('red t-shirt')
     end
 
-    xit "can remove an item from the cart" do
-      visit cart_edit_path
-      click_on 'Remove Item'
-      within('.cart-container') do
-        expect(page).to have_content '0'
-      end
-    end
+    #it "can remove an item from the cart" do
+    #  visit cart_edit_path
+    #  click_on 'remove item'
+    #  within('.cart-container') do
+    #    expect(page).to have_content '0'
+    #  end
+    #end
 
     it "can clear the cart" do
       visit cart_edit_path

@@ -15,8 +15,7 @@
       <td><%= item.description %></td>
       <td><%= item.price %></td>
       <td>
-        <%= form_tag(cart_update_path, method: :patch) do %>
-          <%= hidden_field_tag 'item_id', item.id %>
+        <%= form_tag(cart_add_item_path(item.id), method: :patch) do %>
             <span class="glyphicon glyphicon-plus"></span>
             <%= submit_tag 'Add to cart', class: "btn btn-default btn-sm" %>
         <% end %>
