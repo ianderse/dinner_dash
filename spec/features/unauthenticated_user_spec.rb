@@ -91,6 +91,11 @@ describe 'unauthenticated user', type: :feature do
     #cannot view /admin pages
   end
 
+  it "canot make themselves an administrator" do
+    visit new_user_path
+    expect(page).to_not have_content('Role')
+  end
+
 
   context "cart" do
     before do
@@ -143,6 +148,11 @@ describe 'unauthenticated user', type: :feature do
       end
     end
 
+    it 'cannot checkout' do
+      visit cart_edit_path
+      expect(page).to_not have_content 'Checkout'
+    end
+
   end
 
   #it "can increase the quantity of a item in my cart"
@@ -151,13 +161,4 @@ describe 'unauthenticated user', type: :feature do
   #And I click 'Add item to cart'
   #I expect my cart to have a quantity of 2
 
-  #it "can log in, which does not clear the cart"
-
-
-  #Unauthenticated users are NOT allowed to:
-
-  #CANNOT:
-  #Checkout (until they log in)
-  #
-  #Make themselves an administrator
 end
