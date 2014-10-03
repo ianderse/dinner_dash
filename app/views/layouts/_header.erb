@@ -32,7 +32,7 @@
                 <% end %>
               <%= link_to "Logout", logout_path, method: :delete %>
               <% else %>
-                <%= link_to "LogIn", login_path, class: "btn btn-default btn-sm" %>
+                <%= render 'layouts/login_form'  %>
               <% end %>
               <div class='cart-container' style="display:inline">
                 <%= link_to( image_tag("Shopping-Cart.png"), cart_edit_path) %>

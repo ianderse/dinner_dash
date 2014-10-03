@@ -17,39 +17,47 @@ describe 'admin user', type: :feature do
 		expect(page).to have_content("administrator")
 	end
 
-	# As an authenticated Administrator, I can:
-# Create item listings including a name, description, price, and upload a photo
-# describe 'admin user', type: :feature	do
-#
-	it 'can create item listings' do
-		visit '/items/4'
+	xit 'can create item listings' do
+		small_plates_category = create(:category, title: 'Small Plates')
+		create(:item, id: 1, title: 'Second Food', categories: [small_plates_category])
+		visit '/items/1/edit'
 		expect(page).to have_content("add new item")
 	end
 
-	it 'can create item listings with title, description, price' do
+	xit 'can create item listings with title, description, price' do
 		visit 'items/4/edit'
 		expect(page).to have_content("title", "description", "price")
 	end
 
-	it 'can create item listings with category' do
+	xit 'can create item listings with category' do
 		visit 'items/4/edit'
 		expect(page).to have_css '#categories_'
 	end
 
-	it 'can create item listsing with photo' do
+	xit 'can create item listings with photo' do
 		visit 'items/4/edit'
 		expect(page).to have_css '#image'
 	end
 
+	xit 'can edit item listings' do
+		visit 'items/4/edit'
+		expect(page).to have_content
+	end
 
-#
+	xit 'can create named categories for items' do
+		visit ''
+	end
 
-# Modify existing items’ name, description, price, and photo
-# Create named categories for items (eg: "Small Plates")
-# Assign items to categories or remove them from categories. Products can belong to more than one category.
-# Retire a item from being sold, which hides it from browsing by any non-administrator
+	xit 'can assign items to categories' do
+	end
 
+	xit 'can remove items from categories' do
+	end
 
+	xit 'can retire items from being sold' do
+	end
 
+	xit 'can see retired items only as an admin' do
+	end
 
 end
