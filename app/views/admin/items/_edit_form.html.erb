@@ -1,0 +1,14 @@
+<%= form_for(@admin_item, html: {multipart: true}, :url => admin_item_path(@admin_item) ) do |f| %>
+  <%= label_tag 'Item Title' %><br><%= f.text_field :title, class: "col-md-12"%><br/><br/>
+  <%= label_tag 'Description' %><br><%= f.text_field :description, class: "col-md-12" %><br/><br/>
+  <%= label_tag 'Item Price'%>&nbsp<%= f.text_field :price %><br/><br/>
+
+  <p>
+    <% @categories.each do |category| %>
+      <%= f.label category.title %>
+      <%= check_box_tag "categories[]", category.id, @admin_item.categories.include?(category) ? true : false %>
+    <% end %>
+  </p>
+
+  <%= f.submit "Save Changes", class: "btn btn-primary btn-lg" %>
+<% end %>

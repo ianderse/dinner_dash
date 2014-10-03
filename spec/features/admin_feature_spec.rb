@@ -23,6 +23,19 @@ describe 'admin user', type: :feature do
 		fill_in 'password', with: "#{@user.password}"
 		click_on 'login'
 		expect(page).to have_content("administrator")
-		# expect(current_path).to eq admin_path
+		expect(current_path).to eq admin_path
+		expect(page).to have_content "Site Administrator Dashboard"
 	end
+
+describe 'admin dashboard' do
+
+		it 'has link to create new items' do
+		  visit admin_path
+			expect(page).to have_content('Site Administrator Dashboard')
+		end
+
+		it 'has link to manage users'
+		it 'has link to manage ????'
+	end
+
 end

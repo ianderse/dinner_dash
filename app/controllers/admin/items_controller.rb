@@ -1,12 +1,18 @@
 class Admin::ItemsController < Admin::Controller
+  load_and_authorize_resource
 
   def new
     @item = Item.new
     @categories = Category.all
   end
 
-  def edit
+  def show
     @item = Item.find(params[:id])
+    @categories = Category.all
+  end
+
+  def edit
+    @admin_item = Item.find(params[:id])
     @categories = Category.all
   end
 
@@ -18,34 +24,39 @@ class Admin::ItemsController < Admin::Controller
       category = Category.find(category)
       @item.categories << category
     end
-    @item.save
-    redirect_to @item
+    if @item.save
+      redirect_to admin_path
+      flash[:notice] = "Your item has been successfully added to the menu!"
+    else
+      redirect_to :back
+      flash[:notice] = "All fields are required to create a menu item, including category."
+    end
   end
 
   def destroy
     @item = Item.find(params[:id])
     @item.destroy
-    redirect_to items_url
+    redirect_to admin_path
   end
 
   def update
     #refactor this
-    @item = Item.find(params[:id])
+    @admin_item = Item.find(params[:id])
     @categories = params[:categories] || []
-    @item.categories = []
+    @admin_item.categories = []
     @categories.each do |category|
       category = Category.find(category)
-      @item.categories << category
+      @admin_item.categories << category
     end
 
-    @item.update(item_params)
-    redirect_to @item
+    @admin_item.update(item_params)
+    redirect_to admin_item_path(@admin_item)
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:title, :description, :price, :image)
+    params.require(:item).permit(:title, :description, :price, :image, :category)
   end
 
 end

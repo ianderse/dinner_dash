@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="background-color:red">
+    <h1 class="text-center">Site Administrator Dashboard</h1>
+  </div>
+  <h2>Manage Categories</h2>
+
+  <h2>Manage Users</h2>
+
+  <h2>Manage Menu Items</h2>
+  <%= link_to "Create A New Menu Item", new_admin_item_path, class: "btn btn-info btn-lg" %>
+  <h4>Click an item's title to edit or delete the item.</h4>
+
+  <%= render 'update_menu' %>
+
+</div>

@@ -45,7 +45,7 @@ describe 'authenticated user', type: :feature do
   it 'can view past orders with links to display each order'
 	it 'cannot view another users order'
 	it 'cannot view the admin screens' do
-		visit '/items/new'
+		visit '/admin/items/new'
 		expect(page).to_not have_content "Create New Item"
 		expect(current_path).to eq(root_path)
 		expect(page).to have_content "You are not authorized to access this page."
@@ -54,7 +54,7 @@ describe 'authenticated user', type: :feature do
 	it 'cannot access admin edit pages' do
 		small_plates_category = create(:category, title: 'Small Plates')
 		create(:item, id: 1, title: 'Second Food', categories: [small_plates_category])
-		visit '/items/1/edit'
+		visit '/admin/items/1/edit'
 		expect(page).to_not have_content "Edit Item"
 		expect(current_path).to eq(root_path)
 		expect(page).to have_content "You are not authorized to access this page."
