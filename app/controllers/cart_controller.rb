@@ -15,5 +15,6 @@ class CartController < ApplicationController
 
   def destroy
     session[:cart].clear
+    redirect_to request.referer 
   end
 end

@@ -15,7 +15,6 @@ class CategoriesController < ApplicationController
 		@items = items_ids.map do |id|
 			Item.where(:id => id)
 		end.flatten
-
 	end
 
 	def new
