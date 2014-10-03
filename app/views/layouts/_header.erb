@@ -34,7 +34,10 @@
               <% else %>
                 <%= link_to "LogIn", login_path, class: "btn btn-default btn-sm" %>
               <% end %>
-              <%= link_to( image_tag("Shopping-Cart.png"), cart_edit_path) %>
+              <div class='cart-container' style="display:inline">
+                <%= link_to( image_tag("Shopping-Cart.png"), cart_edit_path) %>
+                <span><%= session[:cart] ? session[:cart].size : 0 %></span>
+              </div>
             </ul>
 
           </div>
