@@ -106,6 +106,14 @@ describe 'unauthenticated user', type: :feature do
         expect(page).to have_content '0'
       end
     end
+
+    it "can clear the cart" do
+      visit cart_edit_path
+      click_on 'clear my cart'
+      within('.cart-container') do
+        expect(page).to have_content '0'
+      end
+    end
   end
 
   #it "can increase the quantity of a item in my cart"
