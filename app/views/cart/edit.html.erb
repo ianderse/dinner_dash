@@ -1,0 +1,16 @@
+<h1>Your Cart</h1>
+<ul>
+  <% @cart_items.each do |items| %>
+    <% item = items.first %>
+    <li><%= item.title %>
+    <li><%= item.description %>
+      <%= form_tag(cart_update_path, method: :patch) do %>
+        <%= hidden_field_tag 'item_id', item.id %>
+        <%= number_field_tag 'Quantity', items.count %>
+          <span class="glyphicon glyphicon-plus"></span>
+        <%= submit_tag 'Add to cart', class: "btn btn-default btn-sm" %>
+  <% end %>
+<% end %>
+</ul>
+
+<%= link_to 'clear my cart', cart_destroy_path, method: :delete %> 

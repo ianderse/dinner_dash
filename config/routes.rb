@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-
   root 'welcome#index'
+  
+  get 'cart/edit'
+  patch 'cart/update'
+  delete 'cart/destroy'
 
   # post "/items/:id" => "admin/items#update"
   # patch "/items/:id" => "admin/items#update", :as => :admin_post_path
@@ -22,6 +25,4 @@ Rails.application.routes.draw do
   get    '/login',  to: 'sessions#new'
   post   '/login',  to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
-
-
 end

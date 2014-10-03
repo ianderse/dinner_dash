@@ -19,9 +19,12 @@
             <li class="active"><%= link_to "Events", items_path %></li>
             <li class="active"><%= link_to "Blog", items_path %></li>
             <li class="active"><%= link_to "Contact", items_path %></li>
+            <% if can? :create, @item %>
+                  <li class="active"><%= link_to "Admin Dashboard", root_path %></li>
+            <% end %>
           </ul>
           <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right", style= "float:right", style="padding: 20px">
               <% if current_user %>
                 <%= "Welcome #{current_user.full_name}!" %>
                 <% if can? :create, @item %>
@@ -31,7 +34,12 @@
               <% else %>
                 <%= render 'layouts/login_form'  %>
               <% end %>
+              <div class='cart-container' style="display:inline">
+                <%= link_to( image_tag("Shopping-Cart.png"), cart_edit_path) %>
+                <span><%= session[:cart] ? session[:cart].size : 0 %></span>
+              </div>
             </ul>
+
           </div>
         </div>
       </div>

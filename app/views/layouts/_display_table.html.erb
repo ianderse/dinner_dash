@@ -15,9 +15,10 @@
       <td><%= item.description %></td>
       <td><%= item.price %></td>
       <td>
-        <%= form_for(CartItem.new) do |form|%>
+        <%= form_tag(cart_update_path, method: :patch) do %>
+          <%= hidden_field_tag 'item_id', item.id %>
             <span class="glyphicon glyphicon-plus"></span>
-            <%= form.submit 'Add to cart', class: "btn btn-default btn-sm" %>
+            <%= submit_tag 'Add to cart', class: "btn btn-default btn-sm" %>
         <% end %>
       </td>
       <td>
