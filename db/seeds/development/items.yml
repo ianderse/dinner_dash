@@ -96,7 +96,7 @@ records:
     category_ids:
       - '<%= sprig_record(Category, 3).id %>'
       - '<%= sprig_record(Category, 5).id %>'
-    image_file_name: "souffle.jpg"  
+    image_file_name: "souffle.jpg"
   - sprig_id: 14
     title: "carrot tagliatelle"
     description: "carrot top pesto, cumin seed, orange beure blanc"
@@ -104,12 +104,14 @@ records:
     category_ids:
       - '<%= sprig_record(Category, 3).id %>'
       - '<%= sprig_record(Category, 5).id %>'
+    image_file_name: "carrot_tagilatelle.jpg"
   - sprig_id: 15
     title: "day boat scallops"
     description: "surryano ham, cantaloupe, wax beans, fig vin cotto"
     price: 30.01
     category_ids:
       - '<%= sprig_record(Category, 4).id %>'
+    image_file_name: "scallops.jpg"
   - sprig_id: 16
     title: "pan roasted lamb"
     description: "eggplant, garbanzo beans, gaeta olive, crepinette, pomegranate demi-glace"
@@ -117,24 +119,28 @@ records:
     category_ids:
       - '<%= sprig_record(Category, 4).id %>'
       - '<%= sprig_record(Category, 5).id %>'
+    image_file_name: "lamb.jpg"
   - sprig_id: 17
     title: "kale + roasted garlic bucatini"
     description: "smoked ham, pecora vecchio, quail egg yolk"
     price: 25.01
     category_ids:
       - '<%= sprig_record(Category, 4).id %>'
+    image_file_name: "kale.png"
   - sprig_id: 18
     title: "red duroc pork + belly"
     description: "la ratte potatoes, peppercorn-black plum aigre doux, torpedo onions, fennel"
     price: 29.01
     category_ids:
       - '<%= sprig_record(Category, 4).id %>'
+    image_file_name: "pork_belly.jpg"
   - sprig_id: 19
     title: "roasted squab + confit"
     description: "grape + turnip brovada, foie gras torchon, watercress puree"
     price: 34.01
     category_ids:
       - '<%= sprig_record(Category, 4).id %>'
+    image_file_name: "squab.jpg"
   - sprig_id: 20
     title: "cauliflower"
     description: "rye gnocchi, baeburn apple, brussel sprouts"
@@ -142,3 +148,4 @@ records:
     category_ids:
       - '<%= sprig_record(Category, 4).id %>'
       - '<%= sprig_record(Category, 5).id %>'
+    image_file_name: "cauliflower.JPG"
