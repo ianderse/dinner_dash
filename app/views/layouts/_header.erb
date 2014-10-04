@@ -18,7 +18,7 @@
             <li class="active"><%= link_to "Menu", items_path %></li>
             <li class="active"><%= link_to "Events", items_path %></li>
             <li class="active"><%= link_to "Blog", items_path %></li>
-            <li class="active"><%= link_to "Contact", items_path %></li>
+            <li class="active"><%= link_to "Contact", contacts_path %></li>
             <% if can? :create, @item %>
                   <li class="active"><%= link_to "Admin Dashboard", admin_path %></li>
             <% end %>
