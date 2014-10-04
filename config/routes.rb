@@ -1,17 +1,15 @@
 Rails.application.routes.draw do
   root 'welcome#index'
-  
+
   get 'cart/edit'
   patch 'cart/add_item/:item_id', to: 'cart#add_item', as: 'cart_add_item'
   patch 'cart/remove_item/:item_id', to: 'cart#remove_item', as: 'cart_remove_item'
   delete 'cart/destroy'
 
-  # post "/items/:id" => "admin/items#update"
-  # patch "/items/:id" => "admin/items#update", :as => :admin_post_path
-
   namespace :admin do
     get '', to: 'dashboard#index'
     resources :items, except: [:index]
+    resources :categories
   end
 
   get '/code' => 'welcome#code'
@@ -19,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :items, only: [:index, :show]
   resources :users
-  resources :categories
+  resources :categories, only: [:show]
   resources :cart_items, only: [:create]
   get '/about' => 'welcome#about'
 

@@ -14,8 +14,4 @@ class ApplicationController < ActionController::Base
     end
     helper_method :current_user
 
-    # def user_role
-    # 	(Membership.find_by user_id: (current_user.id)).role
-    # end
-    # helper_method :user_role
 end
