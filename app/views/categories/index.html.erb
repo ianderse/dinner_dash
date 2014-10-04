@@ -1,8 +1,0 @@
-<h2>Categories</h2>
-<table>
-	<tr>
-<% @categories.each do |category| %>
-	<td><%= link_to category.title, category_path(category) %></td>
-<% end %>
-	</tr>
-</table>

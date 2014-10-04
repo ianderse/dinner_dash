@@ -10,12 +10,14 @@ describe 'authenticated user', type: :feature do
     fill_in 'password', with: "#{user.password}"
     click_on 'login'
 	end
+
 	it 'can browse all items' do
 		visit '/'
     click_link 'Menu'
     expect(current_path).to eq(items_path)
     expect(page).to have_content 'Menu'
 	end
+
 	it 'can browse items by category' do
     small_plates_category = create(:category, title: 'Small Plates')
     create(:item, title: 'Second Food', categories: [small_plates_category])
@@ -60,15 +62,16 @@ describe 'authenticated user', type: :feature do
 	it 'cannot view another users order'
 
 	it 'cannot view the admin screens' do
-		visit '/items/new'
+		visit '/admin/items/new'
 		expect(page).to_not have_content "Create New Item"
 		expect(current_path).to eq(root_path)
 		expect(page).to have_content "You are not authorized to access this page."
 	end
+
 	it 'cannot access admin edit pages' do
 		small_plates_category = create(:category, title: 'Small Plates')
 		create(:item, id: 1, title: 'Second Food', categories: [small_plates_category])
-		visit '/items/1/edit'
+		visit '/admin/items/1/edit'
 		expect(page).to_not have_content "Edit Item"
 		expect(current_path).to eq(root_path)
 		expect(page).to have_content "You are not authorized to access this page."

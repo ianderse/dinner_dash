@@ -1,15 +1,17 @@
 <h1>Your Cart</h1>
 <ul>
-  <% @cart_items.each do |items| %>
+  <% @cart.each do |items| %>
     <% item = items.first %>
-    <li><%= item.title %>
-    <li><%= item.description %>
-    
-        <%= form_tag(cart_update_path, method: :patch) do %>
-          <%= hidden_field_tag 'item_id', item.id %>
-          <%= number_field_tag 'Quantity', items.count %>
-            <span class="glyphicon glyphicon-plus"></span>
-            <%= submit_tag 'Add to cart', class: "btn btn-default btn-sm" %>
+    <div id="item_<%= item.id %>"
+      <li><%= item.title %>
+      <li><%= item.description %>
+        <%= number_field_tag 'Quantity', items.count %>
+        <%= form_tag(cart_remove_item_path(item.id), method: :patch, id: "remove_item", remote: true) do %>
+          <span class="glyphicon glyphicon-remove"></span>
+          <%= submit_tag 'remove item', class: "btn btn-default btn-sm" %>
+        <% end %>
+    </div>
   <% end %>
-<% end %>
 </ul>
+
+<%= link_to 'clear my cart', cart_destroy_path, method: :delete %> 

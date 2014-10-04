@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe ItemCategory, :type => :model do
   let(:item_category) { create(:item_category) }
 

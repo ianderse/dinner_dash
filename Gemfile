@@ -4,10 +4,13 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.1.0'
   gem 'factory_girl_rails', '~> 4.4.1'
   gem 'quiet_assets', '~> 1.0.3'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test do
   gem 'capybara', '~> 2.4.3'
+  gem 'poltergeist'
   gem "codeclimate-test-reporter", require: nil
 end
 
@@ -15,6 +18,7 @@ group :development do
   gem 'pry-rails', '~> 0.3.2'
 end
 
+gem 'figaro'
 gem 'rails', '4.1.6'
 gem 'pg'
 gem 'uglifier', '>= 1.3.0'

@@ -1,14 +1,14 @@
-<%= form_for(@item, html: {multipart: true}) do |f| %>
+<%= form_for(@admin_item, html: {multipart: true}, :url => admin_item_path(@admin_item) ) do |f| %>
   <p>
     <%= f.label :title %><br/>
     <%= f.text_field :title, autofocus: true %>
   </p>
   <p>
-  	<%= f.label :description %><br/>
+    <%= f.label :description %><br/>
     <%= f.text_field :description %>
   </p>
   <p>
-  	<%= f.label :price %><br/>
+    <%= f.label :price %><br/>
     <%= f.text_field :price %>
   </p>
   <p>
@@ -18,12 +18,12 @@
   <p>
     <% @categories.each do |category| %>
       <%= f.label category.title %>
-      <%= check_box_tag "categories[]", category.id, @item.categories.include?(category) ? true : false %>
+      <%= check_box_tag "categories[]", category.id, @admin_item.categories.include?(category) ? true : false %>
     <% end %>
   </p>
 
   <p>
     <%= f.submit %>
-    <%= link_to "Cancel", items_path %>
+    <%= link_to "Cancel", admin_path %>
   </p>
 <% end %>

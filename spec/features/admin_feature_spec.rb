@@ -1,13 +1,10 @@
-require 'rails_helper'
-require 'capybara/rails'
-require 'capybara/rspec'
-
 describe 'admin user', type: :feature do
+
 	before do
-		user = create(:user, first_name: 'joe', email: 'abc@example.com', password: 'asdf', password_confirmation: 'asdf', role:'admin')
+		@user = create(:user, first_name: 'joe', email: 'abc@example.com', password: 'asdf', password_confirmation: 'asdf', role:'admin')
     visit '/'
-    fill_in 'email', with: "#{user.email}"
-    fill_in 'password', with: "#{user.password}"
+    fill_in 'email', with: "#{@user.email}"
+    fill_in 'password', with: "#{@user.password}"
     click_on 'login'
 	end
 
@@ -15,6 +12,28 @@ describe 'admin user', type: :feature do
 	it 'has a role of admin' do
 		visit '/'
 		expect(page).to have_content("administrator")
+	end
+
+	it 'is redirected to an admin dashboard upon login' do
+		click_on 'Logout'
+		expect(current_path).to eq root_path
+		fill_in 'email', with: "#{@user.email}"
+		fill_in 'password', with: "#{@user.password}"
+		click_on 'login'
+		expect(page).to have_content("administrator")
+		expect(current_path).to eq admin_path
+		expect(page).to have_content "Site Administrator Dashboard"
+	end
+
+describe 'admin dashboard' do
+
+		it 'has link to create new items' do
+		  visit admin_path
+			expect(page).to have_content('Site Administrator Dashboard')
+		end
+
+		it 'has link to manage users'
+		it 'has link to manage ????'
 	end
 
 	xit 'can create item listings' do
@@ -59,5 +78,15 @@ describe 'admin user', type: :feature do
 
 	xit 'can see retired items only as an admin' do
 	end
+
+  it "can see all users" do
+    visit '/users'
+    expect(page).to have_content("Users")
+  end
+
+  it "can see the profile of an individual user" do
+    visit "/users/#{@user.id}"
+    expect(page).to have_content("User Page")
+  end
 
 end
