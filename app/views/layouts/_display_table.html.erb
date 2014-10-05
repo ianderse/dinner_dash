@@ -6,6 +6,7 @@
         <%= link_to item.title, item_path(item) %><br/>
         <%= item.description %>
         <%= print_price(item.price) %><br/>
+        <td><%= link_to "Add to Cart", new_order_item_path(item_id: item.id) %></td>
         <%= form_tag(cart_add_item_path(item.id), method: :patch) do %>
             <span class="glyphicon glyphicon-plus"></span>
             <%= submit_tag 'Add to cart', class: "btn btn-default btn-sm" %>
@@ -32,5 +33,3 @@
     msnry.layout();
   });
 </script>
-
-

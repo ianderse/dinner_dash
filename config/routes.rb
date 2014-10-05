@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :order_items
+
   resources :events
 
   root 'welcome#index'
