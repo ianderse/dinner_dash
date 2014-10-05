@@ -83,7 +83,15 @@ describe 'admin dashboard' do
 	end
 
 	it 'can see retired items only as an admin' do
-
+		small_plates_category = create(:category, title: 'Small Plates')
+		item = create(:item, id: 1, title: 'Second Food', categories: [small_plates_category])
+		visit '/admin/items/1/edit'
+		expect(page).to have_content("Active")
+		click_on 'Save Changes'
+		expect(page).to have_content("Your item has been successfully updated!")
+		click_link 'Return to Your Admin Dashboard'
+		expect(page).to have_content"#{item.title}"
+		expect(page).to have_content("Active")
 	end
 
   it "can see all users" do
