@@ -12,8 +12,12 @@
 }
 
 .grid-item {
+	text-align: center;
 	width: 25%;
 	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border-bottom: solid;
+  border-width: 1px;
 }
 
 .nav navbar-nav navbar-right-login {
