@@ -1,4 +1,4 @@
-class Admin::CategoriesController < ApplicationController
+class Admin::CategoriesController < Admin::Controller
 	load_and_authorize_resource
 
 	def index
