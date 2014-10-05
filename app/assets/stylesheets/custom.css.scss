@@ -1,3 +1,15 @@
+.grid-sizer { width: 20%; }
+
+@media screen and (min-width: 720px) {
+  /* 10 columns for larger screens */
+  .grid-sizer { width: 10%; }
+}
+
+.grid-item {
+	width: 25%;
+	margin-bottom: 20px;
+}
+
 .nav navbar-nav navbar-right-login {
   float: right !important;
   margin: 20px;
