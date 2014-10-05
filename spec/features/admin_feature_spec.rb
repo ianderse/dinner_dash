@@ -64,7 +64,7 @@ describe 'admin dashboard' do
 	end
 
 	xit 'can create named categories for items' do
-		visit ''
+		visit 'admin'
 	end
 
 	xit 'can assign items to categories' do

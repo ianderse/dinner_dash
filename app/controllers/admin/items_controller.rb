@@ -49,14 +49,19 @@ class Admin::ItemsController < Admin::Controller
       @admin_item.categories << category
     end
 
-    @admin_item.update(item_params)
-    redirect_to admin_item_path(@admin_item)
+    if @admin_item.update(item_params)
+      flash[:notice] = "Your item has been successfully updated!"
+      redirect_to admin_item_path(@admin_item)
+    else
+      redirect_to :back
+      flash[:notice] = "Error saving item."
+    end
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:title, :description, :price, :image, :category)
+    params.require(:item).permit(:title, :description, :price, :image, :category, :active)
   end
 
 end
