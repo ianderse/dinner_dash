@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
     end
     helper_method :current_user
 
+    def set_time_zone
+      Time.zone = current_user.time_zone
+    end
+
 end
