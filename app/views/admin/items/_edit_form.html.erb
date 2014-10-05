@@ -10,5 +10,11 @@
     <% end %>
   </p>
 
+  <p>
+    <%= f.label :active %>
+    <%= f.select :active, ['true', 'false'], :selected => f.object.active %>
+    <%= @admin_item.active %>
+  </p>
+
   <%= f.submit "Save Changes", class: "btn btn-primary btn-lg" %>
 <% end %>
