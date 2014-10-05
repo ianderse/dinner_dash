@@ -51,7 +51,7 @@ describe 'unauthenticated user', type: :feature do
     item = create(:item, title: 'Second Food', categories: [small_plates_category])
     visit '/'
     click_on 'Menu'
-    within("table") do
+    within(".grid-item") do
       click_on 'Second Food'
     end
     expect(current_path).to eq item_path(item)
