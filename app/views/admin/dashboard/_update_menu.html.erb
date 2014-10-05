@@ -5,6 +5,7 @@
       <th>Item Name</th>
       <th>Description</th>
       <th>Price</th>
+      <th>Active?</th>
     </tr>
   </thead>
   <tbody>
@@ -14,6 +15,7 @@
       <td><%= link_to item.title, edit_admin_item_path(item) %></td>
       <td><%= item.description %></td>
       <td><%= item.price %></td>
+      <td><%= item.active %></td>
     </tr>
     <% end %>
   </tbody>
