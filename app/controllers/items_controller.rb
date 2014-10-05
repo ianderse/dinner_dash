@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
 	load_and_authorize_resource
 
 	def index
-		@items = Item.all
+		@items = Item.where(:active => 'true')
 		@categories = Category.all
 	end
 
