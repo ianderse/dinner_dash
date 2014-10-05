@@ -87,17 +87,16 @@ describe 'admin dashboard' do
   end
 
 	it "can create a new user with admin role" do
-		new_admin = create(:user, first_name: 'joe', email: 'xyz@example.com', password: 'asdf', password_confirmation: 'asdf')
 		visit '/admin/users/new'
-		fill_in 'First name', with: 'new_admin[:first_name]'
-		fill_in 'Last name', with: 'new_admin[:last_name]'
-		fill_in 'Email', with: "new_admin[:email]"
-		fill_in 'Password', with: "new_admin[:password]"
-		fill_in 'Password confirmation', with: "new_admin[:password_confirmation]"
-		select 'admin', from: 'role'
+		fill_in 'First name', with: 'abc'
+		fill_in 'Last name', with: 'poptart'
+		fill_in 'Email', with: 'tartkins@example.com'
+		fill_in 'Password', with: "abc123"
+		fill_in 'Password confirmation', with: "abc123"
+		select 'admin', from: 'user_role'
 		click_on 'Create New User'
 		expect(current_path).to eq admin_users_path
-		expect(new_admin.role).to eq 'admin'
+		expect(User.last.role).to eq 'admin'
 	end
 
   it "can see the profile of an individual user" do
