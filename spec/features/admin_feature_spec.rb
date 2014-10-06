@@ -33,7 +33,7 @@ describe 'admin dashboard' do
 		end
 
 		it 'has link to manage users'
-		it 'has link to manage ????'
+		it 'has link to manage orders'
 	end
 
 	it 'can create item listings' do
