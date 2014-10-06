@@ -103,7 +103,7 @@ describe 'unauthenticated user', type: :feature do
       click_on 'Add to cart'
     end
 
-    it "can add item to cart" do
+    it "can add item to cart", js: true do
       expect(page).to have_content 'Item added to your cart!'
       within('.cart-container') do
         expect(page).to have_content '1'
@@ -114,13 +114,13 @@ describe 'unauthenticated user', type: :feature do
       expect(page).to have_content('red t-shirt')
     end
 
-    #it "can remove an item from the cart" do
-    #  visit cart_edit_path
-    #  click_on 'remove item'
-    #  within('.cart-container') do
-    #    expect(page).to have_content '0'
-    #  end
-    #end
+    it "can remove an item from the cart", js: true do
+      visit cart_edit_path
+      click_on 'remove item'
+      within('.cart-container') do
+        expect(page).to have_content '0'
+      end
+    end
 
     it "can clear the cart" do
       visit cart_edit_path
