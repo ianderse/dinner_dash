@@ -16,8 +16,13 @@ class Admin::CategoriesController < Admin::Controller
 
 	def create
 		@category = Category.new(category_params)
-		@category.save
-		redirect_to admin_path
+		if @category.save
+			flash[:notice] = "Your category has been successfully created!"
+			redirect_to admin_path
+		else
+			flash[:notice] = "Error saving category"
+			redirect_to :back
+		end
 	end
 
 	def destroy

@@ -44,8 +44,6 @@ describe 'admin dashboard' do
 	end
 
 	it 'can create item listings' do
-		small_plates_category = create(:category, title: 'Small Plates')
-		create(:item, id: 1, title: 'Second Food', categories: [small_plates_category])
 		visit '/admin'
 		click_on('Create A New Menu Item')
 		expect(page).to have_content("Create New Item")
@@ -62,19 +60,40 @@ describe 'admin dashboard' do
 		expect(page).to have_css '#image'
 	end
 
-	xit 'can edit item listings' do
-		visit 'items/4/edit'
-		expect(page).to have_content
+	it 'can edit item listings' do
+		small_plates_category = create(:category, title: 'Small Plates')
+		create(:item, id: 1, title: 'Second Food', categories: [small_plates_category])
+		visit 'admin/items/1/edit'
+		expect(page).to have_content("You are currently editing")
+		fill_in "item_title", with: "Edited Item"
+		fill_in "item_description", with: "Edited Description"
+		fill_in "item_price", with: "12.00"
+		click_on('Save Changes')
+		expect(page).to have_content("Your item has been successfully updated!")
 	end
 
-	xit 'can create named categories for items' do
-		visit 'admin'
+	it 'can create named categories for items' do
+		visit '/admin'
+		click_on('Create A New Category')
+		expect(page).to have_content("Create New Category")
+		fill_in "category_title", with: "New Category"
+		click_on('Create Category')
+		expect(page).to have_content("Your category has been successfully created!")
 	end
 
 	xit 'can assign items to categories' do
+		#how to check status of checkboxes?
+		small_plates_category = create(:category, title: 'Small Plates')
+		create(:item, id: 1, title: 'Second Food', categories: [small_plates_category])
+		visit '/admin/items/1/edit'
+		check
 	end
 
 	xit 'can remove items from categories' do
+		small_plates_category = create(:category, title: 'Small Plates')
+		create(:item, id: 1, title: 'Second Food', categories: [small_plates_category])
+		visit '/admin/items/1/edit'
+		check
 	end
 
 	it 'can retire items from being sold' do
