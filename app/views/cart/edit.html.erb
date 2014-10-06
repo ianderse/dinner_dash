@@ -11,7 +11,7 @@
         <% end %>
         <%= form_tag(cart_remove_item_path(item), method: :patch, remote: true) do %>
           <span class="glyphicon glyphicon-remove"></span>
-          <%= submit_tag 'remove item', class: "btn btn-default btn-sm" %>
+          <%= submit_tag 'remove item', class: "btn btn-default btn-sm", id: "remove_item" %>
         <% end %>
     </div>
   <% end %>

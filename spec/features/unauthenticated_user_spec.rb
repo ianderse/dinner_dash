@@ -98,14 +98,14 @@ describe 'unauthenticated user', type: :feature do
   end
 
 
-  context "when using the cart" do
+  context "when using the cart", js: true do
     before do
       create(:item, title: 'red t-shirt')
       visit items_path
       click_on 'Add to cart'
     end
 
-    it "can add an item to cart", js: true do
+    it "can add an item to cart" do
       expect(page).to have_content 'Item added to your cart!'
       within('.cart-container') do
         expect(page).to have_content '1'
@@ -116,7 +116,7 @@ describe 'unauthenticated user', type: :feature do
       expect(page).to have_content('red t-shirt')
     end
 
-    it "can add a multiple of the same item to cart", js: true do
+    it "can add a multiple of the same item to cart" do
       find("#quantity").select('3')
       click_on 'Add to cart'
       within('.cart-container') do
@@ -124,7 +124,7 @@ describe 'unauthenticated user', type: :feature do
       end
     end
 
-    it "can update the quantity of an item in the cart", js: true do
+    it "can update the quantity of an item in the cart" do
       visit cart_edit_path
       find("#quantity").select('2')
       click_on 'update quantity'
@@ -135,15 +135,15 @@ describe 'unauthenticated user', type: :feature do
       expect(selected).to eq('2')
     end
 
-    it "can remove an item from the cart", js: true do
+    it "can remove an item from the cart" do
       visit cart_edit_path
-      click_on 'remove item'
+      find("#remove_item").click
       within('.cart-container') do
         expect(page).to have_content '0'
       end
     end
 
-    it "can clear the cart", js: true do
+    it "can clear the cart" do
       visit cart_edit_path
       click_on 'clear my cart'
       within('.cart-container') do
@@ -151,7 +151,7 @@ describe 'unauthenticated user', type: :feature do
       end
     end
 
-    it 'can log in, which does not clear the cart', js: true do
+    it 'can log in, which does not clear the cart' do
       visit root_path
       within('.cart-container') do
         expect(page).to have_content '1'
@@ -172,7 +172,5 @@ describe 'unauthenticated user', type: :feature do
       visit cart_edit_path
       expect(page).to_not have_content 'Checkout'
     end
-
   end
-
 end
