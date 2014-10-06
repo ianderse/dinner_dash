@@ -127,7 +127,7 @@ describe 'unauthenticated user', type: :feature do
     it "can update the quantity of an item in the cart" do
       visit cart_edit_path
       find("#quantity").select('2')
-      click_on 'update quantity'
+      find('#update_quantity').click
       within('.cart-container') do
         expect(page).to have_content '2'
       end
