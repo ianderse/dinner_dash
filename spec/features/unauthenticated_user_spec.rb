@@ -1,5 +1,6 @@
 require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist
+Capybara.default_wait_time = 5
 
 describe 'unauthenticated user', type: :feature do
   include Capybara::DSL
@@ -103,10 +104,10 @@ describe 'unauthenticated user', type: :feature do
       create(:item, title: 'red t-shirt')
       visit items_path
       click_on 'Add to cart'
+      expect(page).to have_content 'Item added to your cart!'
     end
 
     it "can add an item to cart" do
-      expect(page).to have_content 'Item added to your cart!'
       within('.cart-container') do
         expect(page).to have_content '1'
         find('a').click
