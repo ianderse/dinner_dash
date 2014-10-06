@@ -10,9 +10,4 @@ class ItemsController < ApplicationController
 		@item = Item.find(params[:id])
 		@categories = @item.categories
 	end
-
-	def new
-		@item = Item.new
-		@categories = Category.all
-	end
 end
