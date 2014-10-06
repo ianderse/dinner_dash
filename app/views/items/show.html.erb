@@ -1,21 +1,16 @@
-<div class="container">
-  <h1><%= @item.title.capitalize %>
-  <table>
-  	<tr>
-      <th>Picture</th>
-			<th>Title</th>
-			<th>Description</th>
-			<th>Price</th>
-      <th>Category</th>
-    </tr>
-    <tr>
-      <td><% if @item.image_file_name != nil %><%= image_tag @item.image.url(:medium) %><% end %></td>
-			<td><%= @item.title %></td>
-			<td><%= @item.description %></td>
-			<td><%= @item.price %></td>
-      <td><% @categories.each do |category| %>
-        <%= category.title %>
-      <% end %></td>
-  	</tr>
-  </table>
+<div id="masonry-grid" class="center">
+  <h1><%= @item.title.capitalize %></h1>
+    <% if @item.image_file_name != nil %><%= image_tag @item.image.url(:medium) %><br/><% end %>
+    <%= @item.title %><br/>
+    <%= @item.description %><br/>
+    <%= print_price(@item.price) %><br/>
+    <%= pluralize(@categories.size, 'Category') %>:
+    <% @categories.each do |category| %>
+      <%= category.title %>
+    <% end %><br/>
+    <%if current_user.nil?  %>
+      <%= link_to "<< Return to All Menu Items", items_path %>
+    <% elsif current_user.is?('admin') %>
+      <%= link_to "<< Return to Your Admin Dashboard", admin_path %>
+    <% end  %>
 </div>

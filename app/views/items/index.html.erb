@@ -1,7 +1,9 @@
 <h2>Menu</h2>
 <h3>Categories</h3>
+<ul>
 <% @categories.each do |category| %>
-<%= link_to category.title, category_path(category) %></td>
+<li><%= link_to category.title, category_path(category) %></li>
 <% end %>
+</ul>
 <h3>Menu Items</h3>
 <%= render 'layouts/display_table'  %>

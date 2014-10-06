@@ -64,7 +64,7 @@ describe 'admin dashboard' do
 	end
 
 	xit 'can create named categories for items' do
-		visit ''
+		visit 'admin'
 	end
 
 	xit 'can assign items to categories' do
@@ -73,10 +73,26 @@ describe 'admin dashboard' do
 	xit 'can remove items from categories' do
 	end
 
-	xit 'can retire items from being sold' do
+	it 'can retire items from being sold' do
+		small_plates_category = create(:category, title: 'Small Plates')
+		create(:item, id: 1, title: 'Second Food', categories: [small_plates_category])
+		visit '/admin/items/1/edit'
+		expect(page).to have_content("Active")
+		click_on 'Save Changes'
+		expect(page).to have_content("Your item has been successfully updated!")
 	end
 
-	xit 'can see retired items only as an admin' do
+	##Would like to add onto this; can we specify a specific text for the item id?
+	it 'can see retired items only as an admin' do
+		small_plates_category = create(:category, title: 'Small Plates')
+		item = create(:item, id: 1, title: 'Second Food', categories: [small_plates_category], active: 'false')
+		visit '/admin/items/1/edit'
+		expect(page).to have_content("Active")
+		click_on 'Save Changes'
+		expect(page).to have_content("Your item has been successfully updated!")
+		click_link 'Return to Your Admin Dashboard'
+		expect(page).to have_content"#{item.active}"
+		expect(page).to have_content"#{item.id}"
 	end
 
   it "can see all users" do
