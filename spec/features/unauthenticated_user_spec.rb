@@ -92,7 +92,7 @@ describe 'unauthenticated user', type: :feature do
     expect(page).to have_content('You are not authorized to access this page')
   end
 
-  it "canot make themselves an administrator" do
+  it "cannot make themselves an administrator" do
     visit new_user_path
     expect(page).to_not have_content('Role')
   end
@@ -117,7 +117,7 @@ describe 'unauthenticated user', type: :feature do
     end
 
     it "can add a multiple of the same item to cart", js: true do
-      select "3", from: "quantity"
+      find("#quantity").select('3')
       click_on 'Add to cart'
       within('.cart-container') do
         expect(page).to have_content '4'
@@ -126,7 +126,7 @@ describe 'unauthenticated user', type: :feature do
 
     it "can update the quantity of an item in the cart", js: true do
       visit cart_edit_path
-      select "2", from: "quantity"
+      find("#quantity").select('2')
       click_on 'update quantity'
       within('.cart-container') do
         expect(page).to have_content '2'
