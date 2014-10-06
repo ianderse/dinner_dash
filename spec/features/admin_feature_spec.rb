@@ -1,3 +1,7 @@
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist 
+Capybara.default_wait_time = 5
+
 describe 'admin user', type: :feature do
 
 	before do

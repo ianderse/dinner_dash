@@ -1,8 +1,6 @@
 require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist 
-#do
-#  Capybara::Poltergeist::Driver.new(DinnerDash, timeout: 15)
-#end
+Capybara.default_wait_time = 5
 
 describe 'authenticated user', type: :feature do
   include Capybara::DSL
