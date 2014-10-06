@@ -1,9 +1,5 @@
 class CategoriesController < ApplicationController
 	load_and_authorize_resource
-	def index
-		@items = Item.all
-		@categories = Category.all
-	end
 
 	def show
 		@category = Category.find(params[:id])
@@ -18,9 +14,4 @@ class CategoriesController < ApplicationController
 		end.flatten
 	end
 
-	private
-
-	def category_params
-		params.require(:category).permit(:title, :description)
-	end
 end
