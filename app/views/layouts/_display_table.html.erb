@@ -10,7 +10,7 @@
           <span class="glyphicon glyphicon-plus"></span>
           <%= label_tag "quantity" %>
           <%= select_tag "quantity", options_for_select(['1','2','3','4','5']) %>
-          <%= submit_tag 'Add to cart', class: "btn btn-default btn-sm" %>
+          <%= submit_tag 'Add to cart', class: "btn btn-default btn-sm", id: "add_to_cart" %>
         <% end %>
       </div>
     <% end %>
@@ -27,5 +27,3 @@
     msnry.layout();
   });
 </script>
-
-

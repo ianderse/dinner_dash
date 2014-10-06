@@ -1,5 +1,6 @@
 require 'capybara/poltergeist'
-Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :poltergeist 
+Capybara.default_wait_time = 5
 
 describe 'authenticated user', type: :feature do
   include Capybara::DSL
@@ -34,7 +35,7 @@ describe 'authenticated user', type: :feature do
 		small_plates_category = create(:category, title: 'Small Plates')
     create(:item, title: 'Second Food', categories: [small_plates_category])
     visit items_path
-    click_on 'Add to cart'
+    find('#add_to_cart').click
     expect(page).to have_content 'Item added to your cart!'
     within('.cart-container') do
         expect(page).to have_content '1'
@@ -53,22 +54,24 @@ describe 'authenticated user', type: :feature do
 		small_plates_category = create(:category, title: 'Small Plates')
     create(:item, title: 'Second Food', categories: [small_plates_category])
     visit items_path
-    click_on 'Add to cart'
+    find('#add_to_cart').click
+    expect(page).to have_content 'Item added to your cart!'
     visit cart_edit_path
-    click_on 'remove item'
-      within('.cart-container') do
-        expect(page).to have_content '0'
-      end
+    find("#remove_item").click
+    within('.cart-container') do
+      expect(page).to have_content '0'
+    end
 	end
 
 	it "can update the quantity of an item in the cart", js: true do
 		small_plates_category = create(:category, title: 'Small Plates')
     create(:item, title: 'Second Food', categories: [small_plates_category])
     visit items_path
-    click_on 'Add to cart'
+    find('#add_to_cart').click
+    expect(page).to have_content 'Item added to your cart!'
     visit cart_edit_path
-    select "2", from: "quantity"
-    click_on 'update quantity'
+    find("#quantity").select('2')
+    find('#update_quantity').click
     within('.cart-container') do
       expect(page).to have_content '2'
     end

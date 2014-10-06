@@ -1,3 +1,7 @@
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist 
+Capybara.default_wait_time = 5
+
 describe 'admin user', type: :feature do
 
 	before do
@@ -50,7 +54,7 @@ describe 'admin dashboard' do
 		fill_in 'Title', with: "Test Item"
 		fill_in 'Description', with: "Test Description"
 		fill_in 'Price', with: '19.22'
-		check('categories_')
+    find('#categories_').set(true)
 		click_on('Create Item')
 		expect(page).to have_content("Your item has been successfully added to the menu!")
 	end

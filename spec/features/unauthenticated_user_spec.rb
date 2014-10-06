@@ -1,5 +1,6 @@
 require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist
+Capybara.default_wait_time = 5
 
 describe 'unauthenticated user', type: :feature do
   include Capybara::DSL
@@ -92,21 +93,21 @@ describe 'unauthenticated user', type: :feature do
     expect(page).to have_content('You are not authorized to access this page')
   end
 
-  it "canot make themselves an administrator" do
+  it "cannot make themselves an administrator" do
     visit new_user_path
     expect(page).to_not have_content('Role')
   end
 
 
-  context "when using the cart" do
+  context "when using the cart", js: true do
     before do
       create(:item, title: 'red t-shirt')
       visit items_path
       click_on 'Add to cart'
+      expect(page).to have_content 'Item added to your cart!'
     end
 
-    it "can add an item to cart", js: true do
-      expect(page).to have_content 'Item added to your cart!'
+    it "can add an item to cart" do
       within('.cart-container') do
         expect(page).to have_content '1'
         find('a').click
@@ -116,18 +117,18 @@ describe 'unauthenticated user', type: :feature do
       expect(page).to have_content('red t-shirt')
     end
 
-    it "can add a multiple of the same item to cart", js: true do
-      select "3", from: "quantity"
+    it "can add a multiple of the same item to cart" do
+      find("#quantity").select('3')
       click_on 'Add to cart'
       within('.cart-container') do
         expect(page).to have_content '4'
       end
     end
 
-    it "can update the quantity of an item in the cart", js: true do
+    it "can update the quantity of an item in the cart" do
       visit cart_edit_path
-      select "2", from: "quantity"
-      click_on 'update quantity'
+      find("#quantity").select('2')
+      find('#update_quantity').click
       within('.cart-container') do
         expect(page).to have_content '2'
       end
@@ -135,15 +136,15 @@ describe 'unauthenticated user', type: :feature do
       expect(selected).to eq('2')
     end
 
-    it "can remove an item from the cart", js: true do
+    it "can remove an item from the cart" do
       visit cart_edit_path
-      click_on 'remove item'
+      find("#remove_item").click
       within('.cart-container') do
         expect(page).to have_content '0'
       end
     end
 
-    it "can clear the cart", js: true do
+    it "can clear the cart" do
       visit cart_edit_path
       click_on 'clear my cart'
       within('.cart-container') do
@@ -151,7 +152,7 @@ describe 'unauthenticated user', type: :feature do
       end
     end
 
-    it 'can log in, which does not clear the cart', js: true do
+    it 'can log in, which does not clear the cart' do
       visit root_path
       within('.cart-container') do
         expect(page).to have_content '1'
@@ -172,7 +173,5 @@ describe 'unauthenticated user', type: :feature do
       visit cart_edit_path
       expect(page).to_not have_content 'Checkout'
     end
-
   end
-
 end
