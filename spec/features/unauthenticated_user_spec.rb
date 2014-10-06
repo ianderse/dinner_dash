@@ -86,8 +86,10 @@ describe 'unauthenticated user', type: :feature do
     expect(page).to have_content('You are not authorized to access this page')
   end
 
-  xit "cannot view the administrator screens or use administrator functionality" do
-    #cannot view /admin pages
+  it "cannot view the administrator screens or use administrator functionality" do
+    visit '/admin'
+    expect(current_path).to eq(root_path)
+    expect(page).to have_content('You are not authorized to access this page')
   end
 
   it "canot make themselves an administrator" do
@@ -121,7 +123,7 @@ describe 'unauthenticated user', type: :feature do
         expect(page).to have_content '4'
       end
     end
-    
+
     it "can update the quantity of an item in the cart", js: true do
       visit cart_edit_path
       select "2", from: "quantity"
@@ -172,11 +174,5 @@ describe 'unauthenticated user', type: :feature do
     end
 
   end
-
-  #it "can increase the quantity of a item in my cart"
-  #Given I visit the Menu and my cart has no items
-  #And I click the up arrow next to the item
-  #And I click 'Add item to cart'
-  #I expect my cart to have a quantity of 2
 
 end

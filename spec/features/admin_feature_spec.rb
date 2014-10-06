@@ -32,8 +32,15 @@ describe 'admin dashboard' do
 			expect(page).to have_content('Site Administrator Dashboard')
 		end
 
-		it 'has link to manage users'
-		it 'has link to manage orders'
+		it 'has link to manage users' do
+			visit admin_path
+			expect(page).to have_content('View Current Users')
+		end
+
+		xit 'has link to manage orders' do
+			visit admin_path
+			expect(page).to have_content('View Orders')
+		end
 	end
 
 	it 'can create item listings' do

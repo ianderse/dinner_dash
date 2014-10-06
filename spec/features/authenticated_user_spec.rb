@@ -48,8 +48,33 @@ describe 'authenticated user', type: :feature do
 		expect(current_path).to eq(cart_edit_path)
     expect(page).to have_content('Your Cart')
 	end
-	it 'can remove an item from my cart'
-	it 'can increase quantity of an item in my cart'
+
+	it 'can remove an item from my cart', js: true do
+		small_plates_category = create(:category, title: 'Small Plates')
+    create(:item, title: 'Second Food', categories: [small_plates_category])
+    visit items_path
+    click_on 'Add to cart'
+    visit cart_edit_path
+    click_on 'remove item'
+      within('.cart-container') do
+        expect(page).to have_content '0'
+      end
+	end
+
+	it "can update the quantity of an item in the cart", js: true do
+		small_plates_category = create(:category, title: 'Small Plates')
+    create(:item, title: 'Second Food', categories: [small_plates_category])
+    visit items_path
+    click_on 'Add to cart'
+    visit cart_edit_path
+    select "2", from: "quantity"
+    click_on 'update quantity'
+    within('.cart-container') do
+      expect(page).to have_content '2'
+    end
+    selected = find('#quantity').value
+    expect(selected).to eq('2')
+  end
 
   it "can logout" do
   	visit '/'
