@@ -41,3 +41,4 @@ gem 'cancancan'
 gem 'fog'
 gem 'mail_form'
 gem 'simple_form'
+gem "simple_calendar", "~> 1.1.0"
