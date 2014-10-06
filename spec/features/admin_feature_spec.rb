@@ -11,7 +11,7 @@ describe 'admin user', type: :feature do
 
 	it 'has a role of admin' do
 		visit '/'
-		expect(page).to have_content("administrator")
+		expect(page).to have_content("Administrator")
 	end
 
 	it 'is redirected to an admin dashboard upon login' do
@@ -20,7 +20,7 @@ describe 'admin user', type: :feature do
 		fill_in 'email', with: "#{@user.email}"
 		fill_in 'password', with: "#{@user.password}"
 		click_on 'login'
-		expect(page).to have_content("administrator")
+		expect(page).to have_content("Administrator")
 		expect(current_path).to eq admin_path
 		expect(page).to have_content "Site Administrator Dashboard"
 	end
@@ -96,13 +96,46 @@ describe 'admin dashboard' do
 	end
 
   it "can see all users" do
-    visit '/users'
-    expect(page).to have_content("Users")
+    visit '/admin'
+		click_on 'Create New User or Administrator'
+		expect(current_path).to eq new_admin_user_path
+    expect(page).to have_content("Create A New User or Administrator")
   end
 
-  it "can see the profile of an individual user" do
-    visit "/users/#{@user.id}"
-    expect(page).to have_content("User Page")
+	it "can create a new user with admin role" do
+		visit '/admin/users/new'
+		fill_in 'First name', with: 'abc'
+		fill_in 'Last name', with: 'poptart'
+		fill_in 'Email', with: 'tartkins@example.com'
+		fill_in 'Password', with: "abc123"
+		fill_in 'Password confirmation', with: "abc123"
+		select 'admin', from: 'user_role'
+		click_on 'Create New User'
+		expect(current_path).to eq admin_users_path
+		expect(User.last.role).to eq 'admin'
+	end
+
+  it "can see all existing users" do
+    visit "/admin/users"
+    expect(page).to have_content("Current List of Caussa Users")
   end
+
+	it "can modify it's own information" do
+		visit '/admin'
+		click_on 'Administrator'
+		expect(current_path).to eq edit_admin_user_path(@user)
+	end
+
+	it "can modify an existing user's role" do
+		nonadmin_user = create(:user, first_name: 'jojo', email: 'jojojo@example.com', password: 'asdf', password_confirmation: 'asdf', role:'user')
+		visit '/admin'
+		click_on 'View Current Users'
+		expect(current_path).to eq admin_users_path
+		click_on('user')
+		expect(current_path).to eq edit_admin_user_path(nonadmin_user)
+		select 'admin', from: 'user_role'
+		click_on 'Save Changes'
+		expect(User.last.role).to eq 'admin'
+	end
 
 end

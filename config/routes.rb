@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     get '', to: 'dashboard#index'
     resources :items, except: [:index]
     resources :categories
+    resources :users
   end
 
   get '/code' => 'welcome#code'
