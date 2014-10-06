@@ -67,7 +67,8 @@ describe 'authenticated user', type: :feature do
 		small_plates_category = create(:category, title: 'Small Plates')
     create(:item, title: 'Second Food', categories: [small_plates_category])
     visit items_path
-    click_on 'Add to cart'
+    find('#add_to_cart').click
+    expect(page).to have_content 'Item added to your cart!'
     visit cart_edit_path
     find("#quantity").select('2')
     find('#update_quantity').click
