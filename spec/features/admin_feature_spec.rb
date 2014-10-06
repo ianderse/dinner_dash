@@ -36,21 +36,18 @@ describe 'admin dashboard' do
 		it 'has link to manage ????'
 	end
 
-	xit 'can create item listings' do
+	it 'can create item listings' do
 		small_plates_category = create(:category, title: 'Small Plates')
 		create(:item, id: 1, title: 'Second Food', categories: [small_plates_category])
-		visit '/items/1/edit'
-		expect(page).to have_content("add new item")
-	end
-
-	xit 'can create item listings with title, description, price' do
-		visit 'items/4/edit'
-		expect(page).to have_content("title", "description", "price")
-	end
-
-	xit 'can create item listings with category' do
-		visit 'items/4/edit'
-		expect(page).to have_css '#categories_'
+		visit '/admin'
+		click_on('Create A New Menu Item')
+		expect(page).to have_content("Create New Item")
+		fill_in 'Title', with: "Test Item"
+		fill_in 'Description', with: "Test Description"
+		fill_in 'Price', with: '19.22'
+		check('categories_')
+		click_on('Create Item')
+		expect(page).to have_content("Your item has been successfully added to the menu!")
 	end
 
 	xit 'can create item listings with photo' do
