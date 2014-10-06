@@ -1,1 +1,2 @@
-$("#item_<%= @item_id %>").remove()
+$('.ajax_flash_messages').html("<div class='flash' id='notice'>Item added to your cart!</div>");
+$('.cart_quantity').text('<%= session[:cart].size %>');

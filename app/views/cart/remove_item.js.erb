@@ -1,1 +1,2 @@
 $("#item_<%= @item_id %>").remove()
+$('.cart_quantity').text('<%= session[:cart].size %>');

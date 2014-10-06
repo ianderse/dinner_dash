@@ -4,19 +4,27 @@ class CartController < ApplicationController
   end
 
   def add_item
-    @item_id = params[:item_id]
+    item_id = params[:id]
     session[:cart] ||= []
-    session[:cart] << @item_id
-    flash[:notice] = "Item added to your cart!"
+    params[:quantity].to_i.times { session[:cart] << item_id }
 
-    redirect_to items_path
-    #respond_to do |format|
-    #  format.js { @item_id } 
-    #end
+    respond_to do |format|
+      format.js {} 
+    end
+  end
+
+  def quantity
+    item_id = params[:id]
+    session[:cart].delete(item_id)
+    params[:quantity].to_i.times { session[:cart] << item_id }
+
+    respond_to do |format|
+      format.js {} 
+    end
   end
 
   def remove_item
-    @item_id = params[:item_id]
+    @item_id = params[:id]
     session[:cart].delete(@item_id)
 
     respond_to do |format|

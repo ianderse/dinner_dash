@@ -1,8 +1,9 @@
-require 'spec_helper'
-require 'capybara/rails'
-require 'capybara/rspec'
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
 
 describe 'authenticated user', type: :feature do
+  include Capybara::DSL
+
 	before do
 		user = create(:user, id: 1, first_name: 'joe', email: 'abc@example.com', password: 'asdf', password_confirmation: 'asdf')
     visit '/'
@@ -29,7 +30,7 @@ describe 'authenticated user', type: :feature do
     expect(page).to have_content 'Second Food'
 	end
 
-	it 'can add item to cart' do
+	it 'can add item to cart', js: true do
 		small_plates_category = create(:category, title: 'Small Plates')
     create(:item, title: 'Second Food', categories: [small_plates_category])
     visit items_path

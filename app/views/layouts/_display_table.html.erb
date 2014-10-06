@@ -6,17 +6,12 @@
         <%= link_to item.title, item_path(item) %><br/>
         <%= item.description %>
         <%= print_price(item.price) %><br/>
-        <%= form_tag(cart_add_item_path(item.id), method: :patch) do %>
-            <span class="glyphicon glyphicon-plus"></span>
-            <%= submit_tag 'Add to cart', class: "btn btn-default btn-sm" %>
+        <%= form_tag(cart_add_item_path(item), method: :patch, remote: true) do %>
+          <span class="glyphicon glyphicon-plus"></span>
+          <%= label_tag "quantity" %>
+          <%= select_tag "quantity", options_for_select(['1','2','3','4','5']) %>
+          <%= submit_tag 'Add to cart', class: "btn btn-default btn-sm" %>
         <% end %>
-        <label for="quantity">Quantity</label>
-        <select>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
       </div>
     <% end %>
   </div>

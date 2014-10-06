@@ -103,7 +103,7 @@ describe 'unauthenticated user', type: :feature do
       click_on 'Add to cart'
     end
 
-    it "can add item to cart", js: true do
+    it "can add an item to cart", js: true do
       expect(page).to have_content 'Item added to your cart!'
       within('.cart-container') do
         expect(page).to have_content '1'
@@ -114,6 +114,25 @@ describe 'unauthenticated user', type: :feature do
       expect(page).to have_content('red t-shirt')
     end
 
+    it "can add a multiple of the same item to cart", js: true do
+      select "3", from: "quantity"
+      click_on 'Add to cart'
+      within('.cart-container') do
+        expect(page).to have_content '4'
+      end
+    end
+    
+    it "can update the quantity of an item in the cart", js: true do
+      visit cart_edit_path
+      select "2", from: "quantity"
+      click_on 'update quantity'
+      within('.cart-container') do
+        expect(page).to have_content '2'
+      end
+      selected = find('#quantity').value
+      expect(selected).to eq('2')
+    end
+
     it "can remove an item from the cart", js: true do
       visit cart_edit_path
       click_on 'remove item'
@@ -122,7 +141,7 @@ describe 'unauthenticated user', type: :feature do
       end
     end
 
-    it "can clear the cart" do
+    it "can clear the cart", js: true do
       visit cart_edit_path
       click_on 'clear my cart'
       within('.cart-container') do
@@ -130,7 +149,7 @@ describe 'unauthenticated user', type: :feature do
       end
     end
 
-    it 'can log in, which does not clear the cart' do
+    it 'can log in, which does not clear the cart', js: true do
       visit root_path
       within('.cart-container') do
         expect(page).to have_content '1'

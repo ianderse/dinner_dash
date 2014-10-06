@@ -36,7 +36,7 @@
               <% end %>
               <div class='cart-container' style="display:inline">
                 <%= link_to( image_tag("Shopping-Cart.png"), cart_edit_path) %>
-                <span><%= session[:cart] ? session[:cart].size : 0 %></span>
+                <span class='cart_quantity'><%= session[:cart] ? session[:cart].size : 0 %></span>
               </div>
             </ul>
 
@@ -46,8 +46,10 @@
     </div>
   </div>
 </nav>
-<% flash.each do |k, v| %>
-  <div class="flash" id="<%= k %>">
-    <%= v %>
-  </div>
+<div class='ajax_flash_messages'>
+  <% flash.each do |type, message| %>
+    <div class="flash" id="<%= type %>">
+      <%= message %>
+    </div>
   <% end %>
+</div>

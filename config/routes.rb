@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get 'cart/edit'
-  patch 'cart/add_item/:item_id', to: 'cart#add_item', as: 'cart_add_item'
-  patch 'cart/remove_item/:item_id', to: 'cart#remove_item', as: 'cart_remove_item'
+  patch 'cart/add_item/:id', to: 'cart#add_item', as: 'cart_add_item'
+  patch 'cart/remove_item/:id', to: 'cart#remove_item', as: 'cart_remove_item'
+  patch 'cart/quantity/:id', to: 'cart#quantity', as: 'cart_quantity'
   delete 'cart/destroy'
 
   namespace :admin do
