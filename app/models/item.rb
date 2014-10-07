@@ -13,4 +13,8 @@ class Item < ActiveRecord::Base
 	validates_attachment :image, content_type: {content_type: ["image/jpeg", "image/jpeg", "image/png", "image/gif"]}
 
 	scope :active, -> {where(active: true)}
+
+	def active?
+		self.active == true
+	end
 end
