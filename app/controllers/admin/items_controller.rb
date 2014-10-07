@@ -8,7 +8,7 @@ class Admin::ItemsController < Admin::Controller
 
   def show
     @item = Item.find(params[:id])
-    @categories = Category.all
+    @categories = @item.categories
   end
 
   def edit
