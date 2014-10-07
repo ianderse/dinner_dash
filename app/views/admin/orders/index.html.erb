@@ -1,14 +1,22 @@
 
-<h2>Edit Orders</h2>
-<table>
+<h2>Current Orders in System</h2>
+<table class = "table table-striped">
+  <thead>
+    <tr>
+      <th>Order Id</th>
+      <th>Creation Date</th>
+      <th>Customer Name</th>
+      <th>Total Price</th>
+    </tr>
+  </thead>
+  <tbody>
     <% @orders.each do |order| %>
     <tr>
+      <td><%= link_to order.id, edit_admin_order_path(order) %></td>
       <td><%= link_to order.created_at, edit_admin_order_path(order) %></td>
-
       <td><%= order.user.first_name %> </td>
-      <td><%= order.print_price(items.price * item.size) %> </td>
-
-
+      <td><%= print_price(order_price(order.items)) %> </td>
     </tr>
     <% end %>
+  </tbody>
 </table>

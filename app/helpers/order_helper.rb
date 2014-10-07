@@ -1,9 +1,11 @@
 module OrderHelper
 
-  def self.order_price
+  def order_price(items)
+    total = 0
     items.each do |item|
-      (item.price * item.quantity).reduce
+      total += (item.price * items.size)
     end
+    total
   end
 
 end

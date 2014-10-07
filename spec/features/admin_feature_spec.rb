@@ -170,7 +170,7 @@ describe 'admin order dashboard' do
 	it 'can see listings of all orders' do
 		visit '/admin'
 		click_on 'View Current Orders'
-		expect(current_path).to eq new_admin_orders_path
+		expect(current_path).to eq admin_orders_path
 		expect(page).to have_content("Current Orders in System")
 	end
 
