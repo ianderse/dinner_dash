@@ -4,12 +4,12 @@ class CartController < ApplicationController
   end
 
   def add_item
-    item_id = params[:id]
+    @item_id = params[:id]
     session[:cart] ||= []
-    params[:quantity].to_i.times { session[:cart] << item_id }
+    params[:quantity].to_i.times { session[:cart] << @item_id }
 
     respond_to do |format|
-      format.js {} 
+      format.js { @item_id } 
     end
   end
 
