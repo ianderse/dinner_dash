@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'cart/edit'
   patch 'cart/add_item/:id', to: 'cart#add_item', as: 'cart_add_item'
   patch 'cart/remove_item/:id', to: 'cart#remove_item', as: 'cart_remove_item'
-  patch 'cart/quantity/:id', to: 'cart#quantity', as: 'cart_quantity'
+  patch 'cart/update_quantity/:id', to: 'cart#update_quantity', as: 'cart_update_quantity'
   delete 'cart/destroy'
 
   namespace :admin do

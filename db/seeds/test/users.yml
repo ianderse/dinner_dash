@@ -8,7 +8,7 @@ records:
     password_confirmation: 'password'
   - sprig_id: 2
     first_name: 'Jeff'
-    last_name:
+    last_name: ''
     email: 'demo+jeff@jumstartlab.com'
     nickname: 'j3'
     password: 'password'

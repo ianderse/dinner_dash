@@ -13,7 +13,7 @@ class CartController < ApplicationController
     end
   end
 
-  def quantity
+  def update_quantity
     item_id = params[:id]
     session[:cart].delete(item_id)
     params[:quantity].to_i.times { session[:cart] << item_id }

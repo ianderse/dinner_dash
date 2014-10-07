@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    "#{first_name + " " + last_name}".strip
+    "#{first_name + ' ' + last_name}".strip
   end
 
   Roles = [ :admin , :default ]
