@@ -47,14 +47,15 @@ describe 'admin dashboard' do
 		end
 	end
 
-	xit 'can create item listings' do
+	it 'can create item listings' do
+		small_plates_category = create(:category, title: 'Small Plates')
 		visit '/admin'
 		click_on('Create A New Menu Item')
 		expect(page).to have_content("Create New Item")
 		fill_in 'Title', with: "Test Item"
 		fill_in 'Description', with: "Test Description"
 		fill_in 'Price', with: '19.22'
-    find('#categories_').set(true)
+    find(:css, ".category_checkbox").set(true)
 		click_on('Create Item')
 		expect(page).to have_content("Your item has been successfully added to the menu!")
 	end
@@ -85,19 +86,28 @@ describe 'admin dashboard' do
 		expect(page).to have_content("Your category has been successfully created!")
 	end
 
-	xit 'can assign items to categories' do
-		#how to check status of checkboxes?
+	it 'can assign items to categories' do
 		small_plates_category = create(:category, title: 'Small Plates')
 		create(:item, id: 1, title: 'Second Food', categories: [small_plates_category])
 		visit '/admin/items/1/edit'
-		check
+		find(:css, ".category_checkbox").set(true)
+		click_on("Save Changes")
+		visit '/admin/items/1'
+		expect(page).to have_content("Small Plates")
+		# checkbox = find(".category_checkbox")
+		# checkbox.should be_checked
 	end
 
-	xit 'can remove items from categories' do
+	it 'can remove items from categories' do
 		small_plates_category = create(:category, title: 'Small Plates')
 		create(:item, id: 1, title: 'Second Food', categories: [small_plates_category])
 		visit '/admin/items/1/edit'
-		check
+		find(:css, ".category_checkbox").set(false)
+		checkbox = find(".category_checkbox")
+		checkbox.should_not be_checked
+		click_on("Save Changes")
+		visit '/admin/items/1'
+		expect(page).to_not have_content("Small Plates")
 	end
 
 	it 'can retire items from being sold' do
