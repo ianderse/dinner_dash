@@ -15,7 +15,7 @@ describe 'admin user', type: :feature do
 
 	it 'has a role of admin' do
 		visit '/'
-		expect(page).to have_content("Administrator")
+		expect(page).to have_content("Admin Dashboard")
 	end
 
 	it 'is redirected to an admin dashboard upon login' do
@@ -154,12 +154,6 @@ describe 'admin dashboard' do
     visit "/admin/users"
     expect(page).to have_content("Current List of Caussa Users")
   end
-
-	it "can modify it's own information" do
-		visit '/admin'
-		click_on 'Administrator'
-		expect(current_path).to eq edit_admin_user_path(@user)
-	end
 
 	it "can modify an existing user's role" do
 		nonadmin_user = create(:user, first_name: 'jojo', email: 'jojojo@example.com', password: 'asdf', password_confirmation: 'asdf', role:'user')
