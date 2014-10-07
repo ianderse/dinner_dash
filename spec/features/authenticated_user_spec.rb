@@ -113,6 +113,22 @@ describe 'authenticated user', type: :feature do
 		expect(page).to have_content "You are not authorized to access this page."
 	end
 
+    it 'cannot add a retired item to the cart' do
+        small_plates_category = create(:category, title: 'Small Plates')
+        create(:item, id: 1, title: 'Second Food', categories: [small_plates_category], active: false)
+        visit '/items/1'
+        expect(page).to have_content "Second Food"
+        visit '/items'
+        expect(page).to_not have_content "Second Food"
+    end
+
+    it 'can view a retired items page' do
+        small_plates_category = create(:category, title: 'Small Plates')
+        create(:item, id: 1, title: 'Second Food', categories: [small_plates_category], active: false)
+        visit '/items/1'
+        expect(page).to have_content "Second Food"
+    end
+
 	describe 'order display page' do
 		it 'displays item with quantity ordered'
 		it 'shows line-item subtotals'
@@ -123,7 +139,5 @@ describe 'authenticated user', type: :feature do
 		it 'shows date and time order was submitted'
 		it 'shows timestamp when order was completed'
 		it 'shows timestamp when order was cancelled'
-		it 'cannot add a retired item to the cart'
-		it 'can view a retired items page'
 	end
 end
