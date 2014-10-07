@@ -20,7 +20,7 @@ describe 'authenticated user', type: :feature do
     expect(page).to have_content 'Menu'
 	end
 
-	it 'can browse items by category' do
+	it 'can browse items by category', js: true do
     small_plates_category = create(:category, title: 'Small Plates')
     create(:item, title: 'Second Food', categories: [small_plates_category])
     visit '/'
