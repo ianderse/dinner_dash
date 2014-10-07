@@ -1,0 +1,3 @@
+$(".grid-item").not(".<%= @category.title.tr(' ','_').html_safe %>").each(function() {
+  $(this).hide();
+});
