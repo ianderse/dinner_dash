@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :users
   resources :categories, only: [:show]
   resources :cart_items, only: [:create]
+
   get '/about' => 'welcome#about'
 
   get    '/login',  to: 'sessions#new'
