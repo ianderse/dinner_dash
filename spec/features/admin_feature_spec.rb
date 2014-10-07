@@ -94,8 +94,6 @@ describe 'admin dashboard' do
 		click_on("Save Changes")
 		visit '/admin/items/1'
 		expect(page).to have_content("Small Plates")
-		# checkbox = find(".category_checkbox")
-		# checkbox.should be_checked
 	end
 
 	it 'can remove items from categories' do
