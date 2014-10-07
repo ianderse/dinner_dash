@@ -6,10 +6,10 @@
       <li><%= item.title %>
       <li><%= item.description %>
         <%= form_tag(cart_quantity_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
-          <%= select_tag "quantity", options_for_select(['1','2','3','4','5'], session[:cart].count(item.id.to_s)) %>
+          <%= number_field_tag "quantity", session[:cart].count(item.id.to_s) %>
           <%= submit_tag "update quantity", class: "btn btn-default btn-sm", id: 'update_quantity' %>
         <% end %>
-        <%= form_tag(cart_remove_item_path(item), method: :patch, remote: true) do %>
+        <%= form_tag(cart_remove_item_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
           <span class="glyphicon glyphicon-remove"></span>
           <%= submit_tag 'remove item', class: "btn btn-default btn-sm", id: "remove_item" %>
         <% end %>

@@ -70,7 +70,7 @@ describe 'authenticated user', type: :feature do
     find('#add_to_cart').click
     expect(page).to have_content 'Item added to your cart!'
     visit cart_edit_path
-    find("#quantity").select('2')
+    fill_in('quantity', with: '2')
     find('#update_quantity').click
     within('.cart-container') do
       expect(page).to have_content '2'
