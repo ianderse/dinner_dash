@@ -1,7 +1,7 @@
 <div id="masonry-grid">
   <div class="grid-sizer">
     <% @items.each do |item| %>
-      <div class="grid-item <%= item.categories.reduce('') { |sum, category| sum + category.title.tr(' ','_') + ' '}.strip %>">
+      <div class="grid-item <%= item.categories.reduce('') { |sum, category| sum + category.title.tr(' ','_') + ' '}.strip %>" id="item_<%= item.id %>">
         <%= image_tag item.image.url(:medium) if item.image_file_name %><br/>
         <%= link_to item.title, item_path(item) %><br/>
         <%= item.description %>
