@@ -6,7 +6,7 @@ class Admin::OrdersController < Admin::Controller
 	end
 
 	def edit
-
+		@order = Order.find(params[:id])
 	end
 
 	def update
@@ -14,7 +14,10 @@ class Admin::OrdersController < Admin::Controller
 	end
 
 	def destroy
-
+		@order = Order.find(params[:id])
+		@order.destroy
+		flash[:notice]="Your shit is destroyed"
+		redirect_to admin_orders_path
 	end
 
 end

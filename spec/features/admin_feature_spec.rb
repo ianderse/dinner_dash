@@ -167,6 +167,14 @@ describe 'admin dashboard' do
 
 describe 'admin order dashboard' do
 
+	before do
+		category = create(:category, title: 'Test Category')
+		item = create(:item, title: 'Test Item', categories:[category])
+
+		@order = create(:order)
+	end
+
+
 	it 'can see listings of all orders' do
 		visit '/admin'
 		click_on 'View Current Orders'
@@ -178,8 +186,9 @@ describe 'admin order dashboard' do
 		# the total number of orders by status
 	end
 
-	xit 'can see the links for each individual order' do
-		# links for each individual order
+	it 'can see the links for each individual order' do
+		visit '/admin/orders'
+		expect(page).to have_content('View/Edit Order')
 	end
 
 	xit 'can filter orders to display by status type' do
@@ -193,8 +202,10 @@ describe 'admin order dashboard' do
 		# link to "mark as completed" individual orders which are currently "paid"
 	end
 
-	xit 'can access details of an individual order' do
-		# Access details of an individual order, including:
+	it 'can access details of an individual order' do
+		visit '/admin/orders'
+		click_on('View/Edit Order')
+		expect(current_path).to eq edit_admin_order_path(@order)
 	end
 
 	xit 'can access order date and time' do

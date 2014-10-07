@@ -7,15 +7,19 @@
       <th>Creation Date</th>
       <th>Customer Name</th>
       <th>Total Price</th>
+      <th>Order Status</th>
+      <th>Order Details</th>
     </tr>
   </thead>
   <tbody>
     <% @orders.each do |order| %>
     <tr>
       <td><%= link_to order.id, edit_admin_order_path(order) %></td>
-      <td><%= link_to order.created_at, edit_admin_order_path(order) %></td>
+      <td><%= order.created_at %></td>
       <td><%= order.user.first_name %> </td>
       <td><%= print_price(order_price(order.items)) %> </td>
+      <td><%= order.status %> </td>
+      <td><%= link_to "View/Edit Order", edit_admin_order_path(order), class: "btn btn-info" %>
     </tr>
     <% end %>
   </tbody>
