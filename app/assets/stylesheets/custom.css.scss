@@ -40,6 +40,10 @@
   border-color: #545454;
 }
 
+.grid-item:hover {
+  opacity: 1 !important;
+}
+
 .not_active {
   background-color: #eed3d7;
 }

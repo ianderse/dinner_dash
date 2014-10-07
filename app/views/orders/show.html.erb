@@ -1,0 +1,6 @@
+<h1>Completed Order</h1>
+
+<% @items.each do |items| %>
+	<% item = items.first %>
+	<%= item.title %> <%= items.size %> <%= print_price(item.price * items.size) %>
+<% end %>

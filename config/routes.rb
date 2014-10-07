@@ -14,17 +14,17 @@ Rails.application.routes.draw do
     resources :items, except: [:index]
     resources :categories
     resources :users
+    resources :orders, except: [:create, :new]
   end
-
-  get '/code' => 'welcome#code'
-  get '/about' => 'welcome#about'
 
   resources :items, only: [:index, :show]
   resources :users
   resources :categories, only: [:show]
   resources :cart_items, only: [:create]
+  resources :orders, except: [:update, :edit, :destroy]
 
   get '/about' => 'welcome#about'
+  get '/code' => 'welcome#code'
 
   get    '/login',  to: 'sessions#new'
   post   '/login',  to: 'sessions#create'

@@ -17,4 +17,5 @@
   <% end %>
 </ul>
 
-<%= link_to 'clear my cart', cart_destroy_path, method: :delete %> 
+<%= link_to 'clear my cart', cart_destroy_path, method: :delete, class: "btn btn-default btn-sm" %>
+<%= link_to 'Checkout', new_order_path, class: "btn btn-default btn-sm" %>
