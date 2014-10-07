@@ -1,0 +1,14 @@
+
+<h2>Edit Orders</h2>
+<table>
+    <% @orders.each do |order| %>
+    <tr>
+      <td><%= link_to order.created_at, edit_admin_order_path(order) %></td>
+
+      <td><%= order.user.first_name %> </td>
+      <td><%= order.print_price(items.price * item.size) %> </td>
+
+
+    </tr>
+    <% end %>
+</table>

@@ -167,16 +167,11 @@ describe 'admin dashboard' do
 
 describe 'admin order dashboard' do
 
-	before do
-		@user = create(:user, first_name: 'joe', email: 'abc@example.com', password: 'asdf', password_confirmation: 'asdf', role:'admin')
-		visit '/'
-		fill_in 'email', with: "#{@user.email}"
-		fill_in 'password', with: "#{@user.password}"
-		click_on 'login'
-	end
-
-	xit 'can see listings of all orders' do
-		visit '/admin/orders'
+	it 'can see listings of all orders' do
+		visit '/admin'
+		click_on 'View Current Orders'
+		expect(current_path).to eq new_admin_orders_path
+		expect(page).to have_content("Current Orders in System")
 	end
 
 	xit 'can see the total number of orders by status' do
