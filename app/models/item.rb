@@ -9,7 +9,7 @@ class Item < ActiveRecord::Base
 	has_many :item_categories
 	has_many :categories, through: :item_categories
 
-	has_attached_file :image, styles: {:medium => "300x300>", :thumb => "100x100"}
+	has_attached_file :image, styles: {:medium => "300x300#", :thumb => "100x100"}
 	validates_attachment :image, content_type: {content_type: ["image/jpeg", "image/jpeg", "image/png", "image/gif"]}
 
 	scope :active, -> {where(active: true)}
