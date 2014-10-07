@@ -83,13 +83,13 @@ describe 'unauthenticated user', type: :feature do
   it "cannot view another user's private data" do
     user = create(:user, id: 1, first_name: 'joe', email: 'abc@example.com', password: 'asdf', password_confirmation: 'asdf')
     visit user_path(user)
-    expect(current_path).to eq(root_path)
+    expect(current_path).to eq(login_path)
     expect(page).to have_content('You are not authorized to access this page')
   end
 
   it "cannot view the administrator screens or use administrator functionality" do
     visit '/admin'
-    expect(current_path).to eq(root_path)
+    expect(current_path).to eq(login_path)
     expect(page).to have_content('You are not authorized to access this page')
   end
 
@@ -171,7 +171,8 @@ describe 'unauthenticated user', type: :feature do
 
     it 'cannot checkout' do
       visit cart_edit_path
-      expect(page).to_not have_content 'Checkout'
+      click_on 'Checkout'
+      expect(current_path).to eq login_path
     end
   end
 end

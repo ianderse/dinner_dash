@@ -1,5 +1,5 @@
 require 'capybara/poltergeist'
-Capybara.javascript_driver = :poltergeist 
+Capybara.javascript_driver = :poltergeist
 Capybara.default_wait_time = 5
 
 describe 'authenticated user', type: :feature do
@@ -93,7 +93,7 @@ describe 'authenticated user', type: :feature do
 	it 'cannot view the admin screens' do
 		visit '/admin/items/new'
 		expect(page).to_not have_content "Create New Item"
-		expect(current_path).to eq(root_path)
+		expect(current_path).to eq(login_path)
 		expect(page).to have_content "You are not authorized to access this page."
 	end
 
@@ -102,14 +102,14 @@ describe 'authenticated user', type: :feature do
 		create(:item, id: 1, title: 'Second Food', categories: [small_plates_category])
 		visit '/admin/items/1/edit'
 		expect(page).to_not have_content "Edit Item"
-		expect(current_path).to eq(root_path)
+		expect(current_path).to eq(login_path)
 		expect(page).to have_content "You are not authorized to access this page."
 	end
 
 	it 'cannot make itself an admin' do
 		visit '/users/1/edit'
 		expect(page).to_not have_content "Edit User"
-		expect(current_path).to eq(root_path)
+		expect(current_path).to eq(login_path)
 		expect(page).to have_content "You are not authorized to access this page."
 	end
 
