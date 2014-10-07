@@ -9,7 +9,7 @@
         <%= form_tag(cart_add_item_path(item), method: :patch, remote: true) do %>
           <span class="glyphicon glyphicon-plus"></span>
           <%= label_tag "quantity" %>
-          <%= select_tag "quantity", options_for_select(['1','2','3','4','5']) %>
+          <%= number_field_tag "quantity", 1 %>
           <%= submit_tag 'Add to cart', class: "btn btn-default btn-sm", id: "add_to_cart" %>
         <% end %>
       </div>

@@ -118,7 +118,7 @@ describe 'unauthenticated user', type: :feature do
     end
 
     it "can add a multiple of the same item to cart" do
-      find("#quantity").select('3')
+      fill_in 'quantity', with: "3"
       click_on 'Add to cart'
       within('.cart-container') do
         expect(page).to have_content '4'
