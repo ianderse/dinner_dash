@@ -165,4 +165,82 @@ describe 'admin dashboard' do
 		expect(User.last.role).to eq 'admin'
 	end
 
+describe 'admin order dashboard' do
+
+	before do
+		@user = create(:user, first_name: 'joe', email: 'abc@example.com', password: 'asdf', password_confirmation: 'asdf', role:'admin')
+		visit '/'
+		fill_in 'email', with: "#{@user.email}"
+		fill_in 'password', with: "#{@user.password}"
+		click_on 'login'
+	end
+
+	xit 'can see listings of all orders' do
+		visit '/admin/orders'
+	end
+
+	xit 'can see the total number of orders by status' do
+		# the total number of orders by status
+	end
+
+	xit 'can see the links for each individual order' do
+		# links for each individual order
+	end
+
+	xit 'can filter orders to display by status type' do
+		# filter orders to display by status type (for statuses "ordered", "paid", "cancelled", "completed")
+	end
+
+	xit 'can link to transition to a different status' do
+		# link to transition to a different status:
+		# link to "cancel" individual orders which are currently "ordered" or "paid"
+		# link to "mark as paid" orders which are "ordered"
+		# link to "mark as completed" individual orders which are currently "paid"
+	end
+
+	xit 'can access details of an individual order' do
+		# Access details of an individual order, including:
+	end
+
+	xit 'can access order date and time' do
+		# Order date and time
+	end
+
+	xit 'can access purchaser full name and email address' do
+	# Purchaser full name and email address
+	end
+
+	xit 'can access order details for each item' do
+		# For each item on the order:
+		# Name linked to the item page
+		# Quantity
+		# Price
+		# Line item subtotal
+	end
+
+	xit 'can access total for order' do
+	# Total for the order
+	end
+
+	xit 'can access status of order' do
+	# Status of the order
+	end
+
+	xit 'update an individual order' do
+	end
+
+	xit 'can view and edit orders' do
+	# View and edit orders; may change quantity or remove items from orders with the status of pending or paid
+	end
+
+	xit 'change the status of an order to specs' do
+	# Change the status of an order according to the rules as outlined above
+	end
+
+	xit 'cannot modify any personal data aside from their own' do
+	#Modify any personal data aside from their own
+	end
+
+end
+
 end
