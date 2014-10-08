@@ -72,42 +72,34 @@
   text-decoration:none;
   padding: .2em 1em;
   color: #fff;
-  background-color: #545454;
+  background-color: rgb(192, 192, 192);
 }
 
-
-#categories ul li a:hover {
-  color: #fff;
-  background-color: #C0C0C0;
-}
+// #categories ul li a:hover {
+//   color: #fff;
+//   background-color: #C0C0C0;
+// }
 
 // Contact Form Styling
 .hidden { display: none; }
 
 /*flash*/
 
-.alert-error {
+.flash#error {
 background-color: #f2dede;
 border-color: #eed3d7;
 color: #b94a48;
 text-align: left;
 }
 
-.alert-alert {
+.flash#alert {
 background-color: #f2dede;
 border-color: #eed3d7;
 color: #b94a48;
 text-align: left;
 }
 
-.alert-success {
-background-color: #dff0d8;
-border-color: #d6e9c6;
-color: #468847;
-text-align: left;
-}
-
-.alert-notice {
+.flash#notice {
 background-color: #dff0d8;
 border-color: #d6e9c6;
 color: #468847;
