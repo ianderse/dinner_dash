@@ -9,7 +9,7 @@ class CartController < ApplicationController
     params[:quantity].to_i.times { session[:cart] << @item_id }
 
     respond_to do |format|
-      format.js { @item_id } 
+      format.js { @item_id }
     end
   end
 
@@ -19,7 +19,7 @@ class CartController < ApplicationController
     params[:quantity].to_i.times { session[:cart] << item_id }
 
     respond_to do |format|
-      format.js {} 
+      format.js {}
     end
   end
 
@@ -33,7 +33,11 @@ class CartController < ApplicationController
   end
 
   def destroy
-    session[:cart].clear
-    redirect_to request.referer 
+    if session[:cart]
+      session[:cart].clear
+      redirect_to request.referer
+    else
+      redirect_to request.referer
+    end
   end
 end
