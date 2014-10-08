@@ -102,7 +102,7 @@ describe 'admin dashboard' do
 		visit '/admin/items/1/edit'
 		find(:css, ".category_checkbox").set(false)
 		checkbox = find(".category_checkbox")
-		checkbox.should_not be_checked
+		expect(checkbox).to_not be_checked
 		click_on("Save Changes")
 		visit '/admin/items/1'
 		expect(page).to_not have_content("Small Plates")
@@ -162,9 +162,9 @@ describe 'admin dashboard' do
 		expect(current_path).to eq admin_users_path
 		click_on('user')
 		expect(current_path).to eq edit_admin_user_path(nonadmin_user)
-		select 'admin', from: 'user_role'
+		select 'Admin', from: 'user_role'
 		click_on 'Save Changes'
-		expect(User.last.role).to eq 'admin'
+		expect(User.last.role).to eq 'Admin'
 	end
 
 describe 'admin order dashboard' do

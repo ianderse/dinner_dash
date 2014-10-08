@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   resources :items, only: [:index, :show]
-  resources :users
+  resources :users, except: [:index, :show]
   resources :categories, only: [:show]
   resources :cart_items, only: [:create]
   resources :orders, except: [:update, :edit, :destroy]

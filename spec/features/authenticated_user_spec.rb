@@ -90,44 +90,44 @@ describe 'authenticated user', type: :feature do
   it 'can view past orders with links to display each order'
 	it 'cannot view another users order'
 
-	it 'cannot view the admin screens' do
-		visit '/admin/items/new'
-		expect(page).to_not have_content "Create New Item"
-		expect(current_path).to eq(login_path)
-		expect(page).to have_content "You are not authorized to access this page."
-	end
-
-	it 'cannot access admin edit pages' do
+	it 'cannot access admin item pages' do
 		small_plates_category = create(:category, title: 'Small Plates')
 		create(:item, id: 1, title: 'Second Food', categories: [small_plates_category])
 		visit '/admin/items/1/edit'
 		expect(page).to_not have_content "Edit Item"
-		expect(current_path).to eq(login_path)
+		expect(current_path).to eq(items_path)
+		expect(page).to have_content "You are not authorized to access this page."
+		visit '/admin/items/new'
+		expect(page).to_not have_content "Create New Item"
+    expect(current_path).to eq(items_path)
 		expect(page).to have_content "You are not authorized to access this page."
 	end
+
+  it 'cannot access admin user pages' do
+    visit '/admin/users/1/edit'
+    expect(page).to_not have_content "User or Admin?"
+  end
 
 	it 'cannot make itself an admin' do
 		visit '/users/1/edit'
-		expect(page).to_not have_content "Edit User"
-		expect(current_path).to eq(login_path)
-		expect(page).to have_content "You are not authorized to access this page."
+		expect(page).to_not have_content "User or Admin"
 	end
 
-    it 'cannot add a retired item to the cart' do
-        small_plates_category = create(:category, title: 'Small Plates')
-        create(:item, id: 1, title: 'Second Food', categories: [small_plates_category], active: false)
-        visit '/items/1'
-        expect(page).to have_content "Second Food"
-        visit '/items'
-        expect(page).to_not have_content "Second Food"
-    end
+  it 'cannot add a retired item to the cart' do
+      small_plates_category = create(:category, title: 'Small Plates')
+      create(:item, id: 1, title: 'Second Food', categories: [small_plates_category], active: false)
+      visit '/items/1'
+      expect(page).to have_content "Second Food"
+      visit '/items'
+      expect(page).to_not have_content "Second Food"
+  end
 
-    it 'can view a retired items page' do
-        small_plates_category = create(:category, title: 'Small Plates')
-        create(:item, id: 1, title: 'Second Food', categories: [small_plates_category], active: false)
-        visit '/items/1'
-        expect(page).to have_content "Second Food"
-    end
+  it 'can view a retired items page' do
+      small_plates_category = create(:category, title: 'Small Plates')
+      create(:item, id: 1, title: 'Second Food', categories: [small_plates_category], active: false)
+      visit '/items/1'
+      expect(page).to have_content "Second Food"
+  end
 
 	describe 'order display page' do
 		it 'displays item with quantity ordered'
