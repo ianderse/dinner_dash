@@ -182,7 +182,7 @@ describe 'admin order dashboard' do
 		expect(page).to have_content("Current Orders in System")
 	end
 
-	xit 'can see the total number of orders by status' do
+	it 'can see the total number of orders by status' do
 		visit 'admin/orders'
 		expect(page).to have_content('Order Status')
 		# the total number of orders by status
@@ -218,9 +218,9 @@ describe 'admin order dashboard' do
 		expect(current_path).to eq edit_admin_order_path(@order)
 	end
 
-	xit 'can access order date and time' do
+	it 'can access order date and time' do
 		visit 'admin/orders'
-		expect(page).to have_content('Created At')
+		expect(page).to have_content('Creation Date')
 		# Order date and time
 	end
 
