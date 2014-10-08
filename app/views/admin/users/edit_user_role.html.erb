@@ -1,11 +1,11 @@
 <div class="admin-user">
   <div class="container">
     <%= form_for @user, :url => admin_user_path(@user), method: "patch" do |f| %>
-        <%= label_tag 'First name' %><br><%= f.text_field :first_name, class: "col-md-12"%><br/><br/>
-        <%= label_tag 'Last name' %><br><%= f.text_field :last_name, class: "col-md-12" %><br/><br/>
-        <%= label_tag 'Nickname'%>&nbsp<%= f.text_field :nickname, class: "col-md-12" %><br/><br/>
-        <%= label_tag 'Email'%>&nbsp<%= f.text_field :email, class: "col-md-12" %><br/><br/>
-        <%= f.label :user_or_admin %><%= f.select :role, ['user', 'admin'], :selected => f.object.role %>
+        <%= f.label :first_name %><br><%= f.text_field :first_name, class: "col-md-12"%><br/><br/>
+        <%= f.label :last_name %><br><%= f.text_field :last_name, class: "col-md-12" %><br/><br/>
+        <%= f.label :nickname %><%= f.text_field :nickname, class: "col-md-12" %><br/><br/>
+        <%= f.label :email %><%= f.text_field :email, class: "col-md-12" %><br/><br/>
+        <%= f.label :user_or_admin, "User or Admin?" %> <%= f.select :role, ['User', 'Admin'], :selected => f.object.role %>
         <br>
         <%= f.submit "Save Changes", class: "btn btn-primary btn-lg" %>
     <% end %>

@@ -1,4 +1,15 @@
-$(".grid-item").not(".<%= @category.title.tr(' ','_').html_safe %>").each(function() {
+$(".grid-item").not(".<%= @category %>").each(function() {
   $(this).hide();
 });
+
+var category_link = $("#<%= @category %>");
+var dark = "rgb(192, 192, 192)";
+var light = 'rgb(84, 84, 84)';
+
+if (category_link.css('background-color') == dark) {
+  category_link.css('background-color', light);
+} else {
+  category_link.css('background-color', dark);
+}
+  
 msnry.layout();

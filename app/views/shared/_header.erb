@@ -26,13 +26,11 @@
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right", style= "float:right", style="padding: 20px">
               <% if current_user %>
-                <%= "Welcome #{current_user.full_name}!" %>
-                <% if can? :create, @item %>
-                  <%= link_to "Administrator", edit_admin_user_path(current_user.id) %>
-                <% end %>
-              <%= link_to "Logout", logout_path, method: :delete %>
+                <%= "Welcome #{current_user.nickname ? current_user.nickname : current_user.full_name}!" %>
+                <%= link_to "My Profile", edit_user_path(current_user) %> /
+                <%= link_to "Logout", logout_path, method: :delete %>
               <% else %>
-                <%= render 'layouts/login_form'  %>
+                <%= render 'shared/login_form'  %>
               <% end %>
               <div class='cart-container' style="display:inline">
                 <%= link_to( image_tag("Shopping-Cart.png"), cart_edit_path) %>

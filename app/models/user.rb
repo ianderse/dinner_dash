@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
     "#{first_name + ' ' + last_name}".strip
   end
 
-  Roles = [ :admin , :default ]
+  Roles = [ :admin , :user, :nonauth ]
 
   def is?( requested_role )
     self.role.to_s == requested_role.to_s
