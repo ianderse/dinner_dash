@@ -173,4 +173,88 @@ describe 'admin dashboard' do
 		expect(User.last.role).to eq 'admin'
 	end
 
+describe 'admin order dashboard' do
+
+	before do
+		category = create(:category, title: 'Test Category')
+		item = create(:item, title: 'Test Item', categories:[category])
+
+		@order = create(:order)
+	end
+
+
+	it 'can see listings of all orders' do
+		visit '/admin'
+		click_on 'View Current Orders'
+		expect(current_path).to eq admin_orders_path
+		expect(page).to have_content("Current Orders in System")
+	end
+
+	xit 'can see the total number of orders by status' do
+		# the total number of orders by status
+	end
+
+	it 'can see the links for each individual order' do
+		visit '/admin/orders'
+		expect(page).to have_content('View/Edit Order')
+	end
+
+	xit 'can filter orders to display by status type' do
+		# filter orders to display by status type (for statuses "ordered", "paid", "cancelled", "completed")
+	end
+
+	xit 'can link to transition to a different status' do
+		# link to transition to a different status:
+		# link to "cancel" individual orders which are currently "ordered" or "paid"
+		# link to "mark as paid" orders which are "ordered"
+		# link to "mark as completed" individual orders which are currently "paid"
+	end
+
+	it 'can access details of an individual order' do
+		visit '/admin/orders'
+		click_on('View/Edit Order')
+		expect(current_path).to eq edit_admin_order_path(@order)
+	end
+
+	xit 'can access order date and time' do
+		# Order date and time
+	end
+
+	xit 'can access purchaser full name and email address' do
+	# Purchaser full name and email address
+	end
+
+	xit 'can access order details for each item' do
+		# For each item on the order:
+		# Name linked to the item page
+		# Quantity
+		# Price
+		# Line item subtotal
+	end
+
+	xit 'can access total for order' do
+	# Total for the order
+	end
+
+	xit 'can access status of order' do
+	# Status of the order
+	end
+
+	xit 'update an individual order' do
+	end
+
+	xit 'can view and edit orders' do
+	# View and edit orders; may change quantity or remove items from orders with the status of pending or paid
+	end
+
+	xit 'change the status of an order to specs' do
+	# Change the status of an order according to the rules as outlined above
+	end
+
+	xit 'cannot modify any personal data aside from their own' do
+	#Modify any personal data aside from their own
+	end
+
+end
+
 end

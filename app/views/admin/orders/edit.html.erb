@@ -1,0 +1,26 @@
+<h1>Order <%= "#{@order.id}" %></h1>
+<%= form_for @order do |f| %>
+<%= f.label :first_name %>
+<%= @order.user.first_name %>
+<%= f.label :status %>
+<%= @order.status %>
+<%= f.label :total_price %>
+<%= print_price(order_price(@order.items)) %>
+<% @order.items.each do |item| %>
+  <div id='<%= "item_#{item.id}" %>'>
+    <li><%= item.title %>
+    <li><%= item.description %>
+      <%= form_tag(cart_update_quantity_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
+        <%= number_field_tag "quantity", session[:cart].count(item.id.to_s) %>
+        <%= submit_tag "update quantity", class: "btn btn-default btn-sm", id: 'update_quantity' %>
+      <% end %>
+      <%= form_tag(cart_remove_item_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
+        <span class="glyphicon glyphicon-remove"></span>
+        <%= submit_tag 'remove item', class: "btn btn-default btn-sm", id: "remove_item" %>
+      <% end %>
+    <% end %>
+<%= link_to "Cancel My Order", admin_order_path, method: :delete %>
+<% if @order.status == 'ordered' %>
+
+ <%end%>
+<% end %>
