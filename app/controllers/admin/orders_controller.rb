@@ -33,7 +33,7 @@ class Admin::OrdersController < Admin::Controller
     @order = params[:id]
     @order.items.delete(@item_id)
 
-    redirect_to admin_orders_path
+    redirect_to admin_orders_path(@order)
   end
 
 	def destroy
