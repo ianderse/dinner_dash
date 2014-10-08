@@ -10,11 +10,13 @@
   <div id='<%= "item_#{item.id}" %>'>
     <li><%= item.title %>
     <li><%= item.description %>
-      <%= form_tag(cart_update_quantity_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
-        <%= number_field_tag "quantity", session[:cart].count(item.id.to_s) %>
+      <%= form_tag(admin_order_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
+        <!-- This is the wrong thing to run count on, was originally session[:cart] changed to @items.count so that it at least runs, we need to redo this form -->
+        <%= number_field_tag "quantity", @items.count(item.id.to_s) %>
         <%= submit_tag "update quantity", class: "btn btn-default btn-sm", id: 'update_quantity' %>
       <% end %>
-      <%= form_tag(cart_remove_item_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
+      <!-- This needs to be a new path for removing item from order-->
+      <%= form_tag(order_remove_item_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
         <span class="glyphicon glyphicon-remove"></span>
         <%= submit_tag 'remove item', class: "btn btn-default btn-sm", id: "remove_item" %>
       <% end %>

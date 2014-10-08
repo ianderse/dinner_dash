@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   patch 'cart/update_quantity/:id', to: 'cart#update_quantity', as: 'cart_update_quantity'
   delete 'cart/destroy'
 
+  patch 'admin/orders/remove_item/:id', to: 'admin/orders#remove_item', as: 'order_remove_item'
+
   namespace :admin do
     get '', to: 'dashboard#index'
     resources :items, except: [:index]
