@@ -6,7 +6,7 @@
       <li><%= item.title %>
       <li><%= item.description %>
         <%= form_tag(cart_update_quantity_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
-          <%= number_field_tag "quantity", session[:cart].count(item.id.to_s) %>
+          <%= number_field_tag "quantity", session[:cart].count(item.id.to_s), min: 0 %>
           <%= submit_tag "update quantity", class: "btn btn-default btn-sm", id: 'update_quantity' %>
         <% end %>
         <%= form_tag(cart_remove_item_path(item), method: :patch, remote: true, style: 'display:inline;') do %>

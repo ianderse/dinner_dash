@@ -16,6 +16,7 @@ class Ability
       can :read, Item
       can :read, Category
       can :create, User
+      can :manage, User, id: user.id
     end
   end
 

@@ -15,7 +15,7 @@ describe 'admin user', type: :feature do
 
 	it 'has a role of admin' do
 		visit '/'
-		expect(page).to have_content("Administrator")
+		expect(page).to have_content("Admin Dashboard")
 	end
 
 	it 'is redirected to an admin dashboard upon login' do
@@ -47,14 +47,15 @@ describe 'admin dashboard' do
 		end
 	end
 
-	xit 'can create item listings' do
+	it 'can create item listings' do
+		small_plates_category = create(:category, title: 'Small Plates')
 		visit '/admin'
 		click_on('Create A New Menu Item')
 		expect(page).to have_content("Create New Item")
 		fill_in 'Title', with: "Test Item"
 		fill_in 'Description', with: "Test Description"
 		fill_in 'Price', with: '19.22'
-    find('#categories_').set(true)
+    find(:css, ".category_checkbox").set(true)
 		click_on('Create Item')
 		expect(page).to have_content("Your item has been successfully added to the menu!")
 	end
@@ -85,19 +86,26 @@ describe 'admin dashboard' do
 		expect(page).to have_content("Your category has been successfully created!")
 	end
 
-	xit 'can assign items to categories' do
-		#how to check status of checkboxes?
+	it 'can assign items to categories' do
 		small_plates_category = create(:category, title: 'Small Plates')
 		create(:item, id: 1, title: 'Second Food', categories: [small_plates_category])
 		visit '/admin/items/1/edit'
-		check
+		find(:css, ".category_checkbox").set(true)
+		click_on("Save Changes")
+		visit '/admin/items/1'
+		expect(page).to have_content("Small Plates")
 	end
 
-	xit 'can remove items from categories' do
+	it 'can remove items from categories' do
 		small_plates_category = create(:category, title: 'Small Plates')
 		create(:item, id: 1, title: 'Second Food', categories: [small_plates_category])
 		visit '/admin/items/1/edit'
-		check
+		find(:css, ".category_checkbox").set(false)
+		checkbox = find(".category_checkbox")
+		expect(checkbox).to_not be_checked
+		click_on("Save Changes")
+		visit '/admin/items/1'
+		expect(page).to_not have_content("Small Plates")
 	end
 
 	it 'can retire items from being sold' do
@@ -147,12 +155,6 @@ describe 'admin dashboard' do
     expect(page).to have_content("Current List of Caussa Users")
   end
 
-	it "can modify it's own information" do
-		visit '/admin'
-		click_on 'Administrator'
-		expect(current_path).to eq edit_admin_user_path(@user)
-	end
-
 	it "can modify an existing user's role" do
 		nonadmin_user = create(:user, first_name: 'jojo', email: 'jojojo@example.com', password: 'asdf', password_confirmation: 'asdf', role:'user')
 		visit '/admin'
@@ -160,9 +162,9 @@ describe 'admin dashboard' do
 		expect(current_path).to eq admin_users_path
 		click_on('user')
 		expect(current_path).to eq edit_admin_user_path(nonadmin_user)
-		select 'admin', from: 'user_role'
+		select 'Admin', from: 'user_role'
 		click_on 'Save Changes'
-		expect(User.last.role).to eq 'admin'
+		expect(User.last.role).to eq 'Admin'
 	end
 
 describe 'admin order dashboard' do

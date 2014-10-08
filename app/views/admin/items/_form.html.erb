@@ -18,7 +18,7 @@
   <p>
     <% @categories.each do |category| %>
       <%= f.label category.title %>
-      <%= check_box_tag "categories[]", category.id, @item.categories.include?(category) ? true : false %>
+      <%= check_box_tag "categories[]", category.id, @item.categories.include?(category) ? true : false, class: "category_checkbox" %>
     <% end %>
   </p>
 
