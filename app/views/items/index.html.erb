@@ -1,12 +1,11 @@
-
 <div id = "categories">
 <ul id='category_list'>
 <h3>Categories</h3>
 <% @categories.each do |category| %>
-<li><%= link_to category.title, category, remote: true %></li>
+  <li><%= link_to category.title, category, id: category.to_s, remote: true %></li>
 <% end %>
 </ul>
 </div>
 
 
-<%= render 'layouts/display_table'  %>
+<%= render 'shared/display_table'  %>

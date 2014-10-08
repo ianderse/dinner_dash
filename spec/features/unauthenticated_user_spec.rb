@@ -65,7 +65,7 @@ describe 'unauthenticated user', type: :feature do
     fill_in 'email', with: "#{user.email}"
     fill_in 'password', with: "#{user.password}"
     click_on 'login'
-    expect(page).to have_content 'Login successful'
+    expect(page).to have_content 'Welcome knownothing!'
     expect(current_path).to eq items_path
     expect(page).to_not have_css '#email'
   end
@@ -82,14 +82,14 @@ describe 'unauthenticated user', type: :feature do
 
   it "cannot view another user's private data" do
     user = create(:user, id: 1, first_name: 'joe', email: 'abc@example.com', password: 'asdf', password_confirmation: 'asdf')
-    visit user_path(user)
+    visit edit_user_path(user)
     expect(current_path).to eq(login_path)
     expect(page).to have_content('You are not authorized to access this page')
   end
 
   it "cannot view the administrator screens or use administrator functionality" do
     visit '/admin'
-    expect(current_path).to eq(login_path)
+    expect(current_path).to eq(items_path)
     expect(page).to have_content('You are not authorized to access this page')
   end
 
@@ -162,7 +162,7 @@ describe 'unauthenticated user', type: :feature do
       fill_in 'email', with: "#{user.email}"
       fill_in 'password', with: "#{user.password}"
       click_on 'login'
-      expect(page).to have_content 'Login successful'
+      expect(page).to have_content 'Welcome knownothing!'
       expect(current_path).to eq items_path
       within('.cart-container') do
         expect(page).to have_content '1'
