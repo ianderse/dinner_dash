@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :categories
     resources :users
     resources :orders, except: [:create, :new]
+    patch '/order/status/:id/:status', to: 'orders#status', as: 'order_status'
   end
 
   resources :items, only: [:index, :show]
@@ -34,4 +35,6 @@ Rails.application.routes.draw do
 
   match '/contacts',     to: 'contacts#new',             via: 'get'
   resources "contacts", only: [:new, :create]
+
+
 end

@@ -34,4 +34,11 @@ class Admin::OrdersController < Admin::Controller
 		redirect_to admin_orders_path
 	end
 
+	def status
+		@order = Order.find(params[:id])
+		@order.status = params[:status]
+		@order.save
+		redirect_to admin_orders_path
+	end
+
 end
