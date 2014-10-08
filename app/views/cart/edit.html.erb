@@ -5,20 +5,20 @@
       <li><%= item.title %>
       <li><%= item.description %>
         <%= form_tag(cart_update_quantity_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
-          <%= number_field_tag "quantity", quantity, min: 0 %>
-          <%= submit_tag "update quantity", class: "btn btn-default btn-sm", id: 'update_quantity' %>
+          <%= number_field_tag "quantity", quantity, min: 0, class: "text-size" %>
+          <%= submit_tag "update quantity", class: "btn btn-grey3 btn-sm", id: 'update_quantity' %>
         <% end %>
         <%= form_tag(cart_remove_item_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
           <span class="glyphicon glyphicon-remove"></span>
-          <%= submit_tag 'remove item', class: "btn btn-default btn-sm", id: "remove_item" %>
+          <%= submit_tag 'remove item', class: "btn btn-grey2 btn-sm", id: "remove_item" %>
         <% end %>
     </div>
   <% end %>
 </ul>
 
-<%= link_to 'Clear My Cart', cart_destroy_path, method: :delete, class: "btn btn-default btn-sm" %>
+<%= link_to 'Clear My Cart', cart_destroy_path, method: :delete, class: "btn btn-grey4 btn-sm" %>
 <% if current_user %>
-  <%= link_to 'Checkout', new_order_path, class: "btn btn-default btn-sm" %>
+  <%= link_to 'Checkout', new_order_path, class: "btn btn-grey3 btn-sm" %>
 <% else %>
-  <%= link_to 'Login To Checkout', login_path, class: "btn btn-default btn-sm" %>
+  <%= link_to 'Login To Checkout', login_path, class: "btn btn-grey4 btn-sm" %>
 <% end %>
