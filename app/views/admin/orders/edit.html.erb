@@ -34,7 +34,10 @@
           <%= link_to "Cancel My Order", admin_order_path, method: :delete, class:"btn btn-danger" %>
         </div>
           <% if @order.status == 'ordered' %>
-            <%= link_to "Mark as Paid", edit_admin_order_path(@order), :remote => true, :status => 'paid' %>
+            <%= link_to "Mark as Paid", admin_order_status_path(@order.id, 'paid'), method: :PATCH, class:"btn btn-default" %>
+          <% end %>
+          <% if @order.status == 'paid' %>
+            <%= link_to "Mark as Completed", admin_order_status_path(@order.id, 'completed'), method: :PATCH, class:"btn btn-default" %>
           <% end %>
         </div>
     <% end %>
