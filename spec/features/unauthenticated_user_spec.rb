@@ -146,7 +146,7 @@ describe 'unauthenticated user', type: :feature do
 
     it "can clear the cart" do
       visit cart_edit_path
-      click_on 'clear my cart'
+      click_on 'Clear My Cart'
       within('.cart-container') do
         expect(page).to have_content '0'
       end
@@ -171,8 +171,7 @@ describe 'unauthenticated user', type: :feature do
 
     it 'cannot checkout' do
       visit cart_edit_path
-      click_on 'Checkout'
-      expect(current_path).to eq login_path
+      expect(page).to have_content 'Login To Checkout'
     end
   end
 end

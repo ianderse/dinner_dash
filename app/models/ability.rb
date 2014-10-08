@@ -12,11 +12,11 @@ class Ability
       can :read, Category
       can :create, Order
       can :read, Order
+      can :manage, User, id: user.id
     else
       can :read, Item
       can :read, Category
       can :create, User
-      can :manage, User, id: user.id
     end
   end
 

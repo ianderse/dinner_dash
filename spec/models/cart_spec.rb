@@ -1,5 +1,6 @@
 RSpec.describe Cart, type: :model do
   it "builds a cart from a session value of item ids" do
+    pending 'switch to tests on the new model'
     item_1 = create(:item, id: 1)
     item_2 = create(:item, id: 2)
     item_3 = create(:item, id: 3)
