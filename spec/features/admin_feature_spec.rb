@@ -183,6 +183,8 @@ describe 'admin order dashboard' do
 	end
 
 	xit 'can see the total number of orders by status' do
+		visit 'admin/orders'
+		expect(page).to have_content('Order Status')
 		# the total number of orders by status
 	end
 
@@ -192,10 +194,18 @@ describe 'admin order dashboard' do
 	end
 
 	xit 'can filter orders to display by status type' do
+		visit '/admin/orders'
+		select 'completed', from: 'order_status'
+		expect(page).to have_content('Completed Orders')
 		# filter orders to display by status type (for statuses "ordered", "paid", "cancelled", "completed")
 	end
 
 	xit 'can link to transition to a different status' do
+		visit 'admin/orders'
+		click_on('View/Edit Order')
+		expect(current_path).to eq edit_admin_order_path(@order)
+		click_on('Mark as Paid')
+		expect(page).to have_content('Paid')
 		# link to transition to a different status:
 		# link to "cancel" individual orders which are currently "ordered" or "paid"
 		# link to "mark as paid" orders which are "ordered"
@@ -209,14 +219,30 @@ describe 'admin order dashboard' do
 	end
 
 	xit 'can access order date and time' do
+		visit 'admin/orders'
+		expect(page).to have_content('Created At')
 		# Order date and time
 	end
 
 	xit 'can access purchaser full name and email address' do
 	# Purchaser full name and email address
+		visit 'admin/orders'
+		click_on('View/Edit Order')
+		expect(current_path).to eq edit_admin_order_path(@order)
+		expect(page).to have_content('Customer Name')
+		expect(page).to have_content('Customer Email Address')
 	end
 
 	xit 'can access order details for each item' do
+		visit 'admin/orders'
+		click_on('View/Edit Order')
+		expect(current_path).to eq edit_admin_order_path(@order)
+		expect(page).to have_content('Quantity')
+		expect(page).to have_content('Price')
+		expect(page).to have_content('Total Price')
+		click_on("#{order.item_title}")
+		expect(current_path).to eq item_path(@item)
+
 		# For each item on the order:
 		# Name linked to the item page
 		# Quantity
@@ -225,10 +251,18 @@ describe 'admin order dashboard' do
 	end
 
 	xit 'can access total for order' do
+		visit 'admin/orders'
+		click_on('View/Edit Order')
+		expect(current_path).to eq edit_admin_order_path(@order)
+		expect(page).to have_content('Total Price')
 	# Total for the order
 	end
 
 	xit 'can access status of order' do
+		visit 'admin/orders'
+		click_on('View/Edit Order')
+		expect(current_path).to eq edit_admin_order_path(@order)
+		expect(page).to have_content('Order Status')
 	# Status of the order
 	end
 
@@ -236,6 +270,11 @@ describe 'admin order dashboard' do
 	end
 
 	xit 'can view and edit orders' do
+		visit 'admin/orders'
+		click_on('View/Edit Order')
+		expect(current_path).to eq edit_admin_order_path(@order)
+		click_on('Remove')
+		expect(page).to have_content('Your Item has been removed')
 	# View and edit orders; may change quantity or remove items from orders with the status of pending or paid
 	end
 

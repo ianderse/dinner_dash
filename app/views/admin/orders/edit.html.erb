@@ -1,7 +1,6 @@
-<h1>Order <%= "#{@order.id}" %></h1>
 <div class="row">
   <div class="col-md-12 col-md-offset-1">
-
+    <h1>Order <%= "#{@order.id}" %></h1>
     <form role="form">
       <%= form_for @order do |f| %>
       <div class="form-group">
@@ -27,17 +26,19 @@
           <% end %>
           <%= form_tag(cart_remove_item_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
             <span class="glyphicon glyphicon-remove"></span>
-            <%= submit_tag 'remove item', class: "btn btn-default btn-sm", id: "remove_item" %>
+            <%= submit_tag 'remove item', class: "btn btn-default", id: "remove_item" %>
           <% end %>
         <% end %>
         <div class="form-group">
-          <%= link_to "Cancel My Order", admin_order_path, method: :delete, class:"btn btn-danger btn-sm" %>
+          <%= link_to "Cancel My Order", admin_order_path, method: :delete, class:"btn btn-danger" %>
         </div>
-        <div class="form-group">
           <% if @order.status == 'ordered' %>
-            <%= link_to "Mark as Paid", admin_order_path, remote: true, :status => 'paid', class: "btn btn-success btn-sm" %>
+            <%= link_to "Mark as Paid", edit_admin_order_path(@order), :remote => true, :status => 'paid' %>
           <% end %>
         </div>
     <% end %>
+  </div>
+  <div class="form-group">
+    <%= link_to "<< Return to Current Order Dashboard", admin_orders_path, class: "btn btn-info"%>
   </div>
 </div>

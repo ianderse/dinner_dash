@@ -7,11 +7,18 @@ class Admin::OrdersController < Admin::Controller
 
 	def edit
 		@order = Order.find(params[:id])
-		
 	end
 
 	def update
-
+		# @order = Order.find(params[:id])
+    # respond_to do |format|
+    #     if @order.toggle!(:paid)
+    #         format.html { redirect_to root_url }
+    #         format.js
+    #     else
+    #         format.html { render :index }
+    #     end
+    # end
 	end
 
 	def destroy

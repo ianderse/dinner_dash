@@ -25,4 +25,34 @@ class Order < ActiveRecord::Base
   def exchanges
     ['pickup', 'delivery']
   end
+
+  status_change :create_scopes => false do
+    status :ordered, :initial => true
+    status :completed
+    status :cancelled
+    status :paid
+  end
+
+  status_change do
+    status :ordered, :initial => true
+    status :completed
+    status :cancelled
+    status :paid
+
+  event :pay do
+    transitions :from => :ordered, :to => :paid
+  end
+
+  event :complete do
+    transitions :from => :paid, :to => :completed
+  end
+
+  event :cancel do
+    transitions :from => [:ordered, :paid], :to => :cancelled
+  end
 end
+
+#helpers for events
+#Controller (public send) with filter into order
+#Model for events
+#In view, create event
