@@ -7,7 +7,7 @@ class Ability
 
     if user.is? :admin
       can :manage, :all
-    elsif user.is? :default
+    elsif user.is? :user
       can :read, Item
       can :read, Category
       can :create, Order
