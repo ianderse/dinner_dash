@@ -7,6 +7,7 @@ class Admin::OrdersController < Admin::Controller
 
 	def edit
 		@order = Order.find(params[:id])
+		
 	end
 
 	def update

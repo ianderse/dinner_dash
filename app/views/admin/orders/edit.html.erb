@@ -1,26 +1,43 @@
 <h1>Order <%= "#{@order.id}" %></h1>
-<%= form_for @order do |f| %>
-<%= f.label :first_name %>
-<%= @order.user.first_name %>
-<%= f.label :status %>
-<%= @order.status %>
-<%= f.label :total_price %>
-<%= print_price(order_price(@order.items)) %>
-<% @order.items.each do |item| %>
-  <div id='<%= "item_#{item.id}" %>'>
-    <li><%= item.title %>
-    <li><%= item.description %>
-      <%= form_tag(cart_update_quantity_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
-        <%= number_field_tag "quantity", session[:cart].count(item.id.to_s) %>
-        <%= submit_tag "update quantity", class: "btn btn-default btn-sm", id: 'update_quantity' %>
-      <% end %>
-      <%= form_tag(cart_remove_item_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
-        <span class="glyphicon glyphicon-remove"></span>
-        <%= submit_tag 'remove item', class: "btn btn-default btn-sm", id: "remove_item" %>
-      <% end %>
-    <% end %>
-<%= link_to "Cancel My Order", admin_order_path, method: :delete %>
-<% if @order.status == 'ordered' %>
+<div class="row">
+  <div class="col-md-12 col-md-offset-1">
 
- <%end%>
-<% end %>
+    <form role="form">
+      <%= form_for @order do |f| %>
+      <div class="form-group">
+        <%= f.label :first_name %>
+        <%= @order.user.first_name %>
+      </div>
+      <div class="form-group">
+        <%= f.label :status %>
+        <%= @order.status %>
+      </div>
+      <div class="form-group">
+        <%= f.label :total_price %>
+        <%= print_price(order_price(@order.items)) %>
+      </div>
+      <h3>Order Items</h3>
+    <% @order.items.each do |item| %>
+      <div id='<%= "item_#{item.id}" %>'>
+        <li><%= item.title %>
+        <li><%= item.description %>
+          <%= form_tag(cart_update_quantity_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
+            <%= number_field_tag "quantity", session[:cart].count(item.id.to_s), class:"text-size" %>
+            <%= submit_tag "update quantity", class: "btn btn-default btn-sm", id: 'update_quantity' %>
+          <% end %>
+          <%= form_tag(cart_remove_item_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
+            <span class="glyphicon glyphicon-remove"></span>
+            <%= submit_tag 'remove item', class: "btn btn-default btn-sm", id: "remove_item" %>
+          <% end %>
+        <% end %>
+        <div class="form-group">
+          <%= link_to "Cancel My Order", admin_order_path, method: :delete, class:"btn btn-danger btn-sm" %>
+        </div>
+        <div class="form-group">
+          <% if @order.status == 'ordered' %>
+            <%= link_to "Mark as Paid", admin_order_path, remote: true, :status => 'paid', class: "btn btn-success btn-sm" %>
+          <% end %>
+        </div>
+    <% end %>
+  </div>
+</div>
