@@ -1,12 +1,11 @@
 <h1>Your Cart</h1>
 <ul>
-  <% @cart.each do |items| %>
-    <% item = items.first %>
+  <% cart.items_to_quantities.each do |item, quantity| %>
     <div id='<%= "item_#{item.id}" %>'>
       <li><%= item.title %>
       <li><%= item.description %>
         <%= form_tag(cart_update_quantity_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
-          <%= number_field_tag "quantity", session[:cart].count(item.id.to_s), min: 0 %>
+          <%= number_field_tag "quantity", quantity, min: 0 %>
           <%= submit_tag "update quantity", class: "btn btn-default btn-sm", id: 'update_quantity' %>
         <% end %>
         <%= form_tag(cart_remove_item_path(item), method: :patch, remote: true, style: 'display:inline;') do %>

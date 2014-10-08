@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
     redirect_to login_url, alert: exception.message
   end
 
+  after_filter :save_cart_in_session
+
   private
 
     def current_user
@@ -16,6 +18,15 @@ class ApplicationController < ActionController::Base
 
     def set_time_zone
       Time.zone = current_user.time_zone
+    end
+
+    def cart
+      @cart ||= Cart.new(session[:cart])
+    end
+    helper_method :cart
+
+    def save_cart_in_session
+      session[:cart] = cart.to_a
     end
 
 end

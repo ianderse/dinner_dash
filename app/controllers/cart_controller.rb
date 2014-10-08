@@ -1,12 +1,10 @@
 class CartController < ApplicationController
   def edit
-    @cart = Cart.build(session[:cart])
   end
 
   def add_item
     @item_id = params[:id]
-    session[:cart] ||= []
-    params[:quantity].to_i.times { session[:cart] << @item_id }
+    cart.add_item @item_id, quantity: params[:quantity]
 
     respond_to do |format|
       format.js { @item_id }
@@ -15,8 +13,7 @@ class CartController < ApplicationController
 
   def update_quantity
     item_id = params[:id]
-    session[:cart].delete(item_id)
-    params[:quantity].to_i.times { session[:cart] << item_id }
+    cart.update_quantity item_id, quantity: params[:quantity]
 
     respond_to do |format|
       format.js {}
@@ -25,7 +22,7 @@ class CartController < ApplicationController
 
   def remove_item
     @item_id = params[:id]
-    session[:cart].delete(@item_id)
+    cart.delete(@item_id)
 
     respond_to do |format|
       format.js { @item_id }
