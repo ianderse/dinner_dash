@@ -13,10 +13,12 @@ class OrdersController < ApplicationController
 	def create
 		order = Order.new(order_params)
 
-		cart = Cart.build(session[:cart])
-
-		cart.flatten.each do |item|
-			order.items << item
+		cart = Cart.new(session[:cart])
+		cart = cart.items_to_quantities
+		cart.each do |item|
+			item[1].times do
+				order.items << item[0]
+			end
 		end
 
 		order.user = current_user

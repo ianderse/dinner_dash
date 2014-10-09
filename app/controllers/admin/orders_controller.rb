@@ -38,7 +38,9 @@ class Admin::OrdersController < Admin::Controller
 		@order = Order.find(params[:id])
 		@order.status = params[:status]
 		@order.save
-		redirect_to admin_orders_path
+		respond_to do |format|
+			format.js { @order }
+		end
 	end
 
 end
