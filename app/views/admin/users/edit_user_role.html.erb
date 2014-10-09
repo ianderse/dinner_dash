@@ -1,10 +1,10 @@
 <div class="admin-user">
   <div class="container">
     <%= form_for @user, :url => admin_user_path(@user), method: "patch" do |f| %>
-        <%= f.label :first_name %><br><%= f.text_field :first_name, class: "col-md-12"%><br/><br/>
-        <%= f.label :last_name %><br><%= f.text_field :last_name, class: "col-md-12" %><br/><br/>
-        <%= f.label :nickname %><%= f.text_field :nickname, class: "col-md-12" %><br/><br/>
-        <%= f.label :email %><%= f.text_field :email, class: "col-md-12" %><br/><br/>
+        First Name: <%= @user.first_name %><br/><br/>
+        Last Name: <%= @user.last_name %><br/><br/>
+        Nick Name: <%= @user.nickname %><br/><br/>
+        Email: <%= @user.email %><br/><br/>
         <%= f.label :user_or_admin, "User or Admin?" %> <%= f.select :role, ['User', 'Admin'], :selected => f.object.role %>
         <br>
         <%= f.submit "Save Changes", class: "btn btn-primary btn-lg" %>
