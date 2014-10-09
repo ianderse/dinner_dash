@@ -26,8 +26,17 @@ class Order < ActiveRecord::Base
     ['pickup', 'delivery']
   end
 
-  def group_items
+  def items_to_quantities
     items.group_by { |id| id }
          .map { |id, ids| [Item.find(id), ids.size] }
+  end
+
+  def add_item(item_id)
+    self.items << Item.find(item_id)
+  end
+
+  def update_quantity(item_id, quantity)
+    self.items.delete(item_id)
+    quantity.to_i.times { add_item(item_id) }
   end
 end

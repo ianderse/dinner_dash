@@ -13,7 +13,7 @@ class CartController < ApplicationController
 
   def update_quantity
     item_id = params[:id]
-    cart.update_quantity item_id, quantity: params[:quantity]
+    cart.update_quantity(item_id, quantity: params[:quantity])
 
     respond_to do |format|
       format.js {}

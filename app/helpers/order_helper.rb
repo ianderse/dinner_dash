@@ -3,7 +3,7 @@ module OrderHelper
   def order_price(items)
     total = 0
     items.each do |item|
-      total += (item.price * items.size)
+      total += item.price
     end
     total
   end

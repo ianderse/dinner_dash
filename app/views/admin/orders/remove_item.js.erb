@@ -1,0 +1,2 @@
+$('#item_<%= @item_id %>').remove();
+$('.price').text("<%= print_price(order_price(@order.items)) %>")

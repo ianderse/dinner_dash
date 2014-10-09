@@ -7,24 +7,27 @@ class Admin::OrdersController < Admin::Controller
 
 	def edit
 		@order = Order.find(params[:id])
-		@items = @order.items
+    @order_items = @order.items_to_quantities
 	end
 
-	def update
-		@order = params[:id]
-    @order.items.delete(item_id)
-    params[:quantity].to_i.times { @order.items << item_id }
+	def update_quantity
+		@order = Order.find(params[:order_id])
+    item_id = params[:item_id]
+    @order.update_quantity(item_id, params[:quantity])
 
     respond_to do |format|
-      format.js {}
+      format.js { @order }
     end
 	end
 
 	def remove_item
-    @order = params[:id]
-    @order.items.delete(@item_id)
+    @item_id = params[:item_id]
+    @order = Order.find(params[:order_id])
+    @order.items.destroy(@item_id)
 
-    redirect_to admin_orders_path(@order)
+    respond_to do |format|
+      format.js { @item_id; @order }
+    end
   end
 
 	def destroy

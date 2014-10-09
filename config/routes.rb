@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :events
-
   root 'welcome#index'
 
   get 'cart/edit'
@@ -9,17 +7,18 @@ Rails.application.routes.draw do
   patch 'cart/update_quantity/:id', to: 'cart#update_quantity', as: 'cart_update_quantity'
   delete 'cart/destroy'
 
-  patch 'admin/orders/remove_item/:id', to: 'admin/orders#remove_item', as: 'admin_order_remove_item'
-
   namespace :admin do
     get '', to: 'dashboard#index'
     resources :items, except: [:index]
     resources :categories
     resources :users
-    resources :orders, except: [:create, :new]
+    resources :orders, only: [:index, :edit, :destroy]
     patch '/order/status/:id/:status', to: 'orders#status', as: 'order_status'
+    patch '/orders/remove_item/:order_id/:item_id', to: 'orders#remove_item', as: 'order_remove_item'
+    patch '/orders/update_quantity/:order_id/:item_id', to: 'orders#update_quantity', as: 'order_update_quantity'
   end
 
+  resources :events
   resources :items, only: [:index, :show]
   resources :users, except: [:index, :show]
   resources :categories, only: [:show]
@@ -35,6 +34,4 @@ Rails.application.routes.draw do
 
   match '/contacts',     to: 'contacts#new',             via: 'get'
   resources "contacts", only: [:new, :create]
-
-
 end
