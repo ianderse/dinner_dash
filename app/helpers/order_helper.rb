@@ -8,20 +8,8 @@ module OrderHelper
     total
   end
 
-  def pay(order)
-    !@order.status == 'paid'
+  def custom_format(time)
+    to_datetime(time)
   end
-
-  def cancel(order)
-    !@order.status == 'cancelled'
-  end
-
-  def complete(order)
-    !@order.status == 'completed'
-  end
-
-  # def mark_paid(items)
-  #   items.paid? ? 'ordered' : 'paid'
-  # end
 
 end
