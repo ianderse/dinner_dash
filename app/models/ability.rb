@@ -3,7 +3,7 @@ class Ability
   include CanCan::Ability
 
   def initialize( user )
-    user ||= User.new
+    user ||= User.new(role: nil)
 
     if user.is? :admin
       can :manage, :all
