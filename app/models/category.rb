@@ -4,6 +4,6 @@ class Category < ActiveRecord::Base
   has_many :items, through: :item_categories
 
   def to_s
-    title.tr(' ', '_')
+    title.tr('& ', 'n_')
   end
 end

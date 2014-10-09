@@ -26,4 +26,8 @@ class Order < ActiveRecord::Base
     ['pickup', 'delivery']
   end
 
+  def group_items
+    items.group_by { |id| id }
+         .map { |id, ids| [Item.find(id), ids.size] }
+  end
 end

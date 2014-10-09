@@ -4,10 +4,9 @@
     <%= @item.title %><br/>
     <%= @item.description %><br/>
     <%= print_price(@item.price) %><br/>
-    <%= pluralize(@categories.size, 'Category') %>:
-    <% @categories.each do |category| %>
-      <%= category.title %>
-    <% end %><br/>
+    <%= 'Category'.pluralize(@categories.size) %>:
+    <%= @categories.map { |category| category.title }.join(', ') %>
+    <br/>
     <%if current_user.nil?  %>
       <%= link_to "<< Return to All Menu Items", items_path %>
     <% elsif current_user.is?('admin') %>
