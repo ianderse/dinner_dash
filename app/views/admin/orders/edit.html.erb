@@ -5,22 +5,22 @@
       <div class="status">
         <%= @order.status %>
       </div>
+      <div class="price">
         <%= print_price(order_price(@order.items)) %>
+      </div>
       <h3>Order Items</h3>
-    <% @order.items.each do |item| %>
-      <div id='<%= "item_#{item.id}" %>'>
-        <li><%= item.title %>
-        <li><%= item.description %>
-          <%= form_tag(admin_order_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
-          <!-- This is the wrong thing to run count on, was originally session[:cart] changed to @items.count so that it at least runs, we need to redo this form -->
-            <%= number_field_tag "quantity", @items.count(item.id.to_s), class:"text-size" %>
-            <%= submit_tag "update quantity", class: "btn btn-default btn-sm", id: 'update_quantity' %>
+      <% @order_items.each do |item, quantity| %>
+        <div id='<%= "item_#{item.id}" %>'>
+          <li><%= item.title %>
+            <%= form_tag(admin_order_update_quantity_path(@order, item), method: :patch, remote: true, style: 'display:inline;') do %>
+              <%= number_field_tag "quantity", quantity, min: 0, class: "text-size" %>
+            <%= submit_tag "update quantity", class: "btn btn-grey3 btn-sm", id: 'update_quantity' %>
           <% end %>
-          <%= form_tag(admin_order_remove_item_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
-            <span class="glyphicon glyphicon-remove"></span>
-            <%= submit_tag 'remove item', class: "btn btn-default", id: "remove_item" %>
-          <% end %>
-        <% end %>
+          </li>
+          <span class="glyphicon glyphicon-remove"></span>
+          <%= link_to 'remove item', admin_order_remove_item_path(@order, item), class: "btn btn-default", id: "remove_item", remote: true, method: :PATCH %>
+        </div>
+      <% end %>
         <div class="form-group">
           <%= link_to "Cancel My Order", admin_order_status_path(@order.id, 'cancelled'), method: :PATCH, remote: true, class:"btn btn-grey1" %>
         </div>
