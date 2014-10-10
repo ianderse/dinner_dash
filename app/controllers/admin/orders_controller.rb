@@ -2,7 +2,11 @@ class Admin::OrdersController < Admin::Controller
 	load_and_authorize_resource
 
 	def index
-		@orders = Order.all
+		@orders       = Order.all
+		@ordered      = Order.where(:status => 'ordered')
+		@paid         = Order.where(:status => 'paid')
+		@completed    = Order.where(:status => 'completed')
+		@cancelled    = Order.where(:status => 'cancelled')
 	end
 
 	def edit
@@ -56,6 +60,10 @@ class Admin::OrdersController < Admin::Controller
 		respond_to do |format|
 			format.js { @order }
 		end
+	end
+
+	def custom_show
+		@orders = Order.where(:status => params[:status])
 	end
 
 end
