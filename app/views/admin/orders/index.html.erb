@@ -21,7 +21,13 @@
     <tr>
       <td><%= link_to order.id, edit_admin_order_path(order) %></td>
       <td><%= (order.created_at).to_formatted_s(:long) %></td>
-      <td><%= (order.updated_at).to_formatted_s(:long) %></td>
+
+      <% if order.status == 'paid' || order.status == 'completed' %>
+        <td><%= (order.updated_at).to_formatted_s(:long) %></td>
+        <% else %>
+        <td></td>
+      <% end %>
+
       <td><%= order.user.first_name %> </td>
       <td><%= print_price(order_price(order.items)) %> </td>
       <td><%= order.status %> </td>

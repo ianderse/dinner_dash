@@ -229,8 +229,8 @@ describe 'admin order dashboard' do
 		visit '/admin/orders'
 		click_on('View/Edit Order')
 		expect(current_path).to eq edit_admin_order_path(@order)
-		expect(page).to have_content('Customer Name')
-		expect(page).to have_content('Customer Email Address')
+		expect(page).to have_content('Customer Name:')
+		expect(page).to have_content('Customer Email Address:')
 	end
 
 	xit 'can access order details for each item' do
@@ -269,7 +269,7 @@ describe 'admin order dashboard' do
 		click_on('View/Edit Order')
 		expect(page).to have_selector("#quantity[value='1']")
 		fill_in 'quantity', with: '2'
-		click_on 'update quantity'
+		click_on 'Update Quantity'
 		expect(page).to have_content("Total Price: $2.00")
 	end
 
@@ -277,7 +277,7 @@ describe 'admin order dashboard' do
 		visit '/admin/orders'
 		click_on('View/Edit Order')
 		expect(current_path).to eq edit_admin_order_path(@order)
-		click_on('remove item')
+		click_on('Remove Item')
 		expect(page).to have_content("Total Price: $0.00")
 	end
 
