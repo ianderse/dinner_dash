@@ -27,6 +27,7 @@ class Admin::OrdersController < Admin::Controller
     if @order.items.empty?
     	@order.status = "cancelled"
     end
+    @order.save
     respond_to do |format|
       format.js { @item_id; @order }
     end
