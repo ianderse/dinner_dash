@@ -10,8 +10,9 @@
       <div class="price" style="display:inline">
         <%= print_price(order_price(@order.items)) %>
       </div>
-      <div class="updated">
-        Last Updated: <%= (@order.updated_at).to_formatted_s(:long) %>
+      Last Updated:
+      <div class="updated" style="display:inline">
+        <%= (@order.updated_at).to_formatted_s(:long) %>
       </div>
       <h3>Order Items</h3>
       <% @order_items.each do |item, quantity| %>

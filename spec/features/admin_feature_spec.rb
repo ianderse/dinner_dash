@@ -221,7 +221,6 @@ describe 'admin order dashboard' do
 	it 'can access order date and time' do
 		visit '/admin/orders'
 		expect(page).to have_content('Creation Date')
-		# Order date and time
 	end
 
 	it 'can access purchaser full name and email address' do
@@ -249,20 +248,18 @@ describe 'admin order dashboard' do
 		# Line item subtotal
 	end
 
-	xit 'can access total for order' do
+	it 'can access total for order' do
 		visit '/admin/orders'
 		click_on('View/Edit Order')
 		expect(current_path).to eq edit_admin_order_path(@order)
 		expect(page).to have_content('Total Price')
-	# Total for the order
 	end
 
-	xit 'can access status of order' do
+	it 'can access status of order' do
 		visit '/admin/orders'
 		click_on('View/Edit Order')
 		expect(current_path).to eq edit_admin_order_path(@order)
 		expect(page).to have_content('Order Status')
-	# Status of the order
 	end
 
 	it 'update an individual order', js: true do
@@ -274,13 +271,12 @@ describe 'admin order dashboard' do
 		expect(page).to have_content("Total Price: $2.00")
 	end
 
-	xit 'can view and edit orders' do
+	it 'can view and edit orders', js: true do
 		visit '/admin/orders'
 		click_on('View/Edit Order')
 		expect(current_path).to eq edit_admin_order_path(@order)
-		click_on('Remove')
-		expect(page).to have_content('Your Item has been removed')
-	# View and edit orders; may change quantity or remove items from orders with the status of pending or paid
+		click_on('remove item')
+		expect(page).to have_content("Total Price: $0.00")
 	end
 
 	xit 'change the status of an order to specs' do
