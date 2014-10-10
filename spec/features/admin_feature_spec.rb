@@ -12,7 +12,6 @@ describe 'admin user', type: :feature do
     click_on 'login'
 	end
 
-
 	it 'has a role of admin' do
 		visit '/'
 		expect(page).to have_content("Admin Dashboard")
@@ -34,6 +33,7 @@ describe 'admin dashboard' do
 		it 'has link to create new items' do
 		  visit admin_path
 			expect(page).to have_content('Site Administrator Dashboard')
+			expect(page).to have_content('Create A New Menu Item')
 		end
 
 		it 'has link to manage users' do
@@ -41,9 +41,9 @@ describe 'admin dashboard' do
 			expect(page).to have_content('View Current Users')
 		end
 
-		xit 'has link to manage orders' do
+		it 'has link to manage orders' do
 			visit admin_path
-			expect(page).to have_content('View Orders')
+			expect(page).to have_content('View Current Orders')
 		end
 	end
 
@@ -117,7 +117,6 @@ describe 'admin dashboard' do
 		expect(page).to have_content("Your item has been successfully updated!")
 	end
 
-	##Would like to add onto this; can we specify a specific text for the item id?
 	it 'can see retired items only as an admin' do
 		small_plates_category = create(:category, title: 'Small Plates')
 		item = create(:item, id: 1, title: 'Second Food', categories: [small_plates_category], active: 'false')
@@ -176,7 +175,6 @@ describe 'admin order dashboard' do
 		@order = create(:order)
 	end
 
-
 	it 'can see listings of all orders' do
 		visit '/admin'
 		click_on 'View Current Orders'
@@ -184,8 +182,8 @@ describe 'admin order dashboard' do
 		expect(page).to have_content("Current Orders in System")
 	end
 
-	it 'can see the total number of orders by status' do
-		visit 'admin/orders'
+	xit 'can see the total number of orders by status' do
+		visit '/admin/orders'
 		expect(page).to have_content('Order Status')
 		# the total number of orders by status
 	end
@@ -197,21 +195,21 @@ describe 'admin order dashboard' do
 
 	xit 'can filter orders to display by status type' do
 		visit '/admin/orders'
-		select 'completed', from: 'order_status'
+		click_on "Completed"
 		expect(page).to have_content('Completed Orders')
 		# filter orders to display by status type (for statuses "ordered", "paid", "cancelled", "completed")
 	end
 
-	xit 'can link to transition to a different status' do
-		visit 'admin/orders'
+	it 'can link to transition to a different status', js: true do
+		visit '/admin/orders'
 		click_on('View/Edit Order')
 		expect(current_path).to eq edit_admin_order_path(@order)
 		click_on('Mark as Paid')
 		expect(page).to have_content('paid')
-		# link to transition to a different status:
-		# link to "cancel" individual orders which are currently "ordered" or "paid"
-		# link to "mark as paid" orders which are "ordered"
-		# link to "mark as completed" individual orders which are currently "paid"
+		click_on('Mark as Completed')
+		expect(page).to have_content('completed')
+		click_on('Cancel My Order')
+		expect(page).to have_content('cancelled')
 	end
 
 	it 'can access details of an individual order' do
@@ -221,22 +219,20 @@ describe 'admin order dashboard' do
 	end
 
 	it 'can access order date and time' do
-		visit 'admin/orders'
+		visit '/admin/orders'
 		expect(page).to have_content('Creation Date')
-		# Order date and time
 	end
 
-	xit 'can access purchaser full name and email address' do
-	# Purchaser full name and email address
-		visit 'admin/orders'
+	it 'can access purchaser full name and email address' do
+		visit '/admin/orders'
 		click_on('View/Edit Order')
 		expect(current_path).to eq edit_admin_order_path(@order)
-		expect(page).to have_content('Customer Name')
-		expect(page).to have_content('Customer Email Address')
+		expect(page).to have_content('Customer Name:')
+		expect(page).to have_content('Customer Email Address:')
 	end
 
 	xit 'can access order details for each item' do
-		visit 'admin/orders'
+		visit '/admin/orders'
 		click_on('View/Edit Order')
 		expect(current_path).to eq edit_admin_order_path(@order)
 		expect(page).to have_content('Quantity')
@@ -252,32 +248,35 @@ describe 'admin order dashboard' do
 		# Line item subtotal
 	end
 
-	xit 'can access total for order' do
-		visit 'admin/orders'
+	it 'can access total for order' do
+		visit '/admin/orders'
 		click_on('View/Edit Order')
 		expect(current_path).to eq edit_admin_order_path(@order)
 		expect(page).to have_content('Total Price')
-	# Total for the order
 	end
 
-	xit 'can access status of order' do
-		visit 'admin/orders'
+	it 'can access status of order' do
+		visit '/admin/orders'
 		click_on('View/Edit Order')
 		expect(current_path).to eq edit_admin_order_path(@order)
 		expect(page).to have_content('Order Status')
-	# Status of the order
 	end
 
-	xit 'update an individual order' do
+	it 'update an individual order', js: true do
+		visit '/admin/orders'
+		click_on('View/Edit Order')
+		expect(page).to have_selector("#quantity[value='1']")
+		fill_in 'quantity', with: '2'
+		click_on 'Update Quantity'
+		expect(page).to have_content("Total Price: $2.00")
 	end
 
-	xit 'can view and edit orders' do
-		visit 'admin/orders'
+	it 'can view and edit orders', js: true do
+		visit '/admin/orders'
 		click_on('View/Edit Order')
 		expect(current_path).to eq edit_admin_order_path(@order)
-		click_on('Remove')
-		expect(page).to have_content('Your Item has been removed')
-	# View and edit orders; may change quantity or remove items from orders with the status of pending or paid
+		click_on('Remove Item')
+		expect(page).to have_content("Total Price: $0.00")
 	end
 
 	xit 'change the status of an order to specs' do

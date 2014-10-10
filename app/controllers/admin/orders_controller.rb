@@ -24,7 +24,10 @@ class Admin::OrdersController < Admin::Controller
     @item_id = params[:item_id]
     @order = Order.find(params[:order_id])
     @order.items.destroy(@item_id)
-
+    if @order.items.empty?
+    	@order.status = "cancelled"
+    end
+    @order.save
     respond_to do |format|
       format.js { @item_id; @order }
     end

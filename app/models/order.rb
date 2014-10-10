@@ -3,7 +3,7 @@ class Order < ActiveRecord::Base
   has_many :line_items
   has_many :items, through: :line_items
 
-  validates :items, presence: true
+  validates :items, presence: true, on: :create
   validates :user, presence: true
   validates :status, inclusion: { in: :statuses }
   validates :exchange, inclusion: { in: :exchanges }

@@ -3,11 +3,9 @@ class OrdersController < ApplicationController
 
 	def new
 		@order = Order.new
-		@order.status = "ordered"
 	end
 
 	def index
-
 	end
 
 	def create
@@ -22,6 +20,8 @@ class OrdersController < ApplicationController
 		end
 
 		order.user = current_user
+
+    session[:cart].clear
 
 		if order.save
 			flash[:notice] = "Your order has been successfully created!"

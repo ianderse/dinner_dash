@@ -22,9 +22,25 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = current_user
+
+    @user.update_attributes(user_params)
+
+    if @user.save
+      flash[:notice] = "Your profile has been updated."
+      session[:user_id] = @user.id
+      redirect_to edit_user_path(@user)
+    else
+      flash[:error] = @user.errors.full_messages.join(', ')
+      render :edit
+    end
   end
 
   def destroy
+  end
+
+  def show_orders
+    @orders = Order.where(user_id: current_user.id)
   end
 
   private

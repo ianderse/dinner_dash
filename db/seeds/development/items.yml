@@ -34,6 +34,7 @@ records:
     price: 15.01
     category_ids:
       - '<%= sprig_record(Category, 1).id %>'
+      - '<%= sprig_record(Category, 5).id %>'
     image_file_name: "okra.jpg"
   - sprig_id: 6
     title: "duck liver sausage"
@@ -48,7 +49,6 @@ records:
     price: 5.01
     category_ids:
       - '<%= sprig_record(Category, 1).id %>'
-      - '<%= sprig_record(Category, 5).id %>'
     image_file_name: "gross.JPG"
   - sprig_id: 8
     title: "margherita"
@@ -118,7 +118,6 @@ records:
     price: 25.01
     category_ids:
       - '<%= sprig_record(Category, 4).id %>'
-      - '<%= sprig_record(Category, 5).id %>'
     image_file_name: "lamb.jpg"
   - sprig_id: 17
     title: "kale + roasted garlic bucatini"

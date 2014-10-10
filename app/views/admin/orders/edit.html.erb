@@ -2,12 +2,11 @@
   <div class="panel panel-default">
     <div class="panel-heading"><h3>Order <%= "#{@order.id}" %></h3></div>
       <div class="panel-body">
-        <b>First Name:</b>
+        <b>Customer Name:</b>
         <div class="user-name">
-          <%= @order.user.first_name %>
+          <%= @order.user.full_name %>
         </div>
-
-        <b>Email Address:</b>
+        <b>Customer Email Address:</b>
         <div class="user-email">
            <%= @order.user.email %>
         </div>

@@ -87,8 +87,17 @@ describe 'authenticated user', type: :feature do
     expect(page).to have_css '#password'
   end
 
-  it 'can view past orders with links to display each order'
-	it 'cannot view another users order'
+  it 'can view past orders with links to display each order' do
+    visit '/'
+    click_on 'My Profile'
+    click_on 'Your Orders'
+    expect(page).to have_content 'Order Status'
+  end
+
+	xit 'cannot view another users order' do
+    #this should work? Any other way to expect a routing error?
+    expect(visit '/users/3/orders').to raise_error( ActionController::RoutingError)
+  end
 
 	it 'cannot access admin item pages' do
 		small_plates_category = create(:category, title: 'Small Plates')
@@ -129,15 +138,50 @@ describe 'authenticated user', type: :feature do
       expect(page).to have_content "Second Food"
   end
 
-	describe 'order display page' do
-		it 'displays item with quantity ordered'
-		it 'shows line-item subtotals'
-		it 'links to each item description'
-		it 'shows current status of a pending order'
-		it 'shows current status of a completed order'
-		it 'shows total order price'
-		it 'shows date and time order was submitted'
-		it 'shows timestamp when order was completed'
-		it 'shows timestamp when order was cancelled'
-	end
+end
+
+describe 'authenticated user order display page' do
+    before do
+      user = create(:user, id: 1, first_name: 'joe', email: 'abc@example.com', password: 'asdf', password_confirmation: 'asdf')
+      small_plates_category = create(:category, title: 'Small Plates')
+      item = create(:item, id: 1, title: 'Second Food', categories: [small_plates_category], active: true)
+      @order = create(:order, user_id: 1, items: [item] )
+      visit '/'
+      fill_in 'email', with: "#{user.email}"
+      fill_in 'password', with: "#{user.password}"
+      click_on 'login'
+      click_on 'My Profile'
+      click_on 'Your Orders'
+    end
+
+    it 'displays item with quantity ordered' do
+      click_on '1'
+      expect(page).to have_content "Second Food"
+      expect(page).to have_content "1"
+    end
+
+    it 'shows line-item subtotals' do
+      click_on '2'
+      expect(page).to have_content 'Second Food 1 $1.00'
+    end
+
+    it 'links to each item description' do
+      click_on '3'
+      click_on 'Second Food'
+      expect(page).to have_content "Second Food"
+    end
+    it 'shows current status of an order' do
+      @order.status = 'pending'
+      click_on '4'
+      expect(page).to have_content "Order Status"
+    end
+
+    it 'shows total order price' do
+      click_on '5'
+      expect(page).to have_content "Total: $1.00"
+    end
+
+    it 'shows date and time order was submitted'
+    it 'shows timestamp when order was completed'
+    it 'shows timestamp when order was cancelled'
 end
