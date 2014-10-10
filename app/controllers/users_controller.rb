@@ -27,6 +27,10 @@ class UsersController < ApplicationController
   def destroy
   end
 
+  def show_orders
+    @orders = Order.where(user_id: current_user.id)
+  end
+
   private
 
     def user_params

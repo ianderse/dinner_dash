@@ -3,7 +3,6 @@ class OrdersController < ApplicationController
 
 	def new
 		@order = Order.new
-		@order.status = "ordered"
 	end
 
 	def index

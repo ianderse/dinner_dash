@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 20141005040201) do
 
   create_table "orders", force: true do |t|
     t.integer  "user_id"
-    t.string   "status"
+    t.string   "status",        default: "ordered"
     t.string   "exchange"
     t.string   "street_number"
     t.string   "street"
