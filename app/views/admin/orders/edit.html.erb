@@ -1,12 +1,14 @@
 <div class="row">
   <div class="col-md-12 col-md-offset-2">
     <h1>Order <%= "#{@order.id}" %></h1>
-        Customer Name: <%= @order.user.full_name %>
+        Customer Name: <%= @order.user.full_name %><br/>
+        Customer Email Address: <%= @order.user.email %><br/>
       <div class="status">
         Order Status: <%= @order.status %>
       </div>
-      <div class="price">
-        Total Price: <%= print_price(order_price(@order.items)) %>
+      Total Price:
+      <div class="price" style="display:inline">
+        <%= print_price(order_price(@order.items)) %>
       </div>
       <div class="updated">
         Last Updated: <%= (@order.updated_at).to_formatted_s(:long) %>

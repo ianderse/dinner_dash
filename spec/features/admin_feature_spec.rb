@@ -175,7 +175,6 @@ describe 'admin order dashboard' do
 		@order = create(:order)
 	end
 
-
 	it 'can see listings of all orders' do
 		visit '/admin'
 		click_on 'View Current Orders'
@@ -225,8 +224,7 @@ describe 'admin order dashboard' do
 		# Order date and time
 	end
 
-	xit 'can access purchaser full name and email address' do
-	# Purchaser full name and email address
+	it 'can access purchaser full name and email address' do
 		visit '/admin/orders'
 		click_on('View/Edit Order')
 		expect(current_path).to eq edit_admin_order_path(@order)
@@ -267,7 +265,13 @@ describe 'admin order dashboard' do
 	# Status of the order
 	end
 
-	xit 'update an individual order' do
+	it 'update an individual order', js: true do
+		visit '/admin/orders'
+		click_on('View/Edit Order')
+		expect(page).to have_selector("#quantity[value='1']")
+		fill_in 'quantity', with: '2'
+		click_on 'update quantity'
+		expect(page).to have_content("Total Price: $2.00")
 	end
 
 	xit 'can view and edit orders' do
