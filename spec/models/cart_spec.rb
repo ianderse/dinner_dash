@@ -1,11 +1,36 @@
 RSpec.describe Cart, type: :model do
-  it "builds a cart from a session value of item ids" do
-    pending 'switch to tests on the new model'
-    item_1 = create(:item, id: 1)
-    item_2 = create(:item, id: 2)
-    item_3 = create(:item, id: 3)
+  let(:cart) { Cart.new([1,2,2,3]) }
 
-    session_cart = [item_1.id, item_2.id, item_3.id]
-    expect(Cart.build(session_cart)).to eq([[item_1], [item_2], [item_3]])
+  it "has an array of item ids" do
+    expect(cart.items).to be_a Array
+    expect(cart.to_a).to eq(cart.items)
+  end
+
+  it "can populate an array of items and quantities" do
+    create(:item)
+    create(:item, id: 2)
+    create(:item, id: 3)
+
+    result = cart.items_to_quantities
+    expect(result).to eq([[Item.find(1), 1], [Item.find(2), 2], [Item.find(3), 1]])
+  end
+
+  it "can add an item and its quantity to its items" do
+    cart.add_item(5, quantity: 3)
+    expect(cart.items).to eq([1,2,2,3,5,5,5])
+  end
+
+  it "can return a size" do
+    expect(cart.size).to eq(4)
+  end
+
+  it "can delete an item" do
+    cart.delete(2)
+    expect(cart.items).to eq([1,3])
+  end
+
+  it "can update quantity of an item" do
+    cart.update_quantity(3, quantity: 3)
+    expect(cart.items).to eq([1,2,2,3,3,3])
   end
 end
