@@ -2,5 +2,5 @@
 
 <% @items.each do |items| %>
 	<% item = items.first %>
-	<%= item.title %> <%= items.size %> <%= print_price(item.price * items.size) %>
+	<%= link_to item.title, item_path(item) %> <%= items.size %> <%= print_price(item.price * items.size) %>
 <% end %>
