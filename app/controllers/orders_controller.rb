@@ -21,6 +21,8 @@ class OrdersController < ApplicationController
 
 		order.user = current_user
 
+    session[:cart].clear
+
 		if order.save
 			flash[:notice] = "Your order has been successfully created!"
 			redirect_to order

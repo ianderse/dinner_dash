@@ -1,4 +1,7 @@
 <H1>New Order</H1>
+<% @order.errors.full_messages.each do |m| %>
+  <%= m %>
+<% end %>
 
 <%= form_for @order do |f|%>
 	<%= f.label :street_number %>

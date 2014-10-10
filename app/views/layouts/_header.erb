@@ -34,7 +34,7 @@
               <% end %>
               <div class='cart-container' style="display:inline">
                 <%= link_to( image_tag("Shopping-Cart.png"), cart_edit_path) %>
-                <span class='cart_quantity'><%= session[:cart] ? session[:cart].size : 0 %></span>
+                <span class='cart_quantity'><%= cart.size %></span>
               </div>
             </ul>
 
