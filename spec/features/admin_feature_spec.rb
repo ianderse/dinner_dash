@@ -184,7 +184,7 @@ describe 'admin order dashboard' do
 
 	it 'can see the total number of orders by status' do
 		visit '/admin/orders'
-		expect(page).to have_content('Pending: ')
+		expect(page).to have_content('Cancelled: ')
 		expect(page).to have_content('Completed: ')
 		expect(page).to have_content('Ordered: ')
 		expect(page).to have_content('Paid: ')
