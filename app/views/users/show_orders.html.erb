@@ -1,0 +1,26 @@
+
+<h2>Your Orders</h2>
+<table class = "table table-striped">
+  <thead>
+    <tr>
+      <th>Order Id</th>
+      <th>Creation Date</th>
+      <th>Completed/Cancelled Date</th>
+      <th>Customer Name</th>
+      <th>Total Price</th>
+      <th>Order Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% current_user.orders.each do |order| %>
+    <tr>
+      <td><%= link_to order.id, edit_admin_order_path(order) %></td>
+      <td><%= (order.created_at).to_formatted_s(:long) %></td>
+      <td><%= (order.updated_at).to_formatted_s(:long) %></td>
+      <td><%= order.user.first_name %> </td>
+      <td><%= print_price(order_price(order.items)) %> </td>
+      <td><%= order.status %> </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
