@@ -46,4 +46,13 @@ class Admin::OrdersController < Admin::Controller
 		end
 	end
 
+	def updated_at
+		@order = Order.find(params[:id])
+		@order.updated_at = params[:updated_at]
+		@order.save
+		respond_to do |format|
+			format.js { @order }
+		end
+	end
+
 end
