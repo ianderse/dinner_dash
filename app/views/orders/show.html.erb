@@ -2,5 +2,11 @@
 
 <% @items.each do |items| %>
 	<% item = items.first %>
-	<%= link_to item.title, item_path(item) %> <%= items.size %> <%= print_price(item.price * items.size) %>
+	<%= link_to item.title, item_path(item) %> <%= items.size %> <%= print_price(item.price * items.size) %><br/>
 <% end %>
+
+<div class="price">
+	Total: <%= print_price(order_price(@order.items)) %>
+</div>
+
+Order Status: <%= @order.status %>
