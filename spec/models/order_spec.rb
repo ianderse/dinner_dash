@@ -5,9 +5,9 @@ RSpec.describe Order, :type => :model do
     expect(order).to be_valid
   end
 
-  it "is invalid while it does not have items" do
-    order.items = []
-    expect(order).to_not be_valid
+  it "is invalid when it is created without items" do
+    order2 = build(:order, items: [])
+    expect(order2).to_not be_valid
   end
 
   it "is invalid without a user" do
@@ -94,7 +94,7 @@ RSpec.describe Order, :type => :model do
       order.state = 'AA'
       expect(order).to_not be_valid
     end
-    
+
     it "is invalid without a proper zip code" do
       order.zip = 'abc'
       expect(order).to_not be_valid

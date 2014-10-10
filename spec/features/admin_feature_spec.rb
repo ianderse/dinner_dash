@@ -207,13 +207,10 @@ describe 'admin order dashboard' do
 		expect(current_path).to eq edit_admin_order_path(@order)
 		click_on('Mark as Paid')
 		expect(page).to have_content('paid')
-		# link to transition to a different status:
 		click_on('Mark as Completed')
 		expect(page).to have_content('completed')
 		click_on('Cancel My Order')
 		expect(page).to have_content('cancelled')
-		# link to "mark as paid" orders which are "ordered"
-		# link to "mark as completed" individual orders which are currently "paid"
 	end
 
 	it 'can access details of an individual order' do
