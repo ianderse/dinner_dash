@@ -1,1 +1,2 @@
 $('.price').text('<%= print_price(order_price(@order.items)) %>');
+$('.updated').text('<%= (@order.updated_at).to_formatted_s(:long) %>');

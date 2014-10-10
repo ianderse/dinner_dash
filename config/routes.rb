@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     patch '/order/status/:id/:status', to: 'orders#status', as: 'order_status'
     patch '/orders/remove_item/:order_id/:item_id', to: 'orders#remove_item', as: 'order_remove_item'
     patch '/orders/update_quantity/:order_id/:item_id', to: 'orders#update_quantity', as: 'order_update_quantity'
+    patch 'ordres/updated_at/:id/:updated_at', to: 'orders#updated_at', as: 'updated_at'
   end
 
   resources :events
