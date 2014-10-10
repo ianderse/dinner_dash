@@ -1,18 +1,16 @@
+//Navbar Styling//
 .navbar-nav >.active > a:hover {
   background-color: #545454 !important;
   color: #FFFFFF !important;
 }
 
-// .navbar-nav {
-//   background-color: #545454;
-//   color: #FFFFFF;
-// }
 .center {
     margin-left: auto;
     margin-right: auto;
     width: 40%;
 }
 
+//Custom Grey Buttons for use//
 .btn-grey1 {
   background-color: #464646;
   color: #FFFFFF;
@@ -47,7 +45,8 @@
   background-color: #D1D1D1;
   color: #FFFFFF;
 }
-//Masonry Grid Styling
+
+//Masonry Grid Styling//
 #masonry-container {
   background: #FFF;
   padding: 5px;
@@ -104,11 +103,12 @@
   max-width: 100%;
 }
 
+// Text Area Sizing//
 .text-size {
   width: 35px;
 }
 
-//Category Menu Styling
+//Category Menu Styling//
 #categories ul {
   margin: 0;
   padding: 0;
@@ -139,7 +139,7 @@
   display: initial;
 }
 
-// Contact Form Styling
+// Contact Form Styling//
 .hidden { display: none; }
 
 /*flash*/
