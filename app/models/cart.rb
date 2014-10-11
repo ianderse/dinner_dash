@@ -1,13 +1,10 @@
 class Cart
+  include ItemQuantity
+
   attr_reader :items
 
   def initialize(items)
     @items = Array(items).map(&:to_i)
-  end
-
-  def items_to_quantities
-    items.group_by { |id| id }
-         .map { |id, ids| [Item.find(id), ids.size] }
   end
 
   def add_item(item_id, quantity:)
