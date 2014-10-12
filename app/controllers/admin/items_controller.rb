@@ -1,4 +1,4 @@
-class Admin::ItemsController < Admin::Controller
+class Admin::ItemsController < Admin::BaseController
   load_and_authorize_resource
 
   def new

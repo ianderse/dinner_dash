@@ -1,4 +1,4 @@
-class Admin::OrdersController < Admin::Controller
+class Admin::OrdersController < Admin::BaseController
 	load_and_authorize_resource
 
 	def index
