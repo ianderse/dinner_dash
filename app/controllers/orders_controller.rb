@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
 	end
 
 	def create
+		# raise params.inspect
 		order = Order.new(order_params)
 
 		cart = Cart.new(session[:cart])
