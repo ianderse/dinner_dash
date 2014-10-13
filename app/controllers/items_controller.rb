@@ -4,6 +4,11 @@ class ItemsController < ApplicationController
 	def index
 		@items = Item.active
 		@categories = Category.all
+
+    respond_to do |format|
+      format.html
+      format.pdf { render pdf: "menu" }
+    end
 	end
 
 	def show
