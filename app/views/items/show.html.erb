@@ -14,7 +14,7 @@
       Stars: <%= review.stars %><br/>
     <% end %>
     <% #if item_purchased_by_user %>
-      <%= link_to "New Review", new_review_path(@item.id) %>
+      <%= link_to "New Review", new_review_path(@item.id) %></br>
     <% #end %>
     <%if current_user.nil?  %>
       <%= link_to "<< Return to All Menu Items", items_path %>

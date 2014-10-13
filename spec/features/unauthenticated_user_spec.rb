@@ -178,8 +178,11 @@ describe 'unauthenticated user', type: :feature do
   describe "What's good here?" do
     it "can see the posted reviews" do
       visit '/items/1'
-      expect(page).to have_content 'reviews'
+      expect(page).to have_content 'Reviews'
     end
-    it 'can see the average of the ratings'
+    it 'can see the average of the ratings' do
+      visit '/items/1'
+      expect(page).to have_content "Average"
+    end
   end
 end
