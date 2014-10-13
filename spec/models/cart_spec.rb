@@ -16,7 +16,7 @@ RSpec.describe Cart, type: :model do
   end
 
   it "can add an item and its quantity to its items" do
-    cart.add_item(5, quantity: 3)
+    cart.add_item(5, 3)
     expect(cart.items).to eq([1,2,2,3,5,5,5])
   end
 
@@ -30,7 +30,7 @@ RSpec.describe Cart, type: :model do
   end
 
   it "can update quantity of an item" do
-    cart.update_quantity(3, quantity: 3)
+    cart.update_quantity(3, 3)
     expect(cart.items).to eq([1,2,2,3,3,3])
   end
 end

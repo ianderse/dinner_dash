@@ -7,7 +7,7 @@ class Cart
     @items = Array(items).map(&:to_i)
   end
 
-  def add_item(item_id, quantity:)
+  def add_item(item_id, quantity)
     items.concat [item_id.to_i] * quantity.to_i
   end
 
@@ -23,8 +23,8 @@ class Cart
     items.delete item_id.to_i
   end
 
-  def update_quantity(item_id, quantity:)
+  def update_quantity(item_id, quantity)
     delete item_id
-    add_item item_id, quantity: quantity
+    add_item(item_id, quantity)
   end
 end
