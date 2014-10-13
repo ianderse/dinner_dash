@@ -10,6 +10,6 @@ class CartPresenter
 	end
 
 	def checkout_path
-		user ? "new_order" : "login"
+		user ? :new_order : :login
 	end
 end
