@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
 	end
 
 	def show
-		@order = Order.find(params[:id])
+		@order = Order.includes(:items).find(params[:id])
 		@items = @order.items.group_by(&:id).values
 	end
 
