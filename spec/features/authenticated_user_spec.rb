@@ -178,7 +178,7 @@ describe 'authenticated user order display page' do
 
     it 'shows total order price' do
       click_on '5'
-      expect(page).to have_content "Total: $1.00"
+      expect(page).to have_content "Price $1.00"
     end
 
     it 'shows date and time order was submitted'

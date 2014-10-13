@@ -5,6 +5,7 @@ class Item < ActiveRecord::Base
 	validates :categories, presence: true
   has_many :line_items
   has_many :orders, through: :line_items
+  has_many :reviews
 
 	has_many :item_categories
 	has_many :categories, through: :item_categories

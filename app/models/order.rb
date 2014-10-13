@@ -1,4 +1,7 @@
 class Order < ActiveRecord::Base
+  include US
+  include ItemQuantity
+
   belongs_to :user
   has_many :line_items
   has_many :items, through: :line_items
@@ -11,7 +14,7 @@ class Order < ActiveRecord::Base
             :street,
             :city,
             presence: true, if: :delivery?
-  validates :state, inclusion: US.states, if: :delivery?
+  validates :state, inclusion: states, if: :delivery?
   validates :zip, format: { with: /\d{5}\d*/ }, if: :delivery?
 
   def delivery?
@@ -24,11 +27,6 @@ class Order < ActiveRecord::Base
 
   def exchanges
     ['pickup', 'delivery']
-  end
-
-  def items_to_quantities
-    items.group_by { |id| id }
-         .map { |id, ids| [Item.find(id), ids.size] }
   end
 
   def add_item(item_id)

@@ -182,10 +182,12 @@ describe 'admin order dashboard' do
 		expect(page).to have_content("Current Orders in System")
 	end
 
-	xit 'can see the total number of orders by status' do
+	it 'can see the total number of orders by status' do
 		visit '/admin/orders'
-		expect(page).to have_content('Order Status')
-		# the total number of orders by status
+		expect(page).to have_content('Cancelled: ')
+		expect(page).to have_content('Completed: ')
+		expect(page).to have_content('Ordered: ')
+		expect(page).to have_content('Paid: ')
 	end
 
 	it 'can see the links for each individual order' do
@@ -193,11 +195,19 @@ describe 'admin order dashboard' do
 		expect(page).to have_content('View/Edit Order')
 	end
 
-	xit 'can filter orders to display by status type' do
+	it 'can filter orders to display by status type' do
 		visit '/admin/orders'
-		click_on "Completed"
+		click_on "Completed:"
 		expect(page).to have_content('Completed Orders')
-		# filter orders to display by status type (for statuses "ordered", "paid", "cancelled", "completed")
+		visit '/admin/orders'
+		click_on "Paid:"
+		expect(page).to have_content('Paid Orders')
+		visit '/admin/orders'
+		click_on "Cancelled:"
+		expect(page).to have_content('Cancelled Orders')
+		visit '/admin/orders'
+		click_on "Ordered:"
+		expect(page).to have_content('Ordered Orders')
 	end
 
 	it 'can link to transition to a different status', js: true do
@@ -231,13 +241,13 @@ describe 'admin order dashboard' do
 		expect(page).to have_content('Customer Email Address:')
 	end
 
-	xit 'can access order details for each item' do
+	it 'can access order details for each item' do
+		small_plates_category = create(:category, title: 'Small Plates')
+		create(:item, id: 1, title: 'Second Food', categories: [small_plates_category])
 		visit '/admin/orders'
 		click_on('View/Edit Order')
 		expect(current_path).to eq edit_admin_order_path(@order)
 		expect(page).to have_content('Total Price')
-		click_on("#{@item.title}")
-		expect(current_path).to eq item_path(@item)
 	end
 
 	it 'can access total for order' do
@@ -271,12 +281,10 @@ describe 'admin order dashboard' do
 		expect(page).to have_content("Total Price: $0.00")
 	end
 
-	xit 'change the status of an order to specs' do
-	# Change the status of an order according to the rules as outlined above
-	end
-
-	xit 'cannot modify any personal data aside from their own' do
-	#Modify any personal data aside from their own
+	it 'cannot modify any personal data aside from their own' do
+		visit '/admin/users'
+		click_on('user')
+		expect(page).to_not have_css('first_name[type="text"]')
 	end
 
 end

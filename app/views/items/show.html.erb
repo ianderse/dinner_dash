@@ -7,6 +7,15 @@
     <%= 'Category'.pluralize(@categories.size) %>:
     <%= @categories.map { |category| category.title }.join(', ') %>
     <br/>
+    <h1>Reviews - Average: <%= @average %> Stars</h1>
+    <% @reviews.each do |review| %>
+      <h4><%= review.title %><br/></h4>
+      <%= review.body %><br/>
+      Stars: <%= review.stars %><br/>
+    <% end %>
+    <% #if item_purchased_by_user %>
+      <%= link_to "New Review", new_review_path(@item.id) %></br>
+    <% #end %>
     <%if current_user.nil?  %>
       <%= link_to "<< Return to All Menu Items", items_path %>
     <% elsif current_user.is?('admin') %>

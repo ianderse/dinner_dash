@@ -1,4 +1,4 @@
-class Admin::DashboardController < Admin::Controller
+class Admin::DashboardController < Admin::BaseController
   load_and_authorize_resource
 
   def index

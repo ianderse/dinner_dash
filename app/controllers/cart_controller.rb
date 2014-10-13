@@ -1,10 +1,11 @@
 class CartController < ApplicationController
   def edit
+    @cart_presenter = CartPresenter.new(current_user)
   end
 
   def add_item
     @item_id = params[:id]
-    cart.add_item @item_id, quantity: params[:quantity]
+    cart.add_item @item_id, params[:quantity]
 
     respond_to do |format|
       format.js { @item_id }
@@ -13,7 +14,7 @@ class CartController < ApplicationController
 
   def update_quantity
     item_id = params[:id]
-    cart.update_quantity(item_id, quantity: params[:quantity])
+    cart.update_quantity(item_id, params[:quantity])
 
     respond_to do |format|
       format.js {}

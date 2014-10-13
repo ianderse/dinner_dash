@@ -16,7 +16,8 @@ Rails.application.routes.draw do
     patch '/order/status/:id/:status', to: 'orders#status', as: 'order_status'
     patch '/orders/remove_item/:order_id/:item_id', to: 'orders#remove_item', as: 'order_remove_item'
     patch '/orders/update_quantity/:order_id/:item_id', to: 'orders#update_quantity', as: 'order_update_quantity'
-    patch 'ordres/updated_at/:id/:updated_at', to: 'orders#updated_at', as: 'updated_at'
+    patch '/orders/updated_at/:id/:updated_at', to: 'orders#updated_at', as: 'updated_at'
+    get   '/orders/:status', to: 'orders#custom_show', as: 'order_custom_show'
   end
 
   resources :events
@@ -26,6 +27,9 @@ Rails.application.routes.draw do
   resources :categories, only: [:show]
   resources :cart_items, only: [:create]
   resources :orders, except: [:update, :edit, :destroy]
+
+  get 'items/:item_id/review', to: 'reviews#new', as: 'new_review'
+  post 'items/:item_id/review', to: 'reviews#create', as: 'reviews'
 
   get '/about' => 'welcome#about'
   get '/code' => 'welcome#code'

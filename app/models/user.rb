@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 
   has_many :orders
+  has_many :reviews
+
   has_secure_password
 
   validate :first_and_last_names_cannot_both_be_blank
