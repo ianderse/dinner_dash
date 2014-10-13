@@ -26,13 +26,15 @@
       <div class="panel-body">
         <h3>Order Items</h3>
         <table class="table">
+
         <tbody>
         <% @order_items.each do |item, quantity| %>
           <div id='<%= "item_#{item.id}" %>'>
-            <td><%= item.title %></td>
+            <td><%= link_to item.title, item_path(item) %></td>
               <td><%= form_tag(admin_order_update_quantity_path(@order, item), method: :patch, remote: true, style: 'display:inline;') do %>
                 <%= number_field_tag "quantity", quantity, min: 0, class: "text-size" %>
               <%= submit_tag "Update Quantity", class: "btn btn-grey3 btn-sm", id: 'update_quantity' %>
+              <td><%= print_price(item.price) %></td>
             <% end %></td>
             <td><%= link_to 'Remove Item', admin_order_remove_item_path(@order, item), class: "btn btn-grey1 btn-sm", id: "remove_item", remote: true, method: :PATCH %></td>
           </div>

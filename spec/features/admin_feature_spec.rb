@@ -235,17 +235,9 @@ describe 'admin order dashboard' do
 		visit '/admin/orders'
 		click_on('View/Edit Order')
 		expect(current_path).to eq edit_admin_order_path(@order)
-		expect(page).to have_content('Quantity')
-		expect(page).to have_content('Price')
 		expect(page).to have_content('Total Price')
-		click_on("#{order.item_title}")
+		click_on("#{@item.title}")
 		expect(current_path).to eq item_path(@item)
-
-		# For each item on the order:
-		# Name linked to the item page
-		# Quantity
-		# Price
-		# Line item subtotal
 	end
 
 	it 'can access total for order' do
