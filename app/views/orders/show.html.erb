@@ -1,12 +1,23 @@
-<h1>Completed Order</h1>
+<div class="col-md-10 col-md-offset-1">
+	<div class="panel panel-default">
 
-<% @items.each do |items| %>
-	<% item = items.first %>
-	<%= link_to item.title, item_path(item) %> <%= items.size %> <%= print_price(item.price * items.size) %><br/>
-<% end %>
-
-<div class="price">
-	Total: <%= print_price(order_price(@order.items)) %>
+	<div class="panel-heading"><h1>Completed Order</h1></div>
+		<div class="panel-body">
+			<% @items.each do |items| %>
+				<b>Items Ordered </b>
+				<div class="items">
+				<% item = items.first %>
+				<%= link_to item.title, item_path(item) %> <%= items.size %> <%= print_price(item.price * items.size) %><br/>
+			<% end %>
+		</div>
+			<b>Price</b>
+			<div class="price">
+			 <%= print_price(order_price(@order.items)) %>
+			</div>
+			<b>Order Status: </b>
+			<div class="status">
+			<%= @order.status %>
+		</div>
+		</div>
+	</div>
 </div>
-
-Order Status: <%= @order.status %>
