@@ -1,5 +1,6 @@
 class CartController < ApplicationController
   def edit
+    @cart_presenter = CartPresenter.new(current_user)
   end
 
   def add_item
