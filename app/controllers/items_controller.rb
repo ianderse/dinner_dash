@@ -8,6 +8,7 @@ class ItemsController < ApplicationController
 
 	def show
 		@item = Item.find(params[:id])
+		@reviews = Review.where(item_id: @item.id)
 		@categories = @item.categories
 	end
 end

@@ -174,4 +174,12 @@ describe 'unauthenticated user', type: :feature do
       expect(page).to have_content 'Login To Checkout'
     end
   end
+
+  describe "What's good here?" do
+    it "can see the posted reviews" do
+      visit '/items/1'
+      expect(page).to have_content 'reviews'
+    end
+    it 'can see the average of the ratings'
+  end
 end

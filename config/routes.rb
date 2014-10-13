@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   resources :cart_items, only: [:create]
   resources :orders, except: [:update, :edit, :destroy]
 
+  get 'items/:item_id/review', to: 'reviews#new', as: 'new_review'
+  post 'items/:item_id/review', to: 'reviews#create', as: 'reviews'
+
   get '/about' => 'welcome#about'
   get '/code' => 'welcome#code'
 
