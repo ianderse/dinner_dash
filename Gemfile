@@ -19,6 +19,7 @@ group :development do
   gem 'pry-rails', '~> 0.3.2'
 end
 
+gem 'prawn'
 gem 'figaro'
 gem 'rails', '4.1.6'
 gem 'pg'
