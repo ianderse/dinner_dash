@@ -7,7 +7,7 @@
     <%= 'Category'.pluralize(@categories.size) %>:
     <%= @categories.map { |category| category.title }.join(', ') %>
     <br/>
-    <h1>Reviews</h1>
+    <h1>Reviews - Average: <%= @average %> Stars</h1>
     <% @reviews.each do |review| %>
       <h4><%= review.title %><br/></h4>
       <%= review.body %><br/>

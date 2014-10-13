@@ -13,7 +13,7 @@
       	<%= f.text_field :body %>
 
       	<%= f.label :stars %>
-      	<%= f.number_field :stars %>
+      	<%= f.number_field :stars, step: '0.5' %>
 
         <%= f.hidden_field :item_id %>
 
