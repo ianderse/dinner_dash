@@ -64,6 +64,7 @@ class Admin::OrdersController < Admin::Controller
 
 	def custom_show
 		@orders = Order.where(:status => params[:status])
+		@status = params[:status]
 	end
 
 end
