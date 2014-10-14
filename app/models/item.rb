@@ -18,4 +18,15 @@ class Item < ActiveRecord::Base
 	def active?
 		self.active == true
 	end
+
+	def average_rating
+		average = self.reviews.map do |review|
+										review.stars
+									end
+		round_rating(average)
+	end
+
+	def round_rating(average)
+		((average.reduce(:+) / self.reviews.size) * 2.0).round / 2.0
+	end
 end

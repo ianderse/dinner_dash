@@ -9,12 +9,8 @@ class ItemsController < ApplicationController
 	def show
 		@item = Item.find(params[:id])
 		@reviews = Review.where(item_id: @item.id)
-		#move average to item model?
 		if !@reviews.empty?
-			@average = @reviews.map do |review|
-										review.stars
-									end
-			@average = ((@average.reduce(:+) / @reviews.size) * 2.0).round / 2.0
+			@average = @item.average_rating
 		else
 			@average = 0
 		end
