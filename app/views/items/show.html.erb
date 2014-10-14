@@ -7,16 +7,19 @@
     <%= 'Category'.pluralize(@categories.size) %>:
     <%= @categories.map { |category| category.title }.join(', ') %>
     <br/>
-    <h1>Reviews - Average: <%= @average %> Stars</h1>
+    <h1>Reviews - Average: <%= @average %></h1>
     <% @reviews.each do |review| %>
     <div class="review">
+      <% if (review.user == current_user) && review.editable? %>
+        <%= link_to "Edit your Review", edit_review_path(@item.id, review.id) %>
+      <% end %>
       <%= review.user.full_name %> says: <br/>
       <h4><%= review.title %><br/></h4>
       <%= review.body %><br/>
-      Stars: <%= review.stars %><br/>
+      Rating: <%= review.stars %><br/>
     </div>
     <% end %>
-    <% if current_user %>
+    <% if current_user && current_user.ordered_items.include?(@item.title) %>
       <%= link_to "New Review", new_review_path(@item.id) %></br>
     <% end %>
     <%if current_user.nil?  %>

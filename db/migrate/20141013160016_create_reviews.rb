@@ -6,6 +6,8 @@ class CreateReviews < ActiveRecord::Migration
       t.float :stars
       t.references :item, index: true
       t.references :user, index: true
+
+      t.timestamps
     end
   end
 end
