@@ -19,7 +19,7 @@
       Rating: <%= review.stars %><br/>
     </div>
     <% end %>
-    <% if current_user.ordered_items.include?(@item.title) %>
+    <% if current_user && current_user.ordered_items.include?(@item.title) %>
       <%= link_to "New Review", new_review_path(@item.id) %></br>
     <% end %>
     <%if current_user.nil?  %>
