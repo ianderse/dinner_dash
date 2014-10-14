@@ -13,8 +13,7 @@ class Ability
       can :create, Order
       can :read, Order
       can :manage, User, id: user.id
-      can :create, Review
-      can :read, Review
+      can :manage, Review
     else
       can :read, Item
       can :read, Category

@@ -94,11 +94,13 @@ ActiveRecord::Schema.define(version: 20141013160016) do
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "reviews", force: true do |t|
-    t.string  "title"
-    t.text    "body"
-    t.float   "stars"
-    t.integer "item_id"
-    t.integer "user_id"
+    t.string   "title"
+    t.text     "body"
+    t.float    "stars"
+    t.integer  "item_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "reviews", ["item_id"], name: "index_reviews_on_item_id", using: :btree

@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
                     uniqueness: true
 
+  Roles = [ :admin , :user, :nonauth ]
+
   def first_and_last_names_cannot_both_be_blank
     if first_name.empty? && last_name.empty?
       errors.add(:full_name, "can't be blank")
@@ -21,11 +23,16 @@ class User < ActiveRecord::Base
     "#{first_name + ' ' + last_name}".strip
   end
 
-  Roles = [ :admin , :user, :nonauth ]
-
   def is?( requested_role )
     self.role.to_s == requested_role.to_s
   end
 
+  def ordered_items
+    self.orders.map do |order|
+      order.items.map do |item|
+        item.title
+      end
+    end.flatten
+  end
 
 end

@@ -30,6 +30,9 @@ Rails.application.routes.draw do
 
   get 'items/:item_id/review', to: 'reviews#new', as: 'new_review'
   post 'items/:item_id/review', to: 'reviews#create', as: 'reviews'
+  get 'items/:item_id/review/:id', to: 'reviews#edit', as: 'edit_review'
+  patch 'items/:item_id/review/:id', to: 'reviews#update', as: 'review_update'
+  #resources :reviews, only: [:update]
 
   get '/about' => 'welcome#about'
   get '/code' => 'welcome#code'
