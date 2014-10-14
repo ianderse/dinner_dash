@@ -5,6 +5,15 @@ class ItemsController < ApplicationController
 	def index
 		@items = Item.active
 		@categories = Category.all
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = MenuPdf.new(@items, @categories)
+        send_data pdf.render, filename: "menu.pdf", disposition: "inline"
+      end
+    end
+
 	end
 
 	def show
