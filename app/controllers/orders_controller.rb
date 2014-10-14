@@ -13,12 +13,6 @@ class OrdersController < ApplicationController
 
 		cart = Cart.new(session[:cart])
     cart.populate_order
-	#	cart = cart.items_to_quantities
-	#	cart.each do |item|
-	#		item[1].times do
-	#			order.items << item[0]
-	#		end
-	#	end
 
     cart.clear
 
