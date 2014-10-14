@@ -26,8 +26,6 @@
       <div class="panel-body">
         <h3>Order Items</h3>
         <table class="table">
-
-
         <% @order_items.each do |item, quantity| %>
           <tbody>
           <tr id='<%= "item_#{item.id}" %>'>
@@ -38,11 +36,9 @@
               <td><%= print_price(item.price) %></td>
             <% end %>
             <td><%= link_to 'Remove Item', admin_order_remove_item_path(@order, item), class: "btn btn-grey1 btn-sm", id: "remove_item", remote: true, method: :PATCH %></td>
-        </tr>
+          </tr>
         </tbody>
         <% end %>
-
-
       </table>
       </br>
           <div class="form-group">
