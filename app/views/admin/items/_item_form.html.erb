@@ -1,4 +1,4 @@
-<%= form_for(@admin_item, html: {multipart: true}, :url => admin_item_path(@admin_item) ) do |f| %>
+<%= form_for(@item, html: {multipart: true}, :url => admin_item_path(@item) ) do |f| %>
   <p>
     <%= f.label :title %><br/>
     <%= f.text_field :title, autofocus: true %>
@@ -18,7 +18,7 @@
   <p>
     <% @categories.each do |category| %>
       <%= f.label category.title %>
-      <%= check_box_tag "categories[]", category.id, @admin_item.categories.include?(category) ? true : false %>
+      <%= check_box_tag "categories[]", category.id, @item.categories.include?(category) ? true : false %>
     <% end %>
   </p>
 
