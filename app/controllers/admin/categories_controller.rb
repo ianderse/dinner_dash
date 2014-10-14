@@ -1,5 +1,6 @@
 class Admin::CategoriesController < Admin::BaseController
-	load_and_authorize_resource
+
+  before_action :set_category, only: [:edit, :update, :destroy]
 
 	def index
 		@items = Item.all
@@ -11,7 +12,6 @@ class Admin::CategoriesController < Admin::BaseController
 	end
 
 	def edit
-		@category = Category.find(params[:id])
 	end
 
 	def create
@@ -25,21 +25,23 @@ class Admin::CategoriesController < Admin::BaseController
 		end
 	end
 
-	def destroy
-		@category = Category.find(params[:id])
-		@category.destroy
-		redirect_to admin_categories_url
-	end
-
 	def update
-		@category = Category.find(params[:id])
 		@category.update(category_params)
 		redirect_to admin_path
 	end
 
+	def destroy
+		@category.destroy
+		redirect_to admin_categories_url
+	end
+
 	private
 
-	def category_params
-		params.require(:category).permit(:title, :description)
-	end
+    def category_params
+      params.require(:category).permit(:title, :description)
+    end
+
+    def set_category
+      @category = Category.find(params[:id])
+    end
 end

@@ -1,5 +1,6 @@
 class Admin::OrdersController < Admin::BaseController
-	load_and_authorize_resource
+
+  before_action :set_order, except: [:index, :custom_show]
 
 	def index
 		@orders       = Order.all
@@ -10,12 +11,10 @@ class Admin::OrdersController < Admin::BaseController
 	end
 
 	def edit
-		@order = Order.find(params[:id])
     @order_items = @order.items_to_quantities
 	end
 
 	def update_quantity
-		@order = Order.find(params[:order_id])
     item_id = params[:item_id]
     @order.update_quantity(item_id, params[:quantity])
 
@@ -26,7 +25,6 @@ class Admin::OrdersController < Admin::BaseController
 
 	def remove_item
     @item_id = params[:item_id]
-    @order = Order.find(params[:order_id])
     @order.items.destroy(@item_id)
     if @order.items.empty?
     	@order.status = "cancelled"
@@ -38,14 +36,12 @@ class Admin::OrdersController < Admin::BaseController
   end
 
 	def destroy
-		@order = Order.find(params[:id])
 		@order.destroy
 		flash[:notice]="Your shit is destroyed"
 		redirect_to admin_orders_path
 	end
 
 	def status
-		@order = Order.find(params[:id])
 		@order.status = params[:status]
 		@order.save
 		respond_to do |format|
@@ -54,7 +50,6 @@ class Admin::OrdersController < Admin::BaseController
 	end
 
 	def updated_at
-		@order = Order.find(params[:id])
 		@order.updated_at = params[:updated_at]
 		@order.save
 		respond_to do |format|
@@ -67,4 +62,9 @@ class Admin::OrdersController < Admin::BaseController
 		@status = params[:status]
 	end
 
+  private
+
+    def set_order
+      @order = Order.find(params[:id])
+    end
 end

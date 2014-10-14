@@ -1,5 +1,6 @@
 class Admin::UsersController < Admin::BaseController
-  load_and_authorize_resource
+
+  before_action :set_user, except: [:index, :new, :create]
 
   def index
     @users = User.all
@@ -20,11 +21,9 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def show
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:notice] = "Your account information has been successfully updated!"
       redirect_to admin_path
@@ -35,18 +34,22 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
     redirect_to admin_path
   end
 
   def edit
-    @user = User.find(params[:id])
     render 'edit_user_role'
   end
 
-  def user_params
-    params.require(:user).permit(:first_name, :last_name, :nickname, :email, :password, :role)
-  end
+  private
+
+    def user_params
+      params.require(:user).permit(:first_name, :last_name, :nickname, :email, :password, :role)
+    end
+
+    def set_user
+      @user = User.find(params[:id])
+    end
 
 end

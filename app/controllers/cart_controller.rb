@@ -1,10 +1,12 @@
 class CartController < ApplicationController
+
+  before_action :set_item_id, except: [:edit, :destroy]
+
   def edit
     @cart_presenter = CartPresenter.new(current_user)
   end
 
   def add_item
-    @item_id = params[:id]
     cart.add_item @item_id, params[:quantity]
 
     respond_to do |format|
@@ -13,8 +15,7 @@ class CartController < ApplicationController
   end
 
   def update_quantity
-    item_id = params[:id]
-    cart.update_quantity(item_id, params[:quantity])
+    cart.update_quantity(@item_id, params[:quantity])
 
     respond_to do |format|
       format.js {}
@@ -22,7 +23,6 @@ class CartController < ApplicationController
   end
 
   def remove_item
-    @item_id = params[:id]
     cart.delete(@item_id)
 
     respond_to do |format|
@@ -31,11 +31,17 @@ class CartController < ApplicationController
   end
 
   def destroy
-    if session[:cart]
-      session[:cart].clear
+    if cart.items
+      cart.items.clear
       redirect_to request.referer
     else
       redirect_to request.referer
     end
   end
+
+  private
+
+    def set_item_id
+      @item_id = params[:id]
+    end
 end
