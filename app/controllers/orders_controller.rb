@@ -19,9 +19,9 @@ class OrdersController < ApplicationController
 			end
 		end
 
-		order.user = current_user
+    cart.clear
 
-    session[:cart].clear
+	  order.user = current_user
 
 		if order.save
 			flash[:notice] = "Your order has been successfully created!"

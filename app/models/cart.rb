@@ -27,4 +27,8 @@ class Cart
     delete item_id
     add_item(item_id, quantity)
   end
+
+  def clear
+    items.clear
+  end
 end

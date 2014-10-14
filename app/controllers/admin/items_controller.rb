@@ -1,5 +1,4 @@
 class Admin::ItemsController < Admin::BaseController
-
   before_action :set_item, except: [:new, :create]
 
   def new

@@ -1,5 +1,4 @@
 class Admin::UsersController < Admin::BaseController
-
   before_action :set_user, except: [:index, :new, :create]
 
   def index

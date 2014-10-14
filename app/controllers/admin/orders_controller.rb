@@ -1,5 +1,4 @@
 class Admin::OrdersController < Admin::BaseController
-
   before_action :set_order, except: [:index, :custom_show]
 
 	def index

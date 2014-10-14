@@ -1,5 +1,4 @@
 class CartController < ApplicationController
-
   before_action :set_item_id, except: [:edit, :destroy]
 
   def edit
@@ -32,7 +31,7 @@ class CartController < ApplicationController
 
   def destroy
     if cart.items
-      cart.items.clear
+      cart.clear
       redirect_to request.referer
     else
       redirect_to request.referer
