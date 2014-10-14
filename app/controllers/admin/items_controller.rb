@@ -37,7 +37,7 @@ class Admin::ItemsController < Admin::BaseController
 
   def update
     @categories = params[:categories] || []
-    @item.categories = []
+    @item.categories.clear
     @categories.each do |category|
       category = Category.find(category)
       @item.categories << category

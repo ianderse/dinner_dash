@@ -32,9 +32,9 @@ class CartController < ApplicationController
   def destroy
     if cart.items
       cart.clear
-      redirect_to request.referer
+      redirect_to :back
     else
-      redirect_to request.referer
+      redirect_to :back
     end
   end
 

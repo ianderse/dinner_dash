@@ -1,5 +1,6 @@
 class Admin::OrdersController < Admin::BaseController
   before_action :set_order, except: [:index, :custom_show]
+  before_action :set_item_id, only: [:update_quantity, :remove_item]
 
 	def index
 		@orders       = Order.all
@@ -14,8 +15,7 @@ class Admin::OrdersController < Admin::BaseController
 	end
 
 	def update_quantity
-    item_id = params[:item_id]
-    @order.update_quantity(item_id, params[:quantity])
+    @order.update_quantity(@item_id, params[:quantity])
 
     respond_to do |format|
       format.js { @order }
@@ -23,7 +23,6 @@ class Admin::OrdersController < Admin::BaseController
 	end
 
 	def remove_item
-    @item_id = params[:item_id]
     @order.items.destroy(@item_id)
     if @order.items.empty?
     	@order.status = "cancelled"
@@ -65,5 +64,9 @@ class Admin::OrdersController < Admin::BaseController
 
     def set_order
       @order = Order.find(params[:id])
+    end
+
+    def set_item_id
+      @item_id = params[:item_id]
     end
 end
