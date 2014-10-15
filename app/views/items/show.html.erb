@@ -1,6 +1,6 @@
-<div id="masonry-grid" class="center">
+<div id="masonry-grid" style="text-align:center">
   <h1><%= @item.title.capitalize %></h1>
-    <% if @item.image_file_name != nil %><%= image_tag @item.image.url(:medium) %><br/><% end %>
+    <%= image_tag @item.image.url(:medium) if @item.image_file_name != nil %><br/>
     <%= @item.title %><br/>
     <%= @item.description %><br/>
     <%= print_price(@item.price) %><br/>
@@ -9,7 +9,7 @@
     <br/>
     <h1>Reviews - Average: <%= @average %></h1>
     <% @reviews.each do |review| %>
-    <div class="review">
+    <div class="review grid-item">
       <% if (review.user == current_user) && review.editable? %>
         <%= link_to "Edit your Review", edit_review_path(@item.id, review.id) %><br/>
       <% end %>
