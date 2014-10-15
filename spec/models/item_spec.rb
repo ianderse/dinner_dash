@@ -35,6 +35,10 @@ RSpec.describe Item, :type => :model do
     expect(item).to_not be_valid
   end
 
+  it "knows if it is vegetarian" do
+    expect(item.vegetarian?).to be false
+  end
+
   it 'uses a default image if one is not uploaded' do
   	skip
   end

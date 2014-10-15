@@ -3,14 +3,15 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show]
 
 	def index
-		@items = Item.active
-		@categories = Category.all
-
     respond_to do |format|
-      format.html
+      format.html do
+        @items = Item.active
+        @categories = Category.all
+      end
+
       format.pdf do
         pdf = MenuPdf.new
-        send_data pdf.render, filename: "menu.pdf", disposition: "inline"
+        send_data pdf.render, filename: "caussa.pdf", disposition: "inline"
       end
     end
 

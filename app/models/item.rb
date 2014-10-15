@@ -18,6 +18,10 @@ class Item < ActiveRecord::Base
 	def active?
 		self.active == true
 	end
+  
+  def vegetarian?
+    categories.include? Category.where(title: "vegetarian").first
+  end
 
 	def average_rating
 		average = self.reviews.map do |review|
