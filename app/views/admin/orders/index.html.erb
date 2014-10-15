@@ -22,7 +22,7 @@
       <td><%= link_to order.id, edit_admin_order_path(order) %></td>
       <td><%= (order.created_at).to_formatted_s(:long) %></td>
 
-      <% if order.status == 'paid' || order.status == 'completed' %>
+      <% if order.status == 'cancelled' || order.status == 'completed' %>
         <td><%= (order.updated_at).to_formatted_s(:long) %></td>
         <% else %>
         <td></td>
