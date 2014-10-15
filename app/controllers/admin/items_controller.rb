@@ -1,5 +1,4 @@
 class Admin::ItemsController < Admin::BaseController
-
   before_action :set_item, except: [:new, :create]
 
   def new
@@ -38,7 +37,7 @@ class Admin::ItemsController < Admin::BaseController
 
   def update
     @categories = params[:categories] || []
-    @item.categories = []
+    @item.categories.clear
     @categories.each do |category|
       category = Category.find(category)
       @item.categories << category

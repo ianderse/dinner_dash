@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-	load_and_authorize_resource
+  load_and_authorize_resource
+  before_action :set_item, only: [:show]
 
 	def index
 		@items = Item.active
@@ -7,7 +8,6 @@ class ItemsController < ApplicationController
 	end
 
 	def show
-		@item = Item.find(params[:id])
 		@reviews = Review.where(item_id: @item.id)
 		if !@reviews.empty?
 			@average = @item.average_rating
@@ -16,4 +16,10 @@ class ItemsController < ApplicationController
 		end
 		@categories = @item.categories
 	end
+
+  private
+    
+    def set_item
+      @item = Item.find(params[:id])
+    end
 end

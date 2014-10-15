@@ -12,16 +12,11 @@ class OrdersController < ApplicationController
 		order = Order.new(order_params)
 
 		cart = Cart.new(session[:cart])
-		cart = cart.items_to_quantities
-		cart.each do |item|
-			item[1].times do
-				order.items << item[0]
-			end
-		end
+    cart.populate_order
 
-		order.user = current_user
+    cart.clear
 
-    session[:cart].clear
+	  order.user = current_user
 
 		if order.save
 			flash[:notice] = "Your order has been successfully created!"

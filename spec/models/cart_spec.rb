@@ -33,4 +33,9 @@ RSpec.describe Cart, type: :model do
     cart.update_quantity(3, 3)
     expect(cart.items).to eq([1,2,2,3,3,3])
   end
+
+  it "can clear" do
+    cart.clear
+    expect(cart.items).to be_empty
+  end
 end
