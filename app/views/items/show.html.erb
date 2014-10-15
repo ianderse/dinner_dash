@@ -11,7 +11,7 @@
     <% @reviews.each do |review| %>
     <div class="review">
       <% if (review.user == current_user) && review.editable? %>
-        <%= link_to "Edit your Review", edit_review_path(@item.id, review.id) %>
+        <%= link_to "Edit your Review", edit_review_path(@item.id, review.id) %><br/>
       <% end %>
       <%= review.user.full_name %> says: <br/>
       <h4><%= review.title %><br/></h4>
