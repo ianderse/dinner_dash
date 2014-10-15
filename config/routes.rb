@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   patch 'items/:item_id/review/:id', to: 'reviews#update', as: 'review_update'
   #resources :reviews, only: [:update]
 
+  get 'menu/:disposition', to: 'items#menu', as: 'menu'
+
   get '/about' => 'welcome#about'
   get '/code' => 'welcome#code'
 

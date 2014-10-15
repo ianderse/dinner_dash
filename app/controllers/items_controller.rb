@@ -3,19 +3,20 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show]
 
 	def index
-    respond_to do |format|
-      format.html do
-        @items = Item.active
-        @categories = Category.all
-      end
+    @items = Item.active
+    @categories = Category.all
+  end
 
+  def menu
+    respond_to do |format|
+      format.html
       format.pdf do
         pdf = MenuPdf.new
-        send_data pdf.render, filename: "caussa.pdf", disposition: "inline"
+        disposition = params[:disposition]
+        send_data pdf.render, filename: "caussa.pdf", disposition: disposition
       end
     end
-
-	end
+  end
 
 	def show
 		@reviews = Review.where(item_id: @item.id)
