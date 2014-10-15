@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
 
 	def create
 		order = Order.new(order_params)
-    order.build(cart, current_user)
+    order.populate(cart, current_user)
     cart.clear
 
 		if order.save
