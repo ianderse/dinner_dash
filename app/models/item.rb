@@ -27,6 +27,10 @@ class Item < ActiveRecord::Base
 	end
 
 	def round_rating(average)
-		((average.reduce(:+) / self.reviews.size) * 2.0).round / 2.0
+		if !average.empty?
+			((average.reduce(:+) / self.reviews.size) * 2.0).round / 2.0
+		else
+			0
+		end
 	end
 end
