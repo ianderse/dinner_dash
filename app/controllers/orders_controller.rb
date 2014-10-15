@@ -10,13 +10,8 @@ class OrdersController < ApplicationController
 
 	def create
 		order = Order.new(order_params)
-
-		cart = Cart.new(session[:cart])
-    cart.populate_order
-
+    order.build(cart, current_user)
     cart.clear
-
-	  order.user = current_user
 
 		if order.save
 			flash[:notice] = "Your order has been successfully created!"
@@ -37,5 +32,4 @@ class OrdersController < ApplicationController
 	def order_params
 		params.require(:order).permit(:street_number, :street, :city, :state, :zip, :exchange, :status)
 	end
-
 end

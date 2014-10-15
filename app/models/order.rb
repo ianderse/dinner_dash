@@ -37,4 +37,12 @@ class Order < ActiveRecord::Base
     self.items.delete(item_id)
     quantity.to_i.times { add_item(item_id) }
   end
+
+  def build(cart, current_user)
+    cart.items_to_quantities.to_h.each do |item, quantity|
+      quantity.times { self.items << item }
+    end
+
+	  self.user = current_user
+  end
 end

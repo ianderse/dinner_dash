@@ -31,10 +31,4 @@ class Cart
   def clear
     items.clear
   end
-
-  def populate_order(order)
-    items_to_quantities.to_h.each do |item, quantity|
-      quantity.times { order.items << item }
-    end
-  end
 end
