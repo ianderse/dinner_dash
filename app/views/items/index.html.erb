@@ -1,7 +1,7 @@
 <div id="pdf">
-<%= link_to 'view menu as pdf', menu_path("inline", format: :pdf) %>
+<%= link_to 'view menu as pdf', menu_path(format: :pdf, disposition: "inline") %>
 <span>or</span>
-<%= link_to 'download', menu_path("attachment", format: :pdf) %>
+<%= link_to 'download', menu_path(format: :pdf, disposition: "attachment") %>
 <span class="glyphicon glyphicon-list-alt"></span>
 </div>
 
