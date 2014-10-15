@@ -19,7 +19,8 @@ group :development do
   gem 'pry-rails', '~> 0.3.2'
 end
 
-gem 'prawn'
+gem 'prawn', github: 'prawnpdf/prawn'
+gem 'prawn-table', github: 'prawnpdf/prawn-table'
 gem 'figaro'
 gem 'rails', '4.1.6'
 gem 'pg'

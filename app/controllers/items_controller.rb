@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = MenuPdf.new(@items, @categories)
+        pdf = MenuPdf.new
         send_data pdf.render, filename: "menu.pdf", disposition: "inline"
       end
     end
