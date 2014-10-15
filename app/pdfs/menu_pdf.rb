@@ -39,7 +39,13 @@ class MenuPdf < Prawn::Document
   end
 
   def footer
+    styles = { size: 9, align: :center }
 
+    move_down 10
+    text "call 303.525.5555 to place an order for pickup or delivery", styles
+
+    move_down 5
+    text "Pearl Street, Boulder, CO", styles
   end
 
   private
