@@ -1,22 +1,11 @@
 class ItemsController < ApplicationController
   load_and_authorize_resource
-  skip_authorize_resource only: :menu
 
   before_action :set_item, only: [:show]
 
 	def index
     @items = Item.active
     @categories = Category.all
-  end
-
-  def menu
-    respond_to do |format|
-      format.pdf do
-        pdf = MenuPdf.new
-        disposition = params[:disposition]
-        send_data pdf.render, filename: "caussa.pdf", disposition: disposition
-      end
-    end
   end
 
 	def show

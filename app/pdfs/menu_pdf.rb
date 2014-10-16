@@ -1,20 +1,32 @@
 class MenuPdf < Prawn::Document
   attr_reader :categories,
-              :vegetarian
+              :vegetarian,
+              :url
 
-  def initialize
+  def initialize(root_url, reference:)
     super()
     @categories = Category.includes(:items)
     @vegetarian = categories.where(title: "vegetarian").first
+    @url = root_url
     font("Courier")
 
     header
+    offer_download unless reference == "pdf"
     body
     footer
   end
 
   def header
     image "#{Rails.root}/app/assets/images/caussa_logo_h.png", position: :center, scale: 0.45
+  end
+
+  def offer_download
+    styles = { size: 10, inline_format: true }
+
+    y_position = cursor + 25
+    bounding_box([400, y_position], width: 75, height: 25) do 
+      text "<color rgb='#b03060'><link href='#{url + 'menu.pdf?disposition=attachment&reference=pdf'}'>click here to download</link></color>", styles
+    end
   end
 
   def body

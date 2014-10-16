@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe ItemsController, type: :controller do
+RSpec.describe PdfController, type: :controller do
   it "sends a reqeust for a pdf file inline" do
     create(:item)
 
