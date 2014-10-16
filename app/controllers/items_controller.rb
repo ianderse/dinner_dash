@@ -20,17 +20,18 @@ class ItemsController < ApplicationController
   end
 
 	def show
-		@reviews = Review.where(item_id: @item.id)
+		@reviews = Review.where(item_id: @item.id) || []
 		if !@reviews.empty?
 			@average = @item.average_rating
 		else
 			@average = 0
 		end
+
 		@categories = @item.categories
 	end
 
   private
-    
+
     def set_item
       @item = Item.find(params[:id])
     end
