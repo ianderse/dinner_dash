@@ -4,7 +4,7 @@
       <table class="table">
         <tbody>
         <% cart.items_to_quantities.each do |item, quantity| %>
-          <div id='<%= "item_#{item.id}" %>'>
+          <tr id='<%= "item_#{item.id}" %>'>
             <td><%= item.title %></td>
               <td><%= form_tag(cart_update_quantity_path(item), method: :patch, remote: true, style: 'display:inline;') do %>
                 <%= number_field_tag "quantity", quantity, min: 0, class: "text-size" %>
@@ -15,7 +15,7 @@
                 <span class="glyphicon glyphicon-remove"></span>
                 <%= submit_tag 'remove item', class: "btn btn-grey2 btn-sm", id: "remove_item" %>
               <% end %></td>
-          </div>
+          </tr>
         </tbody>
         <% end %>
       </table>
