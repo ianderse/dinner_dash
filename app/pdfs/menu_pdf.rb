@@ -65,7 +65,7 @@ class MenuPdf < Prawn::Document
       veg_mark = "<color rgb='006600'><b>Vegetarian</b></color>"
 
       items.map do |item|
-        ["<font size='8'><i>#{item.title}  #{veg_mark if item.vegetarian?}</i></font>", 
+        ["<font size='8'><i>#{item.title}</i>  #{veg_mark if item.vegetarian?}</font>", 
          "<font size='8'>#{item.price}</font>"
         ]
       end
