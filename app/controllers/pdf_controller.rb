@@ -6,8 +6,7 @@ class PdfController < ApplicationController
     respond_to do |format|
       format.pdf do
         pdf = MenuPdf.new(root_url, reference: params[:reference])
-        disposition = params[:disposition]
-        send_data pdf.render, filename: "caussa.pdf", disposition: disposition
+        send_data pdf.render, filename: "caussa.pdf", disposition: params[:disposition]
       end
     end
   end
