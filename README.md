@@ -1,7 +1,7 @@
 Dinner Dash
 ===========
 
-Turing School project started 9/29/14
+This was a Group Rails project done in three weeks in September 2014 and focused on using TDD to build an eCommerce site.  My responsibilities for this project included project management, implementing the admin functionality and the menu display page.
 
 [Live Site](http://caussa.herokuapp.com/)
 
